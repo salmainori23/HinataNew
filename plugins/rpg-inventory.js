@@ -167,7 +167,7 @@ const listMessage = {
   buttonText: `☂️ Klik Disini ☂️`,
   sections
 }
-await conn.sendMessage(m.chat, listMessage, m)
+await conn.sendMessage(m.chat, listMessage, {quoted: fgif})
 }
 
 if (args[0] == '1') {

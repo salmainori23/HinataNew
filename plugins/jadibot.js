@@ -19,11 +19,14 @@ const { MessageType } = (await import('@adiwajshing/baileys')).default
       await conn.loadAuthInfo(obj)
       auth = true
     }
-    conn.ev.on('qr', async qr => {
+    conn.ev.on('connection.update', (conn) => {
+  if (conn.qr) { // if the 'qr' property is available on 'conn'
       let scan = await parent.sendFile(m.chat, await qrcode.toDataURL(qr, { scale: 8 }), 'qrcode.png', 'Scan QR ini untuk jadi bot sementara\n\n1. Klik titik tiga di pojok kanan atas\n2. Ketuk WhatsApp Web\n3. Scan QR ini \nQR Expired dalam 20 detik', m)
+      await conn.sendFile(m.chat, await toDataURL(text.slice(0, 2048), { scale: 8 }), 'qrcode.png', caption, m)
       setTimeout(() => {
         parent.deleteMessage(m.chat, scan.key)
       }, 30000)
+      }
     })
     conn.connect().then(async ({ user }) => {
       parent.reply(m.chat, 'Berhasil tersambung dengan WhatsApp - mu.\n*NOTE: Ini cuma numpang*\n' + JSON.stringify(user, null, 2), m)
@@ -39,7 +42,7 @@ const { MessageType } = (await import('@adiwajshing/baileys')).default
       delete global.conns[i]
       global.conns.splice(i, 1)
     }, 60000)
-    conn.on('close', () => {
+ if (conn.connection && conn.connection === 'close') { //
       setTimeout(async () => {
         try {
           if (conn.state != 'close') return
@@ -51,7 +54,7 @@ const { MessageType } = (await import('@adiwajshing/baileys')).default
           global.conns.splice(i, 1)
         } catch (e) { conn.logger.error(e) }
       }, 30000)
-    })
+    }
     global.conns.push(conn)
   } else throw 'Tidak bisa membuat bot didalam bot!\n\nhttps://wa.me/' + global.conn.user.jid.split`@`[0] + '?text=.jadibot'
 }

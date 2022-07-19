@@ -12,6 +12,27 @@ let type = (args[0] || '').toLowerCase()
 let upgrade = (args[0] || '').toLowerCase()
 
 let user = global.db.data.users[m.sender]
+
+const sections = [
+    {
+	title: '🚜 List Contruction For kingdoms facility',
+	rows: [
+{title: "🏯 Benteng", rowId: usedPrefix + command + ' benteng'},
+{title: "🌾 Pertanian", rowId: usedPrefix + command + ' pertanian'},
+{title: "🏕 ️camptroop", rowId: usedPrefix + command + ' camptroop'},
+{title: "⚒️ Pertambangan", rowId: usedPrefix + command + ' pertambangan'},
+{title: "🏯 Benteng", rowId: usedPrefix + command + ' hospital'}
+	]
+    }
+]
+
+const listMessage = {
+  text: `⚡ Silakan pilih build di bawah...`,
+  footer: global.wm,
+  title: `⎔───「 ${command} 」───⎔`,
+  buttonText: `☂️ Klik Disini ☂️`,
+  sections
+}
 //
         try {
                if (/build|bangun/i.test(command)) {
@@ -64,28 +85,7 @@ let user = global.db.data.users[m.sender]
                        break
 
                        default:
-                        return
-	const sections = [
-    {
-	title: '🚜 List Contruction For kingdoms facility',
-	rows: [
-{title: "🏯 Benteng", rowId: usedPrefix + command + ' benteng'},
-{title: "🌾 Pertanian", rowId: usedPrefix + command + ' pertanian'},
-{title: "🏕 ️camptroop", rowId: usedPrefix + command + ' camptroop'},
-{title: "⚒️ Pertambangan", rowId: usedPrefix + command + ' pertambangan'},
-{title: "🏯 Benteng", rowId: usedPrefix + command + ' hospital'}
-	]
-    }
-]
-
-const listMessage = {
-  text: `⚡ Silakan pilih build di bawah...`,
-  footer: global.wm,
-  title: `⎔───「 ${command} 」───⎔`,
-  buttonText: `☂️ Klik Disini ☂️`,
-  sections
-}
-await conn.sendMessage(m.chat, listMessage, m)
+                        return conn.sendMessage(m.chat, listMessage, {quoted: fgif})
                 }
         }
     } catch (e) {
