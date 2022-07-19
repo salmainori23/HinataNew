@@ -1,5 +1,5 @@
 import fs from 'fs'
-let handler = async (m, { conn, args, command }) => {
+let handler = async (m, { conn, args, usedPrefix, command }) => {
 	let _muptime
     if (process.send) {
       process.send('uptime')
@@ -9,20 +9,14 @@ let handler = async (m, { conn, args, command }) => {
       }) * 1000
     }
     let muptime = clockString(_muptime)
- conn.reply(m.chat, `${htki} *R U N T I M E* ${htka}\n${muptime}\n`, m, {
-contextInfo: { externalAdReply :{
-                        mediaUrl: '',
-                        mediaType: 2,
-                        description: 'anu',
-                        title: bottime,
-                        body: wm2,          previewType: 0,
-                        thumbnail: fs.readFileSync("./src/avatar_contact.png"),
-                        sourceUrl: snh
-                      }}
-})
+    conn.sendHydrated(m.chat, 
+    '*––––––『 BOT INFO 』––––––*', 
+`${htki} *R U N T I M E* ${htka}\n${muptime}\n`.trim(), `${logo}`, webs, 'Website', null, null, [
+[`ᴏᴡɴᴇʀ`, `${usedPrefix}owner`],
+[`ᴅᴏɴᴀᴛᴇ`, `${usedPrefix}donate`]
+], m, {asLocation: true})
+
 }
-
-
 handler.help = ['runtime']
 handler.tags = ['info']
 handler.command = ['runtime', 'rt']

@@ -1,14 +1,14 @@
 import fetch from 'node-fetch'
-import fs from 'fs'
+import { promises, readFileSync } from 'fs'
 import { join } from 'path'
 import { xpRange } from '../lib/levelling.js'
 
 let handler = async(m, { conn, groupMetadata, usedPrefix, text, args, command }) => {
-let frep = { contextInfo: { externalAdReply: {title: global.wm, body: global.author, sourceUrl: snh, thumbnail: fs.readFileSync('./thumbnail.jpg')}}}
+let frep = { contextInfo: { externalAdReply: {title: global.wm, body: global.author, sourceUrl: snh, thumbnail: readFileSync('./thumbnail.jpg')}}}
 let fdoc = {quoted:{key : {participant : '0@s.whatsapp.net'},message: {documentMessage: {title: `${command}`}}}}
 let imgr = flaaa.getRandom()
-let emoj = `${pickRandom(['🌀','🌁','🌂','🌃','🌄','🌅','🌆','🌇','🌈','🌉','🌊','🌋','🌌','🌍','🌎','🌏','🌐','🌑','🌒','🌓','🌔','🌕','🌖','🌗','🌘','🌙','🌚','🌛','🌜','🌝','🌞','🌟','🌠','🌡️','🌤️','🌥️','🌦️','🌧️','🌨️','🌩️','🌪️','🌫️','🌬️','🌭','🌮','🌯','🌰','🌱','🌲','🌳','🌴','🌵','🌶️','🌷','🌸','🌹','🌺','🌻','🌼','🌽','🌾','🌿','🍀','🍁','🍂','🍃','🍄','🍅','🍆','🍇','🍈','🍉','🍊','🍋','🍌','🍍','🍎','🍏','🍐','🍑','🍒','🍓','🍔','🍕','🍖','🍗','🍘','🍙','🍚','🍛','🍜','🍝','🍞','🍟','🍠','🍡','🍢','🍣','🍤','🍥','🍦','🍧','🍨','🍩','🍪','🍫','🍬','🍭','🍮','🍯','🍰','🍱','🍲','🍳','🍴','🍵','🍶','🍷','🍸','🍹','🍺','🍻','🍼','🍽️','🍾','🍿','🎀','🎁','🎂','🎃','🎄','🎅🏻','🎅🏼','🎅🏽','🎅🏾','🎅🏿','🎅','🎆','🎇','🎈','🎉','🎊','🎋','🎌','🎍','🎎','🎏','🎐','🎑','🎒','🎓','🎖️','🎗️','🎙️','🎚️','🎛️','🎞️','🎟️','🎠','🎡','🎢','🎣','🎤','🎥','🎦','🎧','🎨','🎩','🎪','🎫','🎬','🎭','🎮','🎯','🎰','🎱','🎲','🎳','🎴','🎵','🎶','🎷','🎸','🎹','🎺','🎻','🎼','🎽','🎾','🎿','🏀','🏁','🏍️','🏎️','🏏','🏐','🏑','🏒','🏓','🏔️','🏕️','🏖️','🏗️','🏘️','🏙️','🏚️','🏛️','🏜️','🏝️','🏞️','🏟️','🏠','🏡','🏢','🏣','🏤','🏥','🏦','🏧','🏨','🏩','🏪','🏫','🏬','🏭','🏮','🏯','🏰','🏳️‍🌈','🏳️','🏴󠁧󠁢󠁥󠁮󠁧󠁿','🏴󠁧󠁢󠁳󠁣󠁴󠁿','🏴󠁧󠁢󠁷󠁬󠁳󠁿','🏴','🏵️','🏷️','🏸','🏹','🏺','🐀','🐁','🐂','🐃','🐄','🐅','🐆','🐇','🐈','🐉','🐊','🐋','🐌','🐍','🐎','🐏','🐐','🐑','🐒','🐓','🐔','🐕‍🦺','🐕','🐖','🐗','🐘','🐙','🐚','🐛','🐜','🐝','🐞','🐟','🐠','🐡','🐢','🐣','🐤','🐥','🐦','🐧','🐨','🐩','🐪','🐫','🐬','🐭','🐮','🐯','🐰','🐱','🐲','🐳','🐴','🐵','🐶','🐷','🐸','🐹','🐺','🐻','🐼','🐽','🐾','🐿️','👀','👁‍🗨','👑','👒','👓','👔','👕','👖','👗','👘','👙','👚','👛','👜','👝','👞','👟','👠','👡','👢','👣','👤','👥','💋','💌','💍','💎','💏','💐','💑','💒','💓','💔','💕','💖','💗','💘','💙','💚','💛','💜','💝','💞','💟','💠','💡','💢','💣','💤','💥','💦','💧','💨','💩'])}`
-
+let res = JSON.parse(readFileSync('./json/emoji.json'))
+let em = res.emoji
 let who = m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.fromMe ? conn.user.jid : m.sender
 let pp = await conn.profilePictureUrl(who).catch(_ => hwaifu.getRandom())
     let { exp, limit, level, role, money, lastclaim, lastweekly, registered, regTime, age, banned, pasangan } = global.db.data.users[who]
@@ -54,6 +54,7 @@ let weem = `📮 *Note:* Jika menemukan bug, error atau kesulitan dalam pengguna
 'fileName': 'Silahkan Pilih Menu Dibawah.',
 'fileLength': fsizedoc,
 'pageCount': fpagedoc,
+'jpegThumbnail': await( await fetch(pp)).buffer(),
 'contextInfo': {
 'externalAdReply': {
 'showAdAttribution': true,
@@ -67,8 +68,8 @@ let weem = `📮 *Note:* Jika menemukan bug, error atau kesulitan dalam pengguna
 'caption': cap,
 'footer': weem,
 'buttons': [
-{'buttonId': usedPrefix + 'allmenu','buttonText': {'displayText': `${emoj} All Menu`},'type': 1},
-{'buttonId': usedPrefix + 'menulist','buttonText': {'displayText': `${emoj} List Menu`},'type': 1}
+{'buttonId': usedPrefix + 'allmenu','buttonText': {'displayText': `${em.getRandom()} All Menu`},'type': 1},
+{'buttonId': usedPrefix + 'menulist','buttonText': {'displayText': `${em.getRandom()} List Menu`},'type': 1}
 ],
 'headerType': 6}
     await conn.sendMessage(m.chat, buttonMessage, fdoc)
