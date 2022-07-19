@@ -1283,7 +1283,7 @@ export async function handler(chatUpdate) {
                 let xp = 'exp' in plugin ? parseInt(plugin.exp) : 17 // XP Earning per command
                 if (xp > 200)
                     // m.reply('Ngecit -_-') // Hehehe
-                    this.sendButton(m.chat, `Jirr.. Ngecit -_- pake kalkulator.. Gpp lahh\nPencet dibawah, meresahkan`, wm, null, [
+                    conn.sendButton(m.chat, `Jirr.. Ngecit -_- pake kalkulator.. Gpp lahh\nPencet dibawah, meresahkan`, wm, null, [
         ['Ngechit', '/ngechit']
     ], m)
                 else
@@ -1293,7 +1293,7 @@ export async function handler(chatUpdate) {
                     continue // Limit habis
                 }
                 if (plugin.level > _user.level) {
-                    this.sendButton(m.chat, `[💬] Diperlukan level *${plugin.level}* untuk menggunakan perintah ini. Level kamu *${_user.level}🎋*\n*${plugin.level}* level is required to use this command. Your level is *${_user.level}🎋*`, author, null,[['Ok', 'ok']] , m)
+                    conn.sendButton(m.chat, `[💬] Diperlukan level *${plugin.level}* untuk menggunakan perintah ini. Level kamu *${_user.level}🎋*\n*${plugin.level}* level is required to use this command. Your level is *${_user.level}🎋*`, author, null,[['Ok', 'ok']] , m)
                     continue // If the level has not been reached
                 }
                 let extra = {
@@ -1458,7 +1458,7 @@ export async function participantsUpdate({ id, participants, action }) {
                 if (!text) text = (chat.sDemote || this.sdemote || conn.sdemote || '@user *is no longer Admin*')
                 text = text.replace('@user', '@' + participants[0].split('@')[0])
                 if (chat.detect)
-                this.sendButton(m.chat, text, wm, null, [
+                conn.sendButton(m.chat, text, wm, null, [
                 ['Ok', 'huuu']
             ], false, { mentions: [user] })
                 break
@@ -1490,7 +1490,7 @@ export async function groupsUpdate(groupsUpdate, fromMe, m) {
             if (groupUpdate.restrict == false) text = (chats.sRestrictOff || this.sRestrictOff || conn.sRestrictOff || '*Group has been only admin!*')
             //console.log('=============\n\ngroupsUpdate \n\n============\n\n' + await groupUpdate)
             if (!text) continue
-            this.sendButton(m.chat, text, wm, null, [
+            conn.sendButton(m.chat, text, wm, null, [
                 ['Off Detect', '/off detect']
             ], false)
         }
@@ -1510,7 +1510,7 @@ export async function deleteUpdate(message) {
         let chat = global.db.data.chats[msg.chat] || {}
         if (chat.delete)
             return
-            this.sendButton(msg.key.remoteJid, `Terdeteksi @${participant.split`@`[0]} telah menghapus pesan!`, wm, null, [['disable delete', '/disable delete']], msg, {
+            conn.sendButton(msg.key.remoteJid, `Terdeteksi @${participant.split`@`[0]} telah menghapus pesan!`, wm, null, [['disable delete', '/disable delete']], msg, {
                 mentions: [participant]
             })
         this.copyNForward(msg.chat, msg).catch(e => console.log(e, msg))
@@ -1534,7 +1534,12 @@ global.dfail = (type, m, conn) => {
         rpg: 'RPG tidak aktif, Silahkan hubungi Team Bot Discussion Untuk mengaktifkan fitur ini !',
         restrict: 'Fitur ini di *disable* !'
     }[type]
-    if (msg) return conn.sendHydrated2(m.chat, msg, author, `${logo}`, null, null, `${sgc}`, 'Group', [['Owner', '.owner']], m)
+    if (msg) return conn.sendHydrated(m.chat, 
+    '*––––––『 INFO 』––––––*', 
+`${msg}`.trim(), `${logo}`, webs, 'Website', null, null, [
+[`ᴏᴡɴᴇʀ`, `/owner`],
+[`ᴅᴏɴᴀᴛᴇ`, `/donate`]
+], m, {asLocation: true})
 }
 
 let file = global.__filename(import.meta.url, true)
