@@ -22,13 +22,13 @@ Your ❤️health is full!
 [`ᴀsᴋ ᴛᴏ ᴀʟʟ`, `${usedPrefix}tagall *sᴏᴍᴇʙᴏᴅʏ ᴩʟᴇᴀsᴇ sᴇɴᴅ ${count - user.potion} ᴩᴏᴛɪᴏɴ* ᴛᴏ ᴍᴇ.
 ⮕ ᴛᴏ ᴛʀᴀɴsғᴇʀ ᴩᴏᴛɪᴏɴ:
 ${usedPrefix}transfer potion ${count - user.potion} @${conn.getName(m.sender)}`]
-], m, {asLocation: true})
+], m)
     user.potion -= count * 1
     user.health += heal * count
     conn.sendButton(m.chat, `*━┈━┈━『 FULL HEALTH 』━┈━┈━*`, `sᴜᴄᴄᴇssғᴜʟʟʏ ${count} 🥤ᴩᴏᴛɪᴏɴ ᴜsᴇ ᴛᴏ ʀᴇᴄᴏᴠᴇʀ ʜᴇᴀʟᴛʜ.`, imgr + 'fullhealth',
 [
 [`ᴀᴅᴠᴇɴᴛᴜʀᴇ`, `${usedPrefix}adventure`]
-], m, { asLocation: true })
+], m)
 }
 
 handler.help = ['heal']

@@ -42,7 +42,7 @@ ${usedPrefix}${command} legendary`.trim()
   return conn.sendButton(m.chat,'*––––『 LEADERBOARD 』––––*', wrong, imgr + 'leaderboard', [
 [`✉️ ᴇxᴩ`, `${usedPrefix}lb exp`],
 [`💰 ᴍᴏɴᴇʏ`, `${usedPrefix}lb money`]
-], m, {asLocation: true})
+], m)
   let page = isNumber(args[1]) ? Math.min(Math.max(parseInt(args[1]), 0), getPage(type)) : 0
   let sortedItem = users.map(toNumber(type)).sort(sort(type))
   let userItem = sortedItem.map(enumGetKey)

@@ -57,6 +57,9 @@ const items = {
         naga: {
             money: 120000
         },
+        pet: {
+            money: 120000
+        }
     },
     sell: {
         potion: {
@@ -150,7 +153,7 @@ ${usedPrefix}${command} potion 10
 )
     const item = (args[0] || '').toLowerCase()
     const total = Math.floor(isNumber(args[1]) ? Math.min(Math.max(parseInt(args[1]), 1), Number.MAX_SAFE_INTEGER) : 1) * 1
-    if (!listItems[item]) return conn.sendButton(m.chat, text, footer, image, buttons, m, {asLocation: true})
+    if (!listItems[item]) return conn.sendButton(m.chat, text, footer, image, buttons, m)
     if (command.toLowerCase() == 'buy') {
         let paymentMethod = Object.keys(listItems[item]).find(v => v in user)
         if (user[paymentMethod] < listItems[item][paymentMethod] * total) return conn.sendButton(m.chat,
@@ -168,15 +171,15 @@ ${usedPrefix}${command} potion 10
 [`ᴀsᴋ ᴛᴏ ᴀʟʟ`, `${usedPrefix}tagall sᴏᴍᴇʙᴏᴅʏ ᴩʟᴇᴀsᴇ sᴇɴᴅ *${(listItems[item][paymentMethod] * total) - user[paymentMethod]}* ${global.rpg.emoticon(paymentMethod)}${paymentMethod} ᴛᴏ ᴍᴇ.
 ⮕ ᴛᴏ ᴛʀᴀɴsғᴇʀ ${paymentMethod}:
 ${usedPrefix}transfer ${paymentMethod} ${(listItems[item][paymentMethod] * total) - user[paymentMethod]} @${conn.getName(m.sender)}`]
-], m, {asLocation: true})
+], m)
         user[paymentMethod] -= listItems[item][paymentMethod] * total
         user[item] += total
         return conn.sendButton(m.chat,
 `*––––––『 BOUGHT 』––––––*`,
 `ʏᴏᴜ *ʙᴏᴜɢʜᴛ ${total} ${global.rpg.emoticon(item)}${item}*.
-`.trim(), `./media/bought.jpg`, [
+`.trim(), imgr + 'bought', [
 [`ɪɴᴠᴇɴᴛᴏʀʏ`, `${usedPrefix}inventory`]
-], m, {asLocation: true})
+], m)
     } else {
         if (user[item] < total) return m.reply(`You don't have enough *${global.rpg.emoticon(item)}${item}* to sell, you only have ${user[item]} items`)
         user[item] -= total
@@ -184,9 +187,9 @@ ${usedPrefix}transfer ${paymentMethod} ${(listItems[item][paymentMethod] * total
         return conn.sendButton(m.chat,
 `*–––––––『 SOLD 』–––––––*`,
 `ʏᴏᴜ *sᴏʟᴅ ${total} ${global.rpg.emoticon(item)}${item}*.
-`.trim(), `./media/sold.jpg`, [
+`.trim(), imgr + 'sold', [
 [`ɪɴᴠᴇɴᴛᴏʀʏ`, `${usedPrefix}inventory`]
-], m, {asLocation: true})
+], m)
     }
 }
 

@@ -26,6 +26,15 @@ const tfinventory = {
     cat: 10,
     fox: 10,
     dog: 10,
+    robo: 10,
+    lion: 10,
+    rhinoceros: 10,
+    dragon: 10,
+    centaur: 10,
+    kyubi: 10,
+    griffin: 10,
+    phonix: 10,
+    wolf: 10,
   }
 }
 const rewards = {
@@ -86,10 +95,21 @@ const rewards = {
         rock: [0, 1, 0, 0],
         string: [0, 1, 0, 0]
     },
-    // pet: {
-    //     petFood: [0, 1, 0, 0, 0],
-    //     anjing: [],
-    // }
+    pet: {
+        horse: [0, 1, 0, 0, 0, 0],
+        cat: [0, 1, 0, 0],
+        fox: [0, 1, 0, 0, 0, 0],
+        dog: [0, 1, 0, 0, 0, 0, 0],
+        robo: [0, 1, 0, 0],
+        lion: [0, 1, 0, 0, 0, 0],
+        rhinoceros: [0, 1, 0, 0, 0, 0, 0, 0, 0],
+        dragon: [0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+        centaur: [0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+        kyubi: [0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+        griffin: [0, 1, 0, 0, 0, 0, 0],
+        wolf: [0, 1, 0, 0, 0, 0, 0],
+        phonix: [0, 1, 0, 0, 0, 0, 0]
+    },
 }
 let handler = async (m, { command, args, usedPrefix }) => {
 let imgr = flaaa.getRandom()
@@ -112,7 +132,7 @@ ${usedPrefix}open mythic 3
     if (!(type in listCrate)) return conn.sendButton(m.chat, `*––––『 OPEN CRATES 』––––*`, info, imgr + 'open', [
 [`ᴄᴏᴍᴍᴏɴ`, `${usedPrefix}open common`],
 [`ᴜɴᴄᴏᴍᴍᴏɴ`, `${usedPrefix}open uncommon`]
-], m, {asLocation: true})
+], m)
     if (user[type] < count) return m.reply(`
 Your *${rpg.emoticon(type)}${type} crate* is not enough!, you only have ${user[type]} *${rpg.emoticon(type)}${type} crate*
 type *${usedPrefix}buy ${type} ${count - user[type]}* to buy

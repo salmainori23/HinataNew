@@ -16,7 +16,7 @@ let handler = async (m, {
 	let ayam = global.db.data.users[m.sender].ayam
 
 	let ndy = `
-*《 KANDANG MU 》*
+*${htki} KANDANG ${htka}*
     
  *➡️   ️ 🐂 = [ ${banteng} ] Ekor Banteng*
  *➡️   ️ 🐅 = [ ${harimau} ] Ekor Harimau*
@@ -31,9 +31,9 @@ let handler = async (m, {
  *➡️   ️ 🐖 = [ ${babi} ] Ekor Babi*
  *➡️   ️ 🐓 = [ ${ayam} ] Ekor Ayam*
  
- *${author}*    
  `.trim()
-	conn.reply(m.chat, ndy, m)
+	await conn.sendButton(m.chat, ndy, wm, null, [['Menu', `${usedPrefix}menu`],['Owner', `${usedPrefix}owner`]], m)
+
 }
 handler.help = ['kandang']
 handler.tags = ['rpg']
