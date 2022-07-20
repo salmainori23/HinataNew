@@ -1443,7 +1443,7 @@ export async function participantsUpdate({ id, participants, action }) {
   let restext = await gettext.text()
   let katarandom = restext.split('\n')
   
-  this.sendHydrated(id, text, wm + '\n\n' + botdate, action === 'add' ? pp : pp, sgc, (action == 'add' ? 'Hinata Group' : 'Nitip Gorengan'), user.split`@`[0], 'Telpon', [
+  conn.sendHydrated(id, text, wm + '\n\n' + botdate, action === 'add' ? pp : pp, sgc, (action == 'add' ? 'Hinata Group' : 'Nitip Gorengan'), user.split`@`[0], 'Telpon', [
       ['🎀 Menu', '/menu'],
       ['🪄 Test', '/ping'],
       ['Ok 🎉\n\n' + katarandom.getRandom() + '\n\n', '...']
@@ -1458,10 +1458,7 @@ export async function participantsUpdate({ id, participants, action }) {
                 if (!text) text = (chat.sDemote || this.sdemote || conn.sdemote || '@user *is no longer Admin*')
                 text = text.replace('@user', '@' + participants[0].split('@')[0])
                 if (chat.detect)
-                this.sendHydrated(id, text, wm + '\n\n' + botdate, hwaifu.getRandom(), sgc, 'Hinata Group', nomorown, 'Owner', [
-      ['🎀 Menu', '/menu'],
-      ['🪄 Test', '/ping']
-    ], null, false, { mentions: [user] })
+                this.sendMessage(m.chat, { text: text, mentions: this.parseMention(text)}, { quoted: fgif })
                 break
     }
 }
@@ -1491,10 +1488,10 @@ export async function groupsUpdate(groupsUpdate, fromMe, m) {
             if (groupUpdate.restrict == false) text = (chats.sRestrictOff || this.sRestrictOff || conn.sRestrictOff || '*Group has been only admin!*')
             //console.log('=============\n\ngroupsUpdate \n\n============\n\n' + await groupUpdate)
             if (!text) continue
-            this.sendHydrated(id, text, wm + '\n\n' + botdate, hwaifu.getRandom(), sgc, 'Hinata Group', nomorown, 'Owner', [
+            conn.sendHydrated(m.chat, text, wm + '\n\n' + botdate, hwaifu.getRandom(), sgc, 'Hinata Group', nomorown, 'Owner', [
       ['🎀 Menu', '/menu'],
       ['🪄 Test', '/ping']
-    ], null, false, { mentions: [user] })
+    ], null)
         }
     }
 
@@ -1536,10 +1533,10 @@ global.dfail = (type, m, conn) => {
         rpg: 'RPG tidak aktif, Silahkan hubungi Team Bot Discussion Untuk mengaktifkan fitur ini !',
         restrict: 'Fitur ini di *disable* !'
     }[type]
-    if (msg) return this.sendHydrated(id, msg, wm + '\n\n' + botdate, hwaifu.getRandom(), sgc, 'Hinata Group', nomorown, 'Owner', [
+    if (msg) return conn.sendHydrated(m.chat, msg, wm + '\n\n' + botdate, hwaifu.getRandom(), sgc, 'Hinata Group', nomorown, 'Owner', [
       ['🎀 Menu', '/menu'],
       ['🪄 Test', '/ping']
-    ], null, false, { mentions: [user] })
+    ], null)
 }
 
 let file = global.__filename(import.meta.url, true)
