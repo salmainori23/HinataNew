@@ -131,6 +131,6 @@ const listMessage = {
 ///AKSJDDJ
 handler.help = ['game']
 handler.tags = ['rpg']
-handler.command = /^game?s$/i 
+handler.command = /^gam(es|ing|e)$/i 
 
 export default handler

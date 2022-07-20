@@ -210,9 +210,8 @@ if (command == 'chordlagu') {
   if (!text) throw 'Text Mana?'
 let f = await fetch(`https://yog-apikey.herokuapp.com/api/music/chordlagu?lagu=${text}&apikey=YogGanz`)
 let xc = await f.json()
-let r = xc.result
-let caption = `*Result:* ${r.result}`
-await conn.sendButton(m.chat, caption, wm, r.img, [
+let caption = `*Result:* ${xc.result}`
+await conn.sendButton(m.chat, caption, wm, xc.result.img, [
                 ['Menu', `${usedPrefix}menu`]
             ], m)
 }
