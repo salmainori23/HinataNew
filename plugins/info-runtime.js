@@ -10,8 +10,8 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
     }
     let muptime = clockString(_muptime)
     conn.sendHydrated(m.chat, 
-    '*––––––『 BOT INFO 』––––––*', 
-`${htki} *R U N T I M E* ${htka}\n${muptime}\n`.trim(), `${logo}`, webs, 'Website', null, null, [
+    `${htki} *R U N T I M E* ${htka}\n${muptime}\n`.trim(), 
+wm, `${logo}`, webs, 'Website', null, null, [
 [`ᴏᴡɴᴇʀ`, `${usedPrefix}owner`],
 [`ᴅᴏɴᴀᴛᴇ`, `${usedPrefix}donate`]
 ], m, {asLocation: true})

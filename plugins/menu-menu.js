@@ -54,7 +54,7 @@ let weem = `📮 *Note:* Jika menemukan bug, error atau kesulitan dalam pengguna
 'fileName': 'Silahkan Pilih Menu Dibawah.',
 'fileLength': fsizedoc,
 'pageCount': fpagedoc,
-'jpegThumbnail': await( await fetch(pp)).buffer(),
+'jpegThumbnail': await( await fetch(thumbnailUrl.getRandom())).buffer(),
 'contextInfo': {
 'externalAdReply': {
 'showAdAttribution': true,

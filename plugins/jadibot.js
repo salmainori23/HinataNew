@@ -1,49 +1,35 @@
-import { makeWASocket, protoType, serialize } from './lib/simple.js'
-import pino from 'pino'
-import qrcode from 'qrcode'
+import makeWASocket, { DisconnectReason } from '@adiwajshing/baileys'
+import { Boom } from '@hapi/boom'
+
 let handler = async (m, { conn, args, usedPrefix, command, isOwner }) => {
 
-const { AnyWASocket } = (await import('@adiwajshing/baileys'))
+async function connectToWhatsApp () {
+    const sock = makeWASocket({
+        // can provide additional config here
+        printQRInTerminal: true
+    })
+    sock.ev.on('connection.update', (update) => {
+        const { connection, lastDisconnect } = update
+        if(connection === 'close') {
+            const shouldReconnect = (lastDisconnect.error as Boom)?.output?.statusCode !== DisconnectReason.loggedOut
+            console.log('connection closed due to ', lastDisconnect.error, ', reconnecting ', shouldReconnect)
+            // reconnect if not logged out
+            if(shouldReconnect) {
+                connectToWhatsApp()
+            }
+        } else if(connection === 'open') {
+            console.log('opened connection')
+        }
+    })
+    sock.ev.on('messages.upsert', m => {
+        console.log(JSON.stringify(m, undefined, 2))
 
-const start = async () => {
-global.client = makeWASocket({
-logger: pino({
-level: 'silent'
-}),
-printQRInTerminal: false,
-browser: ['bot', 'Chrome', '1.0.0'],
-auth: state,
-version: [2, 2224, 8]
-})
-
-client.ev.on('connection.update', async (update) => {
-const {
-connection,
-lastDisconnect
-} = update
-if(lastDisconnect === undefined) {
-if (update.qr !== undefined){
-//printQRIfNecessaryListener
-const { qrcode } = (await import('qrcode'))
-const { AnyWASocket } = (await import('@adiwajshing/baileys'))
-const client = new AnyWASocket()
-conn.on("qr", (qr) => {
-await client.sendFile(m.chat, qrcode.toDataURL(qr, { scale: 8 }), 'qrcode.png', 'Scan QR ini untuk jadi bot sementara\n\n1. Klik titik tiga di pojok kanan atas\n2. Ketuk WhatsApp Web\n3. Scan QR ini \nQR Expired dalam 20 detik', m)
-console.log('Scan this qr')
-)
+        console.log('replying to', m.messages[0].key.remoteJid)
+        await sock.sendMessage(m.messages[0].key.remoteJid!, { text: 'Hello there!' })
+    })
 }
-}
-if (connection === 'connecting') {}
-if (connection === 'open') {
-console.log(Connected, you login as ${client.user.name})
-}
-if (connection === 'close') console.log(update)
-})
-
-return client
-}
-
-start()
+// run in main file
+connectToWhatsApp()
 }
 handler.help = ['jadibot']
 handler.tags = ['jadibot']

@@ -9,17 +9,14 @@ async function handler(m, { conn, args, usedPrefix, command }) {
     if (confirmation[m.sender]) return m.reply('Kamu sedang melakukan transfer!')
     let user = global.db.data.users[m.sender]
     const item = items.filter(v => v in user && typeof user[v] == 'number')
-    let who = m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.fromMe ? conn.user.jid : m.sender
-    let name = await conn.getName(who)
     let lol = `Use format ${usedPrefix}${command} [type] [value] [number]
-example ${usedPrefix}${command} money 9999 @${who.split("@")[0]}
+example ${usedPrefix}${command} money 9999 @user
 
 📍 Transferable items
 ${item.map(v => `${rpg.emoticon(v)}${v}`.trim()).join('\n')}
 `.trim()
     const type = (args[0] || '').toLowerCase()
-    if (!item.includes(type)) return
-    conn.sendButton(m.chat, lol, wm, null, [['Again', '/tf' + args[0] + ' ' + args[1] + ' ' + who.split("@")[0]]], m, { mentions: this.parseMention(lol) })
+    if (!item.includes(type)) return m.reply(lol)
     const count = Math.min(Number.MAX_SAFE_INTEGER, Math.max(1, (isNumber(args[1]) ? parseInt(args[1]) : 1))) * 1
     let who = m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : args[2] ? (args[2].replace(/[@ .+-]/g, '') + '@s.whatsapp.net') : ''
     if (!who) return m.reply('Tag salah satu, atau ketik Nomernya!!')
@@ -30,7 +27,7 @@ Are you sure you want to transfer *${count}* ${rpg.emoticon(type)}${type}${speci
 Timeout *60* detik
 `.trim()
     let c = global.wm
-    conn.sendButton(m.chat, confirm, c, null, [['y'], ['n']], m, { mentions: [who] })
+    conn.sendButton(m.chat, confirm, c, null, [['Transfer'], ['Batal']], m, { mentions: [who] })
     confirmation[m.sender] = {
         sender: m.sender,
         to: who,
@@ -49,12 +46,12 @@ handler.before = async m => {
     if (m.id === message.id) return
     let user = global.db.data.users[sender]
     let _user = global.db.data.users[to]
-    if (/no?/g.test(m.text.toLowerCase())) {
+    if (/Batal?/g.test(m.text.toLowerCase())) {
         clearTimeout(timeout)
         delete confirmation[sender]
         return m.reply('Reject')
     }
-    if (/y(es)?/g.test(m.text.toLowerCase())) {
+    if (/Transfer)?/g.test(m.text.toLowerCase())) {
         let previous = user[type] * 1
         let _previous = _user[type] * 1
         user[type] -= count * 1
