@@ -1458,9 +1458,10 @@ export async function participantsUpdate({ id, participants, action }) {
                 if (!text) text = (chat.sDemote || this.sdemote || conn.sdemote || '@user *is no longer Admin*')
                 text = text.replace('@user', '@' + participants[0].split('@')[0])
                 if (chat.detect)
-                conn.sendButton(m.chat, text, wm, null, [
-                ['Ok', 'huuu']
-            ], false, { mentions: [user] })
+                this.sendHydrated(id, text, `${wm}` + '\n\n' + botdate, `${logo}`, sgc, 'Hinata Group', `${nomorown}`, 'Owner', [
+      ['🎀 Menu', '/menu'],
+      ['🪄 Test', '/ping']
+    ], null, false, { mentions: [user] })
                 break
     }
 }
@@ -1490,9 +1491,10 @@ export async function groupsUpdate(groupsUpdate, fromMe, m) {
             if (groupUpdate.restrict == false) text = (chats.sRestrictOff || this.sRestrictOff || conn.sRestrictOff || '*Group has been only admin!*')
             //console.log('=============\n\ngroupsUpdate \n\n============\n\n' + await groupUpdate)
             if (!text) continue
-            conn.sendButton(m.chat, text, wm, null, [
-                ['Off Detect', '/off detect']
-            ], false)
+            this.sendHydrated(id, text, `${wm}` + '\n\n' + botdate, `${logo}`, sgc, 'Hinata Group', `${nomorown}`, 'Owner', [
+      ['🎀 Menu', '/menu'],
+      ['🪄 Test', '/ping']
+    ], null, false, { mentions: [user] })
         }
     }
 
@@ -1534,12 +1536,10 @@ global.dfail = (type, m, conn) => {
         rpg: 'RPG tidak aktif, Silahkan hubungi Team Bot Discussion Untuk mengaktifkan fitur ini !',
         restrict: 'Fitur ini di *disable* !'
     }[type]
-    if (msg) return conn.sendHydrated(m.chat, 
-    '*––––––『 INFO 』––––––*', 
-`${msg}`.trim(), `${logo}`, webs, 'Website', null, null, [
-[`ᴏᴡɴᴇʀ`, `/owner`],
-[`ᴅᴏɴᴀᴛᴇ`, `/donate`]
-], m, {asLocation: true})
+    if (msg) return this.sendHydrated(id, text, `${wm}` + '\n\n' + botdate, `${logo}`, sgc, 'Hinata Group', `${nomorown}`, 'Owner', [
+      ['🎀 Menu', '/menu'],
+      ['🪄 Test', '/ping']
+    ], null, false, { mentions: [user] })
 }
 
 let file = global.__filename(import.meta.url, true)
