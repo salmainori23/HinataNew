@@ -23,11 +23,10 @@ Hai, *%name!*
 *Note:*
 _Jika Respon Tidak Muncul Kemungkinan Terjadi Error_
 `.trimStart(),
-  header: '▣═━–〈 *%category* 〉–━═▣',
+  header: `${cmenut} *%category* ${cmenuh}`,
   body: `┊${emot} %cmd %islimit %isPremium`,
-  footer: '┗–––––––––––━═▣\n',
-  after: `⌕ ❙❘❙❙❘❙❚❙❘❙❙❚❙❘❙❘❙❚❙❘❙❙❚❙❘❙❙❘❙❚❙❘ 
-`,
+  footer: `${cmenuf}`,
+  after: `${cmenua}`,
 }
 let handler = async (m, { conn, command, groupMetadata, usedPrefix: _p, __dirname, args }) => {
 

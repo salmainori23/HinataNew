@@ -8,7 +8,7 @@ let imgr = flaaa.getRandom()
   conn.reply(m.chat, `_Mengirim pesan broadcast ke ${chats.length} chat_`, m)
   for (let id of chats) {
   await delay(1500)
-  await conn.sendHydrated(id, "*「 " + author + " Broadcast 」* \n\n" + text, wm, imgr + 'Broadcast', sgc, 'Link', null, null, [[null, null]], m)
+  await conn.sendHydrated(id, "*「 Broadcast 」* \n\n" + text, wm, imgr + 'Broadcast', sgc, 'Link', null, null, [[null, null]], m)
   }
   m.reply('Selesai Broadcast All Chat :)')
 }

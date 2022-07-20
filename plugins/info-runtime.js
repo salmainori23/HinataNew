@@ -10,11 +10,11 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
     }
     let muptime = clockString(_muptime)
     conn.sendHydrated(m.chat, 
-    `${htki} *R U N T I M E* ${htka}\n${muptime}\n`.trim(), 
-wm, `${logo}`, webs, 'Website', null, null, [
+    `${htjava} *R U N T I M E* ${htjava}\n${muptime}\n`.trim(), 
+wm, hwaifu.getRandom(), webs, 'Website', null, null, [
 [`ᴏᴡɴᴇʀ`, `${usedPrefix}owner`],
 [`ᴅᴏɴᴀᴛᴇ`, `${usedPrefix}donate`]
-], m, {asLocation: true})
+], m)
 
 }
 handler.help = ['runtime']

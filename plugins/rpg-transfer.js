@@ -27,7 +27,7 @@ Are you sure you want to transfer *${count}* ${rpg.emoticon(type)}${type}${speci
 Timeout *60* detik
 `.trim()
     let c = global.wm
-    conn.sendButton(m.chat, confirm, c, null, [['Transfer'], ['Batal']], m, { mentions: [who] })
+    conn.sendButton(m.chat, confirm, c, null, [['y'], ['n']], m, { mentions: [who] })
     confirmation[m.sender] = {
         sender: m.sender,
         to: who,
@@ -46,12 +46,12 @@ handler.before = async m => {
     if (m.id === message.id) return
     let user = global.db.data.users[sender]
     let _user = global.db.data.users[to]
-    if (/Batal?/g.test(m.text.toLowerCase())) {
+    if (/no?/g.test(m.text.toLowerCase())) {
         clearTimeout(timeout)
         delete confirmation[sender]
         return m.reply('Reject')
     }
-    if (/Transfer)?/g.test(m.text.toLowerCase())) {
+    if (/y(es)?/g.test(m.text.toLowerCase())) {
         let previous = user[type] * 1
         let _previous = _user[type] * 1
         user[type] -= count * 1

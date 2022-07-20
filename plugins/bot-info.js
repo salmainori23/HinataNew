@@ -73,10 +73,10 @@ let handler = async (m, { conn, usedPrefix, __dirname, text, command }) => {
 ⮕ ${groupsIn.length - groupsIn.length} - Groups Left
 ⮕ ${chats.length - groupsIn.length} - Personal Chats
 ⮕ ${chats.length} - Total Chats
-`.trim(), `${logo}`, webs, 'Website', null, null, [
+`.trim(), hwaifu.getRandom(), webs, 'Website', null, null, [
 [`ᴏᴡɴᴇʀ`, `${usedPrefix}owner`],
 [`ᴅᴏɴᴀᴛᴇ`, `${usedPrefix}donate`]
-], m, {asLocation: true})
+], m)
 }
 handler.help = ['botinfo']
 handler.tags = ['info']
