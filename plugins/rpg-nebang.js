@@ -8,9 +8,8 @@ conn, usedPrefix
     let timers = clockString(_timers) 
     let penebang = await conn.getName(m.sender)
     
-    if (user.stamina < 20) return m.reply(`Stamina anda tidak cukup\nharap isi stamina anda dengan *${usedPrefix}eat8`)
+    if (user.stamina < 20) return m.reply(`Stamina anda tidak cukup\nharap isi stamina anda dengan *${usedPrefix}eat`)
     if (user.lastlumber > 10800000) throw m.reply(`Kamu masih kelelahan\nHarap tunggu *${timers}* lagi`)
-    timers} lagi untuk kerja nebang')
     
     let rndm1 = `${Math.floor(Math.random() * 300)}`
 		let rndm2 = `${Math.floor(Math.random() * 3000)}`

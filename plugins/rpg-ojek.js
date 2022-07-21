@@ -69,7 +69,6 @@ var hsl = `
  ➕ ✨ Exp = [ ${zero5} ] 		 
  ➕ 😍 Order Selesai = +1
 ➕  📥Total Order Sebelumnya : ${order}
-${wm}
 `
 
 

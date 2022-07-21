@@ -1,5 +1,7 @@
+let toM = a => '@' + a.split('@')[0]
+
 let handler = async (m, { 
-conn, usedPrefix
+conn, usedPrefix, text, participants, groupMetadata
 }) => {
 
     let user = global.db.data.users[m.sender]
@@ -7,6 +9,8 @@ conn, usedPrefix
     let _timers = (10800000 - __timers)
     let timers = clockString(_timers) 
     let pengocok = await conn.getName(m.sender)
+    let ps = groupMetadata.participants.map(v => v.id)
+    let a = ps.getRandom()
     
     if (user.stamina < 20) return m.reply(`Stamina anda tidak cukup\nharap isi stamina anda dengan *${usedPrefix}eat8`)
     if (user.lastngocok > 10800000) throw m.reply(`Kamu masih kelelahan\nHarap tunggu *${timers}* lagi`)
@@ -49,7 +53,7 @@ let jln = `
 ⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛
 🏘️🏘️🏘️🏘️🌳🌳🏘️ 🌳🌳🌳
 
-✔️ ${pengocok} Wait....
+✔️ ${pengocok} Mencari Target....
 `
 
 let jln2 = `
@@ -58,7 +62,7 @@ let jln2 = `
 ⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛
 🏘️🏘️🏘️🏘️🌳🌳🏘️ 🌳🌳🌳
 
-➕ ${pengocok} Menemukan Area....
+➕ ${pengocok} Menemukan Target....
 `
 
 let jln3 = `
@@ -67,7 +71,7 @@ let jln3 = `
 ⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛
 🏘️🏘️🏘️🏘️🌳🌳🏘️ 🌳🌳🚶
 
-➕ ${pengocok} Mulai Mengocok....
+➕ ${pengocok} Mulai Mengocok Bersama Target....
 `
 
 let jln4 = `
@@ -77,11 +81,11 @@ let jln4 = `
 🏘️🏘️🏘️🏘️🌳🌳🏘️ 🚶
 
 ➕ ${pengocok}
-💹 Menerima gaji....
+💹 Menerima Gaji Ngocok....
 `
 
 let hsl = `
-*《 Hasil ngocok ${pengocok} 》*
+*《 Hasil Ngocok ${pengocok} 》*
 
  *💎 = [ ${hmsil1} ] Diamond*
  *⛓️ = [ ${hmsil2} ] Iron*
@@ -94,6 +98,7 @@ let hsl = `
  *✉️ = [ ${hmsil9} ] Exp*
  
  Stamina anda berkurang -20
+ *Korban Ngocok:* ${toM(a)}
 `
 
 user.diamond += hmsil1
@@ -108,9 +113,7 @@ user.diamond += hmsil1
 		user.stamina -= 20
 	
 setTimeout(() => {
-                     conn.sendButton(m.chat, hsl, wm, null, [
-		['Inventory', '/inv']
-	], m)
+    conn.sendButton(m.chat, hsl, wm, null, [['Inventory', '/inv']], m, { mentions: conn.parseMention(hsl) })
                      }, 27000) 
                
                      setTimeout(() => {
