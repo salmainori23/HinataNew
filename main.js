@@ -172,6 +172,7 @@ global.reloadHandler = async function (restatConn) {
     conn.ev.off('message.delete', conn.onDelete)
     conn.ev.off('connection.update', conn.connectionUpdate)
     conn.ev.off('creds.update', conn.credsUpdate)
+    conn.ev.off('CB:action,,call', conn.onCall)
   }
 
   conn.welcome = '✦──[ *WELCOME* ]──✦\n╭───────────⸙\n│⫹⫺ in @subject\n╰┬──────────⸙\n╭┫( 👋 Hallo @user)\n││ \n│┣─[ *INTRO* ]\n││ *Nama:*\n││ *Umur:*\n││ *Gender:*\n│╰──────────⸙\n╰[ *DESCRIPTION* ]\n@desc'
@@ -193,6 +194,7 @@ global.reloadHandler = async function (restatConn) {
   conn.onDelete = handler.deleteUpdate.bind(global.conn)
   conn.connectionUpdate = connectionUpdate.bind(global.conn)
   conn.credsUpdate = saveState.bind(global.conn, true)
+  conn.onCall = global.conn.onCall.bind(conn)
   
   conn.ev.on('messages.upsert', conn.handler)
   conn.ev.on('group-participants.update', conn.participantsUpdate)
@@ -200,6 +202,7 @@ global.reloadHandler = async function (restatConn) {
   conn.ev.on('message.delete', conn.onDelete)
   conn.ev.on('connection.update', conn.connectionUpdate)
   conn.ev.on('creds.update', conn.credsUpdate)
+  conn.ev.on('CB:action,,call', conn.onCall)
   
   isInit = false
   return true

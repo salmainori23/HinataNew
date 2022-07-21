@@ -1512,6 +1512,29 @@ export async function deleteUpdate(message) {
     }
 }
 
+/**
+Anti Call
+ */
+export async function onCall(json) {
+    let { from } = json[2][0][1]
+    let users = global.db.data.users
+    let user = users[from] || {}
+    if (user.whitelist) return
+    if (!global.db.settings.anticall) return
+    switch (this.callWhitelistMode) {
+      case 'mycontact':
+        if (from in this.contacts && 'short' in this.contacts[from])
+          return
+        break
+    }
+    user.call += 1
+    await this.reply(from, `Jika kamu menelepon lebih dari 3, kamu akan diblokir.\n\n${user.call} / 3`, null)
+    if (user.call == 3) {
+      await this.blockUser(from, 'add')
+      user.call = 0
+    }
+  }
+  
 global.dfail = (type, m, conn) => {
     let msg = {
         rowner: '*AKSES DITOLAK*\nPerintah ini hanya dapat digunakan oleh *OWWNER* !',
