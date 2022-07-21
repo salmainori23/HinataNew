@@ -81,16 +81,16 @@ let handler = async (m, { conn, usedPrefix, command, text, args, owner }) => {
                                  global.db.data.users[m.sender].umpan -= rbrb13
 
                                 setTimeout(() => {
-                                m.reply(`Yuk mancing mania level easy lagi`)
+                                conn.copyNForward(m.chat, `Yuk mancing mania level easy lagi`)
                                 }, 28800000) 
                                 setTimeout(() => {
-                                m.reply(`${hsl}`)
+                                conn.copyNForward(m.chat, `${hsl}`)
                                 }, 12000) 
                                 setTimeout(() => {
-                                m.reply('Menunggu')
+                                conn.copyNForward(m.chat, `Menunggu`)
                                  }, 6000) 
                                  setTimeout(() => {
-                                 m.reply('_Sedang Memancing..._')
+                                 conn.copyNForward(m.chat, `_Sedang Memancing..._`)
                                  }, 0) 
                                  user.lastmancingeasy = new Date * 1
                                  } else conn.reply(m.chat, 'Minimal umpan kamu *100* untuk memancing level mudah', m)
@@ -173,16 +173,16 @@ let handler = async (m, { conn, usedPrefix, command, text, args, owner }) => {
                                  global.db.data.users[m.sender].umpan -= rbrbs13 
                                  
                                 setTimeout(() => {
-                                m.reply(`Yuk mancing mania level normal lagi`)
+                                conn.copyNForward(m.chat, `Yuk mancing mania level normal lagi`)
                                 }, 28800000) 
                                 setTimeout(() => {
-                                m.reply(`${hsls}`)
+                                conn.copyNForward(m.chat, `${hsls}`)
                                 }, 12000) 
                                 setTimeout(() => {
-                                m.reply('Menunggu')
+                                conn.copyNForward(m.chat, `Menunggu`)
                                  }, 6000) 
                                  setTimeout(() => {
-                                 m.reply('_Sedang Memancing..._')
+                                 conn.copyNForward(m.chat, `_Sedang Memancing..._`)
                                  }, 0) 
                                  user.lastmancingeasy = new Date * 1
                                  } else conn.reply(m.chat, 'Minimal umpan kamu *150* untuk memancing level normal', m)
@@ -265,16 +265,16 @@ let handler = async (m, { conn, usedPrefix, command, text, args, owner }) => {
                                  global.db.data.users[m.sender].umpan -= rbrbsh13
 
                                 setTimeout(() => {
-                                m.reply(`Yuk mancing mania level hard lagi`)
+                                conn.copyNForward(m.chat, `Yuk mancing mania level hard lagi`)
                                 }, 28800000) 
                                 setTimeout(() => {
-                                m.reply(`${hslsh}`)
+                                conn.copyNForward(m.chat, `${hslsh}`)
                                 }, 12000) 
                                 setTimeout(() => {
-                                m.reply('Menunggu')
+                                conn.copyNForward(m.chat, `Menunggu`)
                                  }, 6000) 
                                  setTimeout(() => {
-                                 m.reply('_Sedang Memancing..._')
+                                 conn.copyNForward(m.chat, `_Sedang Memancing..._`)
                                  }, 0) 
                                  user.lastmancingeasy = new Date * 1
                                  } else conn.reply(m.chat, 'Minimal umpan kamu *200* untuk memancing level hard', m)
@@ -357,16 +357,16 @@ let handler = async (m, { conn, usedPrefix, command, text, args, owner }) => {
                                  global.db.data.users[m.sender].umpan -= rbrbshe13
 
                                 setTimeout(() => {
-                                m.reply(`Yuk mancing mania level extreme lagi`)
+                                conn.copyNForward(m.chat, `Yuk mancing mania level extreme lagi`)
                                 }, 28800000) 
                                 setTimeout(() => {
-                                m.reply(`${hslse}`)
+                                conn.copyNForward(m.chat, `${hslse}`)
                                 }, 12000) 
                                 setTimeout(() => {
-                                m.reply('Menunggu')
+                                conn.copyNForward(m.chat, `Menunggu`)
                                  }, 6000) 
                                  setTimeout(() => {
-                                 m.reply('_Sedang Memancing..._')
+                                 conn.copyNForward(m.chat, `_Sedang Memancing..._`)
                                  }, 0) 
                                  user.lastmancingeasy = new Date * 1
                                  } else conn.reply(m.chat, 'Minimal umpan kamu *250* untuk memancing level extreme', m)
@@ -427,16 +427,16 @@ ${ usedPrefix }cook`
         }, 38000)
 
         setTimeout(() => {
-                     m.reply(`_Yey... Sepertinya dapat sesuatu..._`)
+                     conn.copyNForward(m.chat, `_Yey... Sepertinya dapat sesuatu..._`)
                       }, 28000)
         setTimeout(() => {
-                     m.reply(`_Menunggu Strike..._`)
+                     conn.copyNForward(m.chat, `_Menunggu Strike..._`)
                       }, 18000)
        setTimeout(() => {
-                     m.reply(`_Mulai Memancing..._`)
+                     conn.copyNForward(m.chat, `_Mulai Memancing..._`)
                       }, 8000)
        setTimeout(() => {
-                     m.reply(`_Pergi Memancing... 🎣_`)
+                     conn.copyNForward(m.chat, `_Pergi Memancing... 🎣_`)
                       }, 0)
                       
         global.db.data.users[m.sender].nila += nila * 1

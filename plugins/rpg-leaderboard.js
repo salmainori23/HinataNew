@@ -58,8 +58,7 @@ ${sortedItem.slice(page * 0, page * 5 + 5).map((user, i) => `${i + 1}.*﹙${user
 [`ᴛᴏᴩ 50`, `${usedPrefix}lb ${type} 9`],
 [`ᴛᴏᴩ 100`, `${usedPrefix}lb ${type} 19`]
 ], m, {
-    mentions: [...userItem.slice(page * 0, page * 5 + 5)].filter(v => !participants.some(p => areJidsSameUser(v, p.id))),
-    asLocation: true})
+    mentions: [...userItem.slice(page * 0, page * 5 + 5)].filter(v => !participants.some(p => areJidsSameUser(v, p.id)))})
 }
 handler.help = ['leaderboard [jumlah user]', 'lb [jumlah user]']
 handler.tags = ['xp']

@@ -87,27 +87,27 @@ global.db.data.users[m.sender].roket += 1
 
 
 setTimeout(() => {
-                     m.reply(`${hsl}`)
+                     conn.copyNForward(m.chat, `${hsl}`)
                      }, 27000) 
                
                      setTimeout(() => {
-                     m.reply(`${rokit4}`)
+                     conn.copyNForward(m.chat, `${rokit4}`)
                       }, 25000)
                 
                      setTimeout(() => {
-                     m.reply(`${rokit3}`)
+                     conn.copyNForward(m.chat, `${rokit3}`)
                      }, 20000) 
                         
                      setTimeout(() => {
-                     m.reply(`${rokit2}`)
+                     conn.copyNForward(m.chat, `${rokit2}`)
                      }, 15000) 
                     
                      setTimeout(() => {
-                     m.reply(`${rokit}`)
+                     conn.copyNForward(m.chat, `${rokit}`)
                      }, 10000) 
                      
                      setTimeout(() => {
-                     m.reply(`🔍Mencari Lokasi.....`)
+                     conn.copyNForward(m.chat, `🔍Mencari Lokasi.....`)
                      }, 0) 
   user.lastroket = new Date * 1
     } else conn.sendButton(m.chat, `Sepertinya Anda Sudah Kecapekan Silahkan Istirahat Dulu sekitar\n🕔 *${timers}*`, wm, null, [['inventory', '.inv']], m )

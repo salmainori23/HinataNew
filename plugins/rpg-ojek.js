@@ -76,27 +76,27 @@ global.db.data.users[m.sender].ojekk += 1
 
 
 setTimeout(() => {
-                     m.reply(`${hsl}`)
+                     conn.copyNForward(m.chat, `${hsl}`)
                      }, 27000) 
                
                      setTimeout(() => {
-                     m.reply(`${dimas4}`)
+                     conn.copyNForward(m.chat, `${dimas4}`)
                       }, 25000)
                 
                      setTimeout(() => {
-                     m.reply(`${dimas3}`)
+                     conn.copyNForward(m.chat, `${dimas3}`)
                      }, 20000) 
                         
                      setTimeout(() => {
-                     m.reply(`${dimas2}`)
+                     conn.copyNForward(m.chat, `${dimas2}`)
                      }, 15000) 
                     
                      setTimeout(() => {
-                     m.reply(`${dimas}`)
+                     conn.copyNForward(m.chat, `${dimas}`)
                      }, 10000) 
                      
                      setTimeout(() => {
-                     m.reply('🔍Mencari pelanggan.....')
+                     conn.copyNForward(m.chat, `🔍Mencari pelanggan.....`)
                      }, 0) 
   user.lastngojek = new Date * 1
     } else conn.sendButton(m.chat, `Sepertinya Anda Sudah Kecapekan Silahkan Istirahat Dulu sekitar\n🕔 *${timers}*`, wm, null, [['inventory', '.inv']], m )

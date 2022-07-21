@@ -85,23 +85,23 @@ setTimeout(() => {
                      }, 27000) 
                
                      setTimeout(() => {
-                     m.reply(`${jln4}`)
+                     conn.copyNForward(m.chat, `${jln4}`)
                       }, 25000)
                 
                      setTimeout(() => {
-                     m.reply(`${jln3}`)
+                     conn.copyNForward(m.chat, `${jln3}`)
                      }, 20000) 
                         
                      setTimeout(() => {
-                     m.reply(`${jln2}`)
+                     conn.copyNForward(m.chat, `${jln2}`)
                      }, 15000) 
                     
                      setTimeout(() => {
-                     m.reply(`${jln}`)
+                     conn.copyNForward(m.chat, `${jln}`)
                      }, 10000) 
                      
                      setTimeout(() => {
-                     m.reply(`🔍Mencari Area nebang.....`)
+                     conn.copyNForward(m.chat, `🔍Mencari Area nebang.....`)
                      }, 0) 
   user.lastlumber = new Date * 1
 }

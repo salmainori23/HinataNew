@@ -20,40 +20,38 @@ return `
   await conn.sendButton(m.chat, teks, wm, null, [
                 ['Search!', `${usedPrefix + command}`]
             ], m)
-            
 }
+
 if (command == 'sfx3') {
 if (!text) throw `Contoh:
 ${usedPrefix + command} box`
 let f = await fetch(`https://freesound.org/apiv2/search/${text}/?format=json&token=TJEbxX84wKTySiEtUPxhm8b2WCi5Izak0h9nNDbO`)
-let xx = await f.json()
-
-let teks = `
-*Name :* ${xx.results[0].name}
-*ID :* ${xx.results[0].id}
-*tags :* ${Array.from(xx.results[0].tags)}
-*license :* ${xx.results[0].license}
-*username :* ${xx.results[0].username}
-      `
+let xxx = await f.json()
+let xx = xxx.results
+for(int xx=0;xx<xx.length;xx++){
+let teks = `*Name :* ${xx.name}
+*ID :* ${xx.id}
+*tags :* ${Array.from(xx.tags)}
+*license :* ${xx.license}
+*username :* ${xx.username}`
   await conn.sendButton(m.chat, teks, wm, null, [
-                ['Get!', `${usedPrefix}sfx4 https://freesound.org/apiv2/sounds/${xx.results[0].id}`]
+                ['Get!', `${usedPrefix}sfx4 ${xx.id}`]
             ], m)
+            }
 }
 if (command == 'sfx4') {
 if (!text) throw `Contoh:
 ${usedPrefix + command} id`
-let f = await fetch(`https://freesound.org/apiv2/search/${text}/?format=json&token=TJEbxX84wKTySiEtUPxhm8b2WCi5Izak0h9nNDbO`)
+let f = await fetch(`https://freesound.org/apiv2/sounds/${text}&token=TJEbxX84wKTySiEtUPxhm8b2WCi5Izak0h9nNDbO`)
 let xx = await f.json()
 
-let teks = `
-*Name :* ${xx.name}
+let teks = `*Name :* ${xx.name}
 *ID :* ${xx.id}
 *tags :* ${Array.from(xx.tags)}
 *filesize :* ${xx.filesize}
-*username :* ${xx.results[0].username}
-      `
-  await conn.sendButton(m.chat, teks, wm, xx.images['spectral_bw_l'], [
-                ['Get!', `${usedPrefix}get https://freesound.org/apiv2/sounds/${xx.results.previews.['preview-hq-mp3']}`]
+*username :* ${xx.username}`
+  await conn.sendButton(m.chat, teks, wm, xx.images.['spectral_bw_l'], [
+                ['Get!', `${usedPrefix}get https://freesound.org/apiv2/sounds/${xx.previews.['preview-hq-mp3']}`]
             ], m)
 }
 

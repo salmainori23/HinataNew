@@ -72,23 +72,23 @@ let handler = async (m, {
 		global.db.data.users[m.sender].ayam += rbrb12
 
 		setTimeout(() => {
-			m.reply(`${hsl}`)
+			conn.copyNForward(m.chat, `${hsl}`)
 		}, 20000)
 
 		setTimeout(() => {
-			m.reply(`Nah ini dia`)
+			conn.copyNForward(m.chat, `Nah ini dia`)
 		}, 18000)
 
 		setTimeout(() => {
-			m.reply('......')
+			conn.copyNForward(m.chat, `......`)
 		}, 15000)
 
 		setTimeout(() => {
-			m.reply('Dapet nih')
+			conn.copyNForward(m.chat, `Dapet nih`)
 		}, 14000)
 
 		setTimeout(() => {
-			m.reply('Sedang mencari mangsa...')
+			conn.copyNForward(m.chat, `Sedang mencari mangsa...`)
 		}, 0)
 		user.lastberburu = new Date * 1
 	} else conn.sendButton(m.chat, `\n*Sepertinya Anda Sudah Kecapekan*\n*Silahkan Istirahat dulu sekitar ${timers}*\n*Untuk bisa melanjutkan berburu*\n`, author, null, [

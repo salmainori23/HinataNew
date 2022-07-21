@@ -8,7 +8,7 @@ let imgr = flaaa.getRandom()
 `ʏᴏᴜʀ ʜᴇᴀʟᴛʜ ɪs ʙᴇʟᴏᴡ 80﹗
 ᴩʟᴇᴀsᴇ ʜᴇᴀʟ ❤ ғɪʀsᴛ ᴛᴏ ᴀᴅᴠᴇɴᴛᴜʀᴇ ᴀɢᴀɪɴ.`.trim(), imgr + 'lowhealth', [
 [`ʜᴇᴀʟ ❤`, `${usedPrefix}heal`]
-], m, {asLocation: true})
+], m)
     if (new Date - user.lastadventure <= cooldown) return conn.sendButton(m.chat, 
 '*━┈━┈━『 COOLDOWN 』━┈━┈━*',
 `ʏᴏᴜ'ᴠᴇ ᴀʟʀᴇᴀᴅʏ *ᴀᴅᴠᴇɴᴛᴜʀᴇ*, ᴩʟᴇᴀsᴇ ᴡᴀɪᴛ ᴛɪʟʟ ᴄᴏᴏʟᴅᴏᴡɴ ғɪɴɪsʜ.
@@ -16,7 +16,7 @@ let imgr = flaaa.getRandom()
 ⏱️ ${timers.toTimeString()}`.trim(), imgr + 'cooldown', [
 [`ɪɴᴠᴇɴᴛᴏʀʏ`, `${usedPrefix}inventory`],
 [`ᴅᴀɪʟʏ`, `${usedPrefix}daily`]
-], m, {asLocation: true})
+], m)
     const rewards = reward(user)
     let text = 'You\'ve been adventure and decrease'
     for (const lost in rewards.lost) if (user[lost]) {
@@ -35,7 +35,7 @@ let imgr = flaaa.getRandom()
     text.trim(), imgr + 'adventure', [
 [`ɪɴᴠᴇɴᴛᴏʀʏ`, `${usedPrefix}inventory`],
 [`ᴅᴀɪʟʏ`, `${usedPrefix}daily`]
-], m, {asLocation: true})
+], m)
     user.lastadventure = new Date * 1
 }
 handler.help = ['adventure']
