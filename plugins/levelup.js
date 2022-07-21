@@ -15,21 +15,23 @@ Kurang *${max - user.exp}* lagi! ✨
     while (canLevelUp(user.level, user.exp, global.multiplier)) user.level++
     if (before !== user.level) {
         let teks = `Selamat ${conn.getName(m.sender)} naik 🧬level\n.             ${user.role}`
-        let str = `
+        let str = `${conn.getName(m.sender)} naik 🧬level\n.             ${user.role}
+
 *🎉 C O N G R A T S 🎉*
 *${before}* ➔ *${user.level}* [ *${user.role}* ]
 
 • 🧬Level Sebelumnya : ${before}
 • 🧬Level Baru : ${user.level}
 • Pada Jam : ${new Date().toLocaleString('id-ID')}
-*Semakin sering berinteraksi dengan bot Semakin Tinggi level kamu*
+
+*Note:* _Semakin sering berinteraksi dengan bot Semakin Tinggi level kamu_
 `.trim()
             
             try {
             let img = await levelup(teks, user.level)
             conn.sendButton(m.chat, str, botdate, img, [['INVENTORY', '.inv']], m)
             } catch (e) {
-            conn.sendButton(m.chat, str, botdate, Buffer.alloc(0), [['INVENTORY', '.inv']], m)
+            conn.sendButton(m.chat, str, botdate, hwaifu.getRandon(), [['INVENTORY', '.inv']], m)
             }
 
     }

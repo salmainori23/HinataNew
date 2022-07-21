@@ -1,4 +1,3 @@
-import { MessageType } from '@adiwajshing/baileys'
 import qrcode from 'qrcode'
 
 if (global.conns instanceof Array) console.log()// for (let i of global.conns) global.conns[i] && global.conns[i].user ? global.conns[i].close().then(() => delete global.conns[id] && global.conns.splice(i, 1)).catch(global.conn.logger.error) : delete global.conns[i] && global.conns.splice(i, 1)
@@ -42,8 +41,8 @@ let handler = async (m, { conn, args, usedPrefix, command, isOwner }) => {
     conn.connect().then(async ({ user }) => {
       parent.reply(m.chat, 'Berhasil tersambung dengan WhatsApp - mu.\n*NOTE: Ini cuma numpang*\n' + JSON.stringify(user, null, 2), m)
       if (auth) return
-      await parent.sendMessage(user.jid, `Kamu bisa login tanpa qr dengan pesan dibawah ini. untuk mendapatkan kode lengkapnya, silahkan kirim *${usedPrefix}getcode* untuk mendapatkan kode yang akurat`, MessageType.extendedText)
-      parent.sendMessage(user.jid, `${usedPrefix + command} ${Buffer.from(JSON.stringify(conn.base64EncodedAuthInfo())).toString('base64')}`, MessageType.extendedText)
+      await conn.reply(user.jid, `Kamu bisa login tanpa qr dengan pesan dibawah ini. untuk mendapatkan kode lengkapnya, silahkan kirim *${usedPrefix}getcode* untuk mendapatkan kode yang akurat`, m)
+      conn.reply(user.jid, `${usedPrefix + command} ${Buffer.from(JSON.stringify(conn.base64EncodedAuthInfo())).toString('base64')}`, m)
     })
     setTimeout(() => {
       if (conn.user) return
@@ -58,7 +57,7 @@ let handler = async (m, { conn, args, usedPrefix, command, isOwner }) => {
         try {
           if (conn.state != 'close') return
           if (conn.user && conn.user.jid)
-            parent.sendMessage(conn.user.jid, `Koneksi terputus...`, MessageType.extendedText)
+            conn.reply(conn.user.jid, `Koneksi terputus...`, m)
           let i = global.conns.indexOf(conn)
           if (i < 0) return
           delete global.conns[i]
