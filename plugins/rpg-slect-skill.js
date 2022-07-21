@@ -20,8 +20,7 @@ var bintang = {
    
    let skil = text.trim().toLowerCase() // to filter text
      
-   if (!skill.includes(skil)) throw `Select *skill🃏* what do you want/pilih skill apa yg kamu inginkan:\n
-     ${skill.map(skil => `› ${skil}`).join('\n')}
+   if (!skill.includes(skil)) throw `Select *skill🃏* what do you want/pilih skill apa yg kamu inginkan:\n\n${skill.map(skil => `› ${skil}`).join('\n')}
 
      How To use/Cara menggunakan:
      ${usedPrefix + command} <nameskill>
@@ -39,7 +38,7 @@ var bintang = {
 
 }
 
-handler.help = ['selectskill *<type>*']
+handler.help = ['selectskill <type>']
 handler.tags = ['rpg']
 handler.command = /^(slectskill|selectskill)$/i
 

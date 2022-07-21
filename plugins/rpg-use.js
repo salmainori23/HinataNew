@@ -15,10 +15,10 @@ let handler  = async (m, { conn, command, args, usedPrefix }) => {
                         if (global.db.data.users[m.sender].potion >= count * 1) {
                             global.db.data.users[m.sender].potion -= count * 1
                             global.db.data.users[m.sender].healt += usepotion * count
-                            conn.sendButton(m.chat, msgsucces, wm, null, [['inventory', usedPrefix + 'inv', 'petualang', usedPrefix + 'work']], m)
-                        } else conn.sendButton(m.chat, msgkurang, wm, null, [['beli potion', usedPrefix + 'beli potion', 'cek inv', usedPrefix + 'inv']], m)
-                    } else conn.sendButton(m.chat, msgpenuh, wm, null, [['inventory', usedPrefix + 'inv', 'petualang', usedPrefix + 'work']], m)
-                } else if (args.length > 2 && args[0] === !'potion') conn.sendButton(m.chat, pickRandom(['Hanya bisa menggunakan potion', 'Mau ngunain apa? Cuma bisa gunain potion :v', 'Wih mau gunain apa kamu, kan hanya bisa potion', 'Waduheck, hanya bisa potion', 'lah, mau gunain apa?, kan hanya bisa potion']) + '\nContoh penggunaan: *' + usedPrefix + 'use potion 1*', wm, null, [['gunakan 1 potion', usedPrefix + 'use potion 1', 'gunakan 2 potion', usedPrefix + 'use potion 2']], m)
+                            conn.sendButton(m.chat, msgsucces, wm, null, [['inventory', usedPrefix + 'inv'], ['petualang', usedPrefix + 'work']], m)
+                        } else conn.sendButton(m.chat, msgkurang, wm, null, [['beli potion', usedPrefix + 'beli potion'], ['cek inv', usedPrefix + 'inv']], m)
+                    } else conn.sendButton(m.chat, msgpenuh, wm, null, [['inventory', usedPrefix + 'inv'], ['petualang', usedPrefix + 'work']], m)
+                } else if (args.length > 2 && args[0] === !'potion') conn.sendButton(m.chat, pickRandom(['Hanya bisa menggunakan potion', 'Mau ngunain apa? Cuma bisa gunain potion :v', 'Wih mau gunain apa kamu, kan hanya bisa potion', 'Waduheck, hanya bisa potion', 'lah, mau gunain apa?, kan hanya bisa potion']) + '\nContoh penggunaan: *' + usedPrefix + 'use potion 1*', wm, null, [['gunakan 1 potion', usedPrefix + 'use potion 1'], ['gunakan 2 potion', usedPrefix + 'use potion 2']], m)
             } catch (e) {
                 console.log(e)
                 throw msgerror
@@ -31,9 +31,9 @@ let handler  = async (m, { conn, command, args, usedPrefix }) => {
                     if (global.db.data.users[m.sender].potion >= count * 1) {
                         global.db.data.users[m.sender].potion -= count * 1
                         global.db.data.users[m.sender].healt += usepotion * count
-                        conn.sendButton(m.chat, msgsucces, wm, null, [['inventory', usedPrefix + 'inv', 'petualang', usedPrefix + 'work']], m)
-                    } else conn.sendButton(m.chat, msgkurang, wm, null, [['beli potion', usedPrefix + 'beli potion', 'cek inv', usedPrefix + 'inv']], m)
-                } else conn.sendButton(m.chat, msgpenuh, wm, null, [['inventory', usedPrefix + 'inv', 'petualang', usedPrefix + 'work']], m)
+                        conn.sendButton(m.chat, msgsucces, wm, null, [['inventory', usedPrefix + 'inv'], ['petualang', usedPrefix + 'work']], m)
+                    } else conn.sendButton(m.chat, msgkurang, wm, null, [['beli potion', usedPrefix + 'beli potion'], ['cek inv', usedPrefix + 'inv']], m)
+                } else conn.sendButton(m.chat, msgpenuh, wm, null, [['inventory', usedPrefix + 'inv'], ['petualang', usedPrefix + 'work']], m)
             } catch (e) {
                 console.log(e)
                 throw msgerror
@@ -47,7 +47,7 @@ let handler  = async (m, { conn, command, args, usedPrefix }) => {
 
 handler.help = ['use <item> <jumlah>']
 handler.tags = ['rpg']
-handler.command = /^(use)$/i
+handler.command = /^(use)/i
 
 export default handler
 

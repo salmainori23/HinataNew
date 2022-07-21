@@ -31,7 +31,10 @@ const timeout = 1800000
                                      global.db.data.users[m.sender].bibitjeruk -= 500
                                      global.db.data.users[m.sender].bibitapel -= 500
                                      global.db.data.users[m.sender].lastberkebon = new Date * 1
-                                     m.reply(`Selamat kamu mendapatkan : \n+${pisangpoin} Pisang\n+${manggapoin} Mangga\n+${anggurpoin} Anggur\n+${jerukpoin} Jeruk\n+${apelpoin} Apel\n+1 Tiketcoin`)
+                                     let hsl = `Selamat ${conn.getName(m.sender)}, Kamu mendapatkan : \n+${pisangpoin} Pisang\n+${manggapoin} Mangga\n+${anggurpoin} Anggur\n+${jerukpoin} Jeruk\n+${apelpoin} Apel\n+1 Tiketcoin`
+                                     conn.sendHydrated(m.chat, hsl, botdate, null, null, null, null, null, [
+      [null, null]
+    ], null)
                                      setTimeout(() => {
 					                      conn.reply(m.chat, `Waktunya berkebon lagi kak 😅`, m)
 					                  }, timeout)

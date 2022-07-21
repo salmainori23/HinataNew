@@ -4,8 +4,11 @@ let handler = async (m, { conn }) => {
     let _timers = (300000 - __timers)
     let order = global.db.data.users[m.sender].ojekk
     let timers = clockString(_timers) 
-let name = conn.getName(m.sender)
+    let name = await conn.getName(m.sender)
     let user = global.db.data.users[m.sender]
+    
+    if (user.stamina < 20) return m.reply(`Stamina anda tidak cukup\nharap isi stamina anda dengan *${usedPrefix}eat8`)
+    if (user.lastngojek > 10800000) throw m.reply(`Kamu masih kelelahan\nHarap tunggu *${timers}* lagi`)
     
      if (new Date - global.db.data.users[m.sender].lastngojek > 300000) {
 let randomaku1 = `${Math.floor(Math.random() * 10)}`
@@ -76,27 +79,39 @@ global.db.data.users[m.sender].ojekk += 1
 
 
 setTimeout(() => {
-                     conn.copyNForward(m.chat, `${hsl}`)
+                     conn.sendHydrated(m.chat, hsl, botdate, null, null, null, null, null, [
+      [null, null]
+    ], null)
                      }, 27000) 
                
                      setTimeout(() => {
-                     conn.copyNForward(m.chat, `${dimas4}`)
+                     conn.sendHydrated(m.chat, dimas4, botdate, null, null, null, null, null, [
+      [null, null]
+    ], null)
                       }, 25000)
                 
                      setTimeout(() => {
-                     conn.copyNForward(m.chat, `${dimas3}`)
+                     conn.sendHydrated(m.chat, dimas3, botdate, null, null, null, null, null, [
+      [null, null]
+    ], null)
                      }, 20000) 
                         
                      setTimeout(() => {
-                     conn.copyNForward(m.chat, `${dimas2}`)
+                     conn.sendHydrated(m.chat, dimas2, botdate, null, null, null, null, null, [
+      [null, null]
+    ], null)
                      }, 15000) 
                     
                      setTimeout(() => {
-                     conn.copyNForward(m.chat, `${dimas}`)
+                     conn.sendHydrated(m.chat, dimas, botdate, null, null, null, null, null, [
+      [null, null]
+    ], null)
                      }, 10000) 
                      
                      setTimeout(() => {
-                     conn.copyNForward(m.chat, `🔍Mencari pelanggan.....`)
+                     conn.sendHydrated(m.chat, `🔍 ${name} Mencari pelanggan.....`, botdate, null, null, null, null, null, [
+      [null, null]
+    ], null)
                      }, 0) 
   user.lastngojek = new Date * 1
     } else conn.sendButton(m.chat, `Sepertinya Anda Sudah Kecapekan Silahkan Istirahat Dulu sekitar\n🕔 *${timers}*`, wm, null, [['inventory', '.inv']], m )

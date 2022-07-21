@@ -6,26 +6,23 @@ let handler = async (m, { conn }) => {
     if (!canLevelUp(user.level, user.exp, global.multiplier)) {
         let { min, xp, max } = xpRange(user.level, global.multiplier)
         throw `
-Level *${user.level} (${user.exp - min}/${xp})*
-Kurang *${max - user.exp}* lagi!
+Level ${user.level} 📊
+*${user.exp - min} / ${xp}*
+Kurang *${max - user.exp}* lagi! ✨
 `.trim()
     }
     let before = user.level * 1
     while (canLevelUp(user.level, user.exp, global.multiplier)) user.level++
     if (before !== user.level) {
-        let teks = `Selamat ${conn.getName(m.sender)} naik 🧬level`
+        let teks = `.             ${user.role}`
         let str = `
-${teks} 
-• 🧬Level Sebelumnya : ${before}
-• 🧬Level Baru : ${user.level}
-• Pada Jam : ${new Date().toLocaleString('id-ID')}
-*_Semakin sering berinteraksi dengan bot Semakin Tinggi level kamu_*
-`.trim()
+*🎉 C O N G R A T S 🎉*
+*${before}* ➔ *${user.level}* [ *${user.role}* ]`.trim()
         try {
             const img = await levelup(teks, user.level)
-            conn.sendFile(m.chat, img, 'levelup.jpg', str, m)
+            conn.sendButton(m.chat, str, botdate, img, [['INVENTORY', '.inv']], m)
         } catch (e) {
-            m.reply(str)
+            conn.sendButton(m.chat, str, botdate, img, [['INVENTORY', '.inv']], m)
         }
     }
 }

@@ -2,6 +2,7 @@
 let handler = async (m, { conn, usedPrefix, command, text, args, owner }) => {
     let user = global.db.data.users[m.sender]
        let pancingan = user.pancingan
+       let pemancing = await conn.getName(m.sender)
        let umpan = user.umpan
        let type = (args[0] || '').toLowerCase()
         switch (type) {
@@ -55,7 +56,7 @@ let handler = async (m, { conn, usedPrefix, command, text, args, owner }) => {
                                   let zero12 = `${rbrb12}`
 
                                  let hsl = `
-*《 Hasil Memancing Kali Ini 》*
+*《 Hasil Memancing ${pemancing} 》*
  *🦀 = [ ${zero2} ]*			*🐠 = [ ${zero6} ]*
  *🦞 = [ ${zero8} ]*			 *🐟 = [ ${zero11} ]*
  *🦐 = [ ${zero10} ]*			 *🐬 = [ ${zero7} ]*
@@ -81,16 +82,24 @@ let handler = async (m, { conn, usedPrefix, command, text, args, owner }) => {
                                  global.db.data.users[m.sender].umpan -= rbrb13
 
                                 setTimeout(() => {
-                                conn.copyNForward(m.chat, `Yuk mancing mania level easy lagi`)
+                                conn.sendHydrated(m.chat, `${pemancing} Yuk mancing mania level easy lagi`, botdate, null, null, null, null, null, [
+      [null, null]
+    ], null)
                                 }, 28800000) 
                                 setTimeout(() => {
-                                conn.copyNForward(m.chat, `${hsl}`)
+                                conn.sendHydrated(m.chat, hsl, botdate, null, null, null, null, null, [
+      [null, null]
+    ], null)
                                 }, 12000) 
                                 setTimeout(() => {
-                                conn.copyNForward(m.chat, `Menunggu`)
+                                conn.sendHydrated(m.chat, `${pemancing} Menunggu`, botdate, null, null, null, null, null, [
+      [null, null]
+    ], null)
                                  }, 6000) 
                                  setTimeout(() => {
-                                 conn.copyNForward(m.chat, `_Sedang Memancing..._`)
+                                 conn.sendHydrated(m.chat, `${pemancing} Sedang Memancing...`, botdate, null, null, null, null, null, [
+      [null, null]
+    ], null)
                                  }, 0) 
                                  user.lastmancingeasy = new Date * 1
                                  } else conn.reply(m.chat, 'Minimal umpan kamu *100* untuk memancing level mudah', m)
@@ -147,7 +156,7 @@ let handler = async (m, { conn, usedPrefix, command, text, args, owner }) => {
                                   let aine12 = `${rbrbs12}`
 
                                  let hsls = `
-*《 Hasil Memancing Kali Ini 》*
+*《 Hasil Memancing ${pemancing} 》*
  *🦀 = [ ${aine2} ]*			*🐠 = [ ${aine6} ]*
  *🦞 = [ ${aine8} ]*			 *🐟 = [ ${aine11} ]*
  *🦐 = [ ${aine10} ]*			 *🐬 = [ ${aine7} ]*
@@ -173,16 +182,24 @@ let handler = async (m, { conn, usedPrefix, command, text, args, owner }) => {
                                  global.db.data.users[m.sender].umpan -= rbrbs13 
                                  
                                 setTimeout(() => {
-                                conn.copyNForward(m.chat, `Yuk mancing mania level normal lagi`)
+                                conn.sendHydrated(m.chat, `${pemancing} Yuk mancing mania level normal lagi`, botdate, null, null, null, null, null, [
+      [null, null]
+    ], null)
                                 }, 28800000) 
                                 setTimeout(() => {
-                                conn.copyNForward(m.chat, `${hsls}`)
+                                conn.sendHydrated(m.chat, hsls, botdate, null, null, null, null, null, [
+      [null, null]
+    ], null)
                                 }, 12000) 
                                 setTimeout(() => {
-                                conn.copyNForward(m.chat, `Menunggu`)
+                                conn.sendHydrated(m.chat, `${pemancing} Menunggu`, botdate, null, null, null, null, null, [
+      [null, null]
+    ], null)
                                  }, 6000) 
                                  setTimeout(() => {
-                                 conn.copyNForward(m.chat, `_Sedang Memancing..._`)
+                                 conn.sendHydrated(m.chat, `${pemancing} Sedang Memancing...`, botdate, null, null, null, null, null, [
+      [null, null]
+    ], null)
                                  }, 0) 
                                  user.lastmancingeasy = new Date * 1
                                  } else conn.reply(m.chat, 'Minimal umpan kamu *150* untuk memancing level normal', m)
@@ -239,7 +256,7 @@ let handler = async (m, { conn, usedPrefix, command, text, args, owner }) => {
                                   let aines12 = `${rbrbsh12}`
 
                                  let hslsh = `
-*《 Hasil Memancing Kali Ini 》*
+*《 Hasil Memancing ${pemancing} 》*
  *🦀 = [ ${aines2} ]*			*🐠 = [ ${aines6} ]*
  *🦞 = [ ${aines8} ]*			 *🐟 = [ ${aines11} ]*
  *🦐 = [ ${aines10} ]*			 *🐬 = [ ${aines7} ]*
@@ -265,16 +282,24 @@ let handler = async (m, { conn, usedPrefix, command, text, args, owner }) => {
                                  global.db.data.users[m.sender].umpan -= rbrbsh13
 
                                 setTimeout(() => {
-                                conn.copyNForward(m.chat, `Yuk mancing mania level hard lagi`)
+                                conn.sendHydrated(m.chat, `${pemancing} Yuk mancing mania level hard lagi`, botdate, null, null, null, null, null, [
+      [null, null]
+    ], null)
                                 }, 28800000) 
                                 setTimeout(() => {
-                                conn.copyNForward(m.chat, `${hslsh}`)
+                                conn.sendHydrated(m.chat, hslsh, botdate, null, null, null, null, null, [
+      [null, null]
+    ], null)
                                 }, 12000) 
                                 setTimeout(() => {
-                                conn.copyNForward(m.chat, `Menunggu`)
+                                conn.sendHydrated(m.chat, `${pemancing} Menunggu`, botdate, null, null, null, null, null, [
+      [null, null]
+    ], null)
                                  }, 6000) 
                                  setTimeout(() => {
-                                 conn.copyNForward(m.chat, `_Sedang Memancing..._`)
+                                 conn.sendHydrated(m.chat, `${pemancing} Sedang Memancing...`, botdate, null, null, null, null, null, [
+      [null, null]
+    ], null)
                                  }, 0) 
                                  user.lastmancingeasy = new Date * 1
                                  } else conn.reply(m.chat, 'Minimal umpan kamu *200* untuk memancing level hard', m)
@@ -331,7 +356,7 @@ let handler = async (m, { conn, usedPrefix, command, text, args, owner }) => {
                                   let ainese12 = `${rbrbshe12}`
 
                                  let hslse = `
-*《 Hasil Memancing Kali Ini 》*
+*《 Hasil Memancing ${pemancing} 》*
  *🦀 = [ ${ainese2} ]*			*🐠 = [ ${ainese6} ]*
  *🦞 = [ ${ainese8} ]*			 *🐟 = [ ${ainese11} ]*
  *🦐 = [ ${ainese10} ]*			 *🐬 = [ ${ainese7} ]*
@@ -357,16 +382,24 @@ let handler = async (m, { conn, usedPrefix, command, text, args, owner }) => {
                                  global.db.data.users[m.sender].umpan -= rbrbshe13
 
                                 setTimeout(() => {
-                                conn.copyNForward(m.chat, `Yuk mancing mania level extreme lagi`)
+                                conn.sendHydrated(m.chat, `${pemancing} Yuk mancing mania level extreme lagi`, botdate, null, null, null, null, null, [
+      [null, null]
+    ], null)
                                 }, 28800000) 
                                 setTimeout(() => {
-                                conn.copyNForward(m.chat, `${hslse}`)
+                                conn.sendHydrated(m.chat, hslse, botdate, null, null, null, null, null, [
+      [null, null]
+    ], null)
                                 }, 12000) 
                                 setTimeout(() => {
-                                conn.copyNForward(m.chat, `Menunggu`)
+                                conn.sendHydrated(m.chat, `${pemancing} Menunggu`, botdate, null, null, null, null, null, [
+      [null, null]
+    ], null)
                                  }, 6000) 
                                  setTimeout(() => {
-                                 conn.copyNForward(m.chat, `_Sedang Memancing..._`)
+                                 conn.sendHydrated(m.chat, `${pemancing} Sedang Memancing...`, botdate, null, null, null, null, null, [
+      [null, null]
+    ], null)
                                  }, 0) 
                                  user.lastmancingeasy = new Date * 1
                                  } else conn.reply(m.chat, 'Minimal umpan kamu *250* untuk memancing level extreme', m)
@@ -381,6 +414,9 @@ let handler = async (m, { conn, usedPrefix, command, text, args, owner }) => {
         let you = conn.getName(m.sender)
         let user = global.db.data.users[m.sender]
         
+        if (user.stamina < 20) return m.reply(`Stamina anda tidak cukup\nharap isi stamina anda dengan *${usedPrefix}eat8`)
+    if (user.lastfishing > 10800000) throw m.reply(`Kamu masih kelelahan\nHarap tunggu *${timers}* lagi`)
+    
         if (global.db.data.users[m.sender].fishingrod > 0 ) {
         if (new Date - global.db.data.users[m.sender].lastfishing > 240000) {
         	
@@ -401,7 +437,7 @@ let handler = async (m, { conn, usedPrefix, command, text, args, owner }) => {
            let psenjata = (_psenjata * 1)
            
         let mcng = `
-*Hasil 🎣Fishing Kamu!*
+*Hasil 🎣Fishing ${pemancing}!*
         
 🐟 nila : ${nila}
 🐡 bawal : ${bawal}
@@ -414,8 +450,10 @@ let handler = async (m, { conn, usedPrefix, command, text, args, owner }) => {
 Kamu bisa memasak ini, dan memakannya💉
 _example:_
 ${ usedPrefix }cook`    
-        setTimeout(() => {                 
-        conn.reply( m.chat, mcng, m)
+        setTimeout(() => {
+        conn.sendHydrated(m.chat, mcng, botdate, null, null, null, null, null, [
+      [null, null]
+    ], null)
          if (psepick > 0 ) {
          	global.db.data.users[m.sender].psepick += psepick * 1
          conn.sendButton( m.chat, `You Get 🎁chest weapons epic ${psepick} item`, wm, [[`again`, `.mancing`]], m)
@@ -427,16 +465,19 @@ ${ usedPrefix }cook`
         }, 38000)
 
         setTimeout(() => {
-                     conn.copyNForward(m.chat, `_Yey... Sepertinya dapat sesuatu..._`)
+                     conn.sendHydrated(m.chat, `${pemancing} Sepertinya dapat sesuatu..`, botdate, null, null, null, null, null, [
+      [null, null]
+    ], null)
                       }, 28000)
-        setTimeout(() => {
-                     conn.copyNForward(m.chat, `_Menunggu Strike..._`)
-                      }, 18000)
        setTimeout(() => {
-                     conn.copyNForward(m.chat, `_Mulai Memancing..._`)
+                     conn.sendHydrated(m.chat, `${pemancing} Menunggu`, botdate, null, null, null, null, null, [
+      [null, null]
+    ], null)
                       }, 8000)
        setTimeout(() => {
-                     conn.copyNForward(m.chat, `_Pergi Memancing... 🎣_`)
+                     conn.sendHydrated(m.chat, `${pemancing} Sedang Memancing...`, botdate, null, null, null, null, null, [
+      [null, null]
+    ], null)
                       }, 0)
                       
         global.db.data.users[m.sender].nila += nila * 1
@@ -449,7 +490,7 @@ ${ usedPrefix }cook`
          user.kepiting += kepiting * 1
 
         	  } else m.reply(`You're already fishing, wait until ${timers}`)
-           } else conn.sendButton(m.chat, `*[❗] kamu tidak punya kail pancingan 🎣*`, wm, [[`Craft Fishingrod`, '.craft pancing']], m)
+           } else conn.sendButton(m.chat, `*[❗] kamu tidak punya kail pancingan 🎣*`, wm, [[`Craft Fishingrod`, '.craft fishingrod']], m)
            } catch (e) {
         console.log(e)
         conn.reply(m.chat, 'Error', m)

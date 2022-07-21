@@ -5,14 +5,14 @@ import fs from "fs"
 let handler = async (m, { conn, args, text, usedPrefix, command }) => {
 let frep = { contextInfo: { externalAdReply: {title: global.wm, body: global.author, sourceUrl: snh, thumbnail: fs.readFileSync('./thumbnail.jpg')}}}
 let fdoc = {quoted:{key : {participant : '0@s.whatsapp.net'},message: {documentMessage: {title: `${command}`}}}}
-
+  
     conn.slots = conn.slots ? conn.slots : {}
     if (m.chat in conn.slots) return m.reply('Masih ada Yang Melakukan Slots Disini, Tunggu Sampai selesai!!')
     else conn.slots[m.chat] = true
     try { 
         if (args.length < 1) return m.reply(`Gunakan format *${usedPrefix}${command} [jumlah]*
 contoh *${usedPrefix}${command} 10*`)
-        let count = (typeof args[0] == 'number' ? Math.round(Math.max(args[0], 1)) : 1)
+        let count = args[0]
         let _spin1 = pickRandom(['1', '2', '3', '4', '5']) 
         let _spin2 = pickRandom(['1', '2', '3', '4', '5'])
         let _spin3 = pickRandom(['1', '2', '3', '4', '5'])
@@ -41,7 +41,7 @@ contoh *${usedPrefix}${command} 10*`)
         let spins8 = (spin8 == 1 ? '🍊' : spin8 == 2 ? '🍇' : spin8 == 3 ? '🍉' : spin8 == 4 ? '🍌' : spin8 == 5 ? '🍍' : '')
         let spins9 = (spin9 == 1 ? '🍊' : spin9 == 2 ? '🍇' : spin9 == 3 ? '🍉' : spin9 == 4 ? '🍌' : spin9 == 5 ? '🍍' : '' )
         let user = global.db.data.users[m.sender]
-        user.money -= count * 1
+        user.money -= Math.ceil(count * 1)
         for (let i = 0; i < 3; i++) {
             m.reply(m.chat, `
             *🎰VIRTUAL SLOTS🎰*
@@ -55,17 +55,17 @@ ${pickRandom(['🍊', '🍇', '🍉', '🍌', '🍍'])}|${pickRandom(['🍊', '�
         let WinOrLose, Hadiah
         if (spin1 == spin2 && spin2 == spin3 && spin3 == spin4 && spin4 == spin5 && spin5 == spin6 && spin6 == spin7 && spin7 == spin8 && spin8 == spin9) {
             WinOrLose = 'BIG JACKPOT🥳🥳'
-            Hadiah = `+${count * 4}`
-            user.money += count * 4
+            Hadiah = `+${Math.ceil(count * 4)}`
+            user.money += Math.ceil(count * 4)
         } else if (spin4 == spin5 && spin5  == spin6) {
            WinOrLose = 'JACKPOT🥳' 
-           Hadiah = `+${count * 2}`
-           user.money += count * 2
+           Hadiah = `+${Math.ceil(count * 2)}`
+           user.money += Math.ceil(count * 2)
         } else if ((spin1 == spin2 && spin2 == spin3) || (spin7 == spin8 && spin8 == spin9)) {  
-            Hadiah = `-${count * 1}`
+            Hadiah = `-${Math.ceil(count * 1)}`
             WinOrLose = 'DIKIT LAGI!!'
         } else {
-             Hadiah = `-${count * 1}`
+             Hadiah = `-${Math.ceil(count * 1)}`
              WinOrLose = 'YOU LOSE'
         } 
         conn.sendButton(m.chat, `

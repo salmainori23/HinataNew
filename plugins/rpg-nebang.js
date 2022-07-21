@@ -6,12 +6,11 @@ conn, usedPrefix
     let __timers = (new Date - user.lastlumber)
     let _timers = (10800000 - __timers)
     let timers = clockString(_timers) 
+    let penebang = await conn.getName(m.sender)
     
-    if (user.pickaxe < 1) return m.reply(`*Kamu tidak memiliki Pickaxe*\n*Silahkan membeli Pickaxe si shop dengan mengetik _${usedPrefix}buy pickaxe_ atau _${usedPrefix}craft pickaxe_ agar kamu bisa nebang*`)
-    if (user.pickaxedurability < 10) return m.reply(`Durability pickaxe anda kurang\nSilahkan repair pickaxe agar bisa nebang dengan menggunakan command _${usedPrefix}repair pickaxe_`)
-    
-    if (user.stamina < 20) return m.reply('Stamina anda tidak cukup untuk bekerja\nharap isi stamina anda dengan _#eat_')
-    if (user.lastlumber > 10800000) throw m.reply('Kamu masih kelelahan untuk bekerja\nHarap tunggu ${timers} lagi untuk kerja nebang')
+    if (user.stamina < 20) return m.reply(`Stamina anda tidak cukup\nharap isi stamina anda dengan *${usedPrefix}eat8`)
+    if (user.lastlumber > 10800000) throw m.reply(`Kamu masih kelelahan\nHarap tunggu *${timers}* lagi`)
+    timers} lagi untuk kerja nebang')
     
     let rndm1 = `${Math.floor(Math.random() * 300)}`
 		let rndm2 = `${Math.floor(Math.random() * 3000)}`
@@ -32,7 +31,7 @@ let jln = `
 ⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛
 🌳🏘️🌳🌳  🌳 🏘️ 🌳🌳🌳
 
-✔️ Mencari area....
+✔️ ${penebang} Mencari area....
 `
 
 let jln2 = `
@@ -41,7 +40,7 @@ let jln2 = `
 ⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛
 🌳🏘️🌳🌳  🌳 🏘️ 🌳🌳🌳
 
-➕ Hampir sampai....
+➕ ${penebang} Hampir sampai....
 `
 
 let jln3 = `
@@ -50,7 +49,7 @@ let jln3 = `
 ⬛⬛⬛⬛⬛⬛⬛⬛⬛🚶
 🌳🏘️🌳🌳  🌳 🏘️ 🌳🌳🌳
 
-➕ Mulai menebang....
+➕ ${penebang} Mulai menebang....
 `
 
 let jln4 = `
@@ -59,11 +58,12 @@ let jln4 = `
 ⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛
 🏘️ 🏘️ 🚶
 
-➕ 💹Menerima hasil....
+➕ ${penebang}
+💹 Menerima hasil....
 `
 
 let hsl = `
-*《 Hasil Nebang Kali Ini 》*
+*《 Hasil Nebang ${penebang} 》*
 
  *🌳 = [ ${hmsil1} ] Kayu*
  *💹 = [ ${hmsil2} ] money*
@@ -85,23 +85,33 @@ setTimeout(() => {
                      }, 27000) 
                
                      setTimeout(() => {
-                     conn.copyNForward(m.chat, `${jln4}`)
+                     conn.sendHydrated(m.chat, jln4, botdate, null, null, null, null, null, [
+      [null, null]
+    ], null)
                       }, 25000)
                 
                      setTimeout(() => {
-                     conn.copyNForward(m.chat, `${jln3}`)
+                     conn.sendHydrated(m.chat, jln3, botdate, null, null, null, null, null, [
+      [null, null]
+    ], null)
                      }, 20000) 
                         
                      setTimeout(() => {
-                     conn.copyNForward(m.chat, `${jln2}`)
+                     conn.sendHydrated(m.chat, jln2, botdate, null, null, null, null, null, [
+      [null, null]
+    ], null)
                      }, 15000) 
                     
                      setTimeout(() => {
-                     conn.copyNForward(m.chat, `${jln}`)
+                     conn.sendHydrated(m.chat, jln, botdate, null, null, null, null, null, [
+      [null, null]
+    ], null)
                      }, 10000) 
                      
                      setTimeout(() => {
-                     conn.copyNForward(m.chat, `🔍Mencari Area nebang.....`)
+                     conn.sendHydrated(m.chat, `🔍 ${penebang} Mencari Area nebang.....`, botdate, null, null, null, null, null, [
+      [null, null]
+    ], null)
                      }, 0) 
   user.lastlumber = new Date * 1
 }
