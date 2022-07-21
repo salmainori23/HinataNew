@@ -1453,13 +1453,14 @@ export async function participantsUpdate({ id, participants, action }) {
             }
             break
         case 'promote':
-                text = (chat.sPromote || this.spromote || conn.spromote || '@user *is now Admin*')
-            case 'demote':
-                if (!text) text = (chat.sDemote || this.sdemote || conn.sdemote || '@user *is no longer Admin*')
-                text = text.replace('@user', '@' + participants[0].split('@')[0])
-                if (chat.detect)
-                this.sendMessage(m.chat, { text: text, mentions: this.parseMention(text)}, { quoted: fgif })
-                break
+            text = (chat.sPromote || this.spromote || conn.spromote || '@user ```is now Admin```')
+        case 'demote':
+            if (!text)
+                text = (chat.sDemote || this.sdemote || conn.sdemote || '@user ```is no longer Admin```')
+            text = text.replace('@user', '@' + participants[0].split('@')[0])
+            if (chat.detect)
+                this.sendMessage(id, { text, mentions: this.parseMention(text) })
+            break
     }
 }
 
@@ -1467,17 +1468,14 @@ export async function participantsUpdate({ id, participants, action }) {
  * Handle groups update
  * @param {import('@adiwajshing/baileys').BaileysEventMap<unknown>['groups.update']} groupsUpdate 
  */
-export async function groupsUpdate(groupsUpdate, fromMe, m) {
-        if (opts['self'] && m.fromMe) return
-            console.log(m)
-        // Ingfo tag orang yg update group
-        for (let groupUpdate of groupsUpdate) {
-            const id = groupUpdate.id
-            const participant = groupUpdate.participants
-            console.log('\n\n=============\n\n In Groups Update \n\n============\n\n'+ `Id: ${id}\nParticipants: ${participant}` + '\n\n==============================\n')
-            if (!id) continue
-            let chats = global.db.data.chats[id], text = ''
-            if (!chats.detect) continue
+export async function groupsUpdate(groupsUpdate) {
+    if (opts['self'])
+        return
+    for (const groupUpdate of groupsUpdate) {
+        const id = groupUpdate.id
+        if (!id) continue
+        let chats = global.db.data.chats[id], text = ''
+        if (!chats?.detect) continue
             if (groupUpdate.desc) text = (chats.sDesc || this.sDesc || conn.sDesc || '*Description has been changed to*\n@desc').replace('@desc', groupUpdate.desc)
             if (groupUpdate.subject) text = (chats.sSubject || this.sSubject || conn.sSubject || '*Subject has been changed to*\n@subject').replace('@subject', groupUpdate.subject)
             if (groupUpdate.icon) text = (chats.sIcon || this.sIcon || conn.sIcon || '*Icon has been changed to*').replace('@icon', groupUpdate.icon)
@@ -1486,14 +1484,10 @@ export async function groupsUpdate(groupsUpdate, fromMe, m) {
             if (groupUpdate.announce == false) text = (chats.sAnnounceOff || this.sAnnounceOff || conn.sAnnounceOff || '*Group has been open!*')
             if (groupUpdate.restrict == true) text = (chats.sRestrictOn || this.sRestrictOn || conn.sRestrictOn || '*Group has been all participants!*')
             if (groupUpdate.restrict == false) text = (chats.sRestrictOff || this.sRestrictOff || conn.sRestrictOff || '*Group has been only admin!*')
-            //console.log('=============\n\ngroupsUpdate \n\n============\n\n' + await groupUpdate)
             if (!text) continue
-            conn.sendHydrated(m.chat, text, wm + '\n\n' + botdate, hwaifu.getRandom(), sgc, 'Hinata Group', nomorown, 'Owner', [
-      ['🎀 Menu', '/menu'],
-      ['🪄 Test', '/ping']
-    ], null)
-        }
+            await this.sendMessage(id, { text, mentions: this.parseMention(text) })
     }
+}
 
 /**
 Delete Chat
