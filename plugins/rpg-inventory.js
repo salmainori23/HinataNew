@@ -762,7 +762,7 @@ let health = global.db.data.users[m.sender].health
     let emaspro = global.db.data.users[m.sender].emasbatang
     let hero = global.db.data.users[m.sender].hero
     let exphero = global.db.data.users[m.sender].exphero
-    let { max } = levelling.xpRange(level, exp, global.multiplier)
+    let { max } = xpRange(level, exp, global.multiplier)
    // let name = m.fromMe ? conn.user : conn.contacts[m.sender]
     let name = m.sender
     let sortedmoney = Object.entries(global.db.data.users).sort((a, b) => b[1].money - a[1].money)

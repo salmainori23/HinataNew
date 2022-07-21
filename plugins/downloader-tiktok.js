@@ -1,5 +1,5 @@
 import fetch from 'node-fetch'
-import { tiktokdl } from '@bochilteam/scraper'
+import { tiktokdl, tiktokdlv2 } from '@bochilteam/scraper'
 
 let handler = async (m, { conn, args, text, usedPrefix, command }) => {
 let who = m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.fromMe ? conn.user.jid : m.sender
@@ -12,23 +12,27 @@ let buttons = [
 	{ buttonText: { displayText: 'No Wm' }, buttonId: `${usedPrefix}tiktoknowm ${args[0]}` }
 	]
 if (command == 'tiktok') {
-    const { author: { nickname }, video, description } = await tiktokdl(args[0])
-    const url = video.no_watermark || video.no_watermark2 || video.no_watermark_raw
+    const { author: { nickname }, video, description } = await tiktokdl(args[0]).catch(async _ => await tiktokdlv2(args[0]))
+    const url = video.no_watermark || video.no_watermark_hd || video.with_watermark || video.no_watermark_raw
     if (!url) throw 'Can\'t download video!'
-let caption = `*TIKTOK DOWNLOADER*
-*Nickname:* ${nickname}
-*Description:* ${description}
+let caption = `${htki} *TIKTOK* ${htka}
+🧏 *Nickname:* ${nickname}
+🔗 *Url:* ${await shortUrl(url)}
 
-_©${global.wm}_`
-	conn.sendMessage(m.chat, { video: { url: url }, caption: caption , footer: await shortUrl(url), buttons }, { quoted: fgif })
+*Description:* ${description}
+`
+	conn.sendHydrated(m.chat, `${htki} ᴛɪᴋᴛᴏᴋ ᴡᴍ ${htka}`, caption, `${await shortUrl(url)}`, url, '🌎 s ᴏ ᴜ ʀ ᴄ ᴇ', null, null, [
+      ['🎀 Menu', '/menu']
+    ], m)
 }
 
 if (command == 'tiktokwm') {
 let linkwm = `https://api.lolhuman.xyz/api/tiktokwm?apikey=9b817532fadff8fc7cb86862&url=${args[0]}`
 if (!linkwm) throw 'Can\'t download video!'
-let caption2 = `*TIKTOK WITH WM*
-_©${global.wm}_`
-	// conn.sendMessage(m.chat, { video: { url: linkwm }, caption: caption2 , footer: await shortUrl(`${args[0]}`), buttons }, { quoted: fgif })
+let caption2 = `*TIKTOK WM*
+*Url:* ${await shortUrl(`${args[0]}`)}
+`
+/*
 	let buttonMessage= {
 'video': {'url': linkwm},
 'mimetype': "video/mp4",
@@ -45,11 +49,14 @@ _©${global.wm}_`
 'thumbnail': await (await fetch(hwaifu.getRandom())).buffer(),
 'sourceUrl': gcwangsaf}},
 'caption': caption2,
-'footer': await shortUrl(`${args[0]}`),
+'footer': wm,
 'buttons': buttons,
 'headerType': 6}
     await conn.sendMessage(m.chat, buttonMessage, {quoted: fgif})
-    
+    */
+    conn.sendHydrated(m.chat, `${htki} ᴛɪᴋᴛᴏᴋ ᴡᴍ ${htka}`, caption3, `${await shortUrl(linkwm)}`, linkwm, '🌎 s ᴏ ᴜ ʀ ᴄ ᴇ', null, null, [
+      ['🎀 Menu', '/menu']
+    ], m)
 }
 
 if (command == 'tiktoknowm') {
@@ -61,9 +68,10 @@ let caption3 = `*TIKTOK NO WM*
 *Title:* ${x.title}
 *Keyword:* ${x.keywords}
 *Description:* ${x.description}
-
-_©${global.wm}_`
-let buttonMessage= {
+*Url:* ${await shortUrl(x.link)}
+`
+/*
+let buttonMessage = {
 'video': {'url': x.link},
 'mimetype': "video/mp4",
 'fileLength': fsizedoc,
@@ -79,11 +87,14 @@ let buttonMessage= {
 'thumbnail': await (await fetch(hwaifu.getRandom())).buffer(),
 'sourceUrl': gcwangsaf}},
 'caption': caption3,
-'footer': await shortUrl(x.link),
+'footer': wm,
 'buttons': buttons,
 'headerType': 6}
     await conn.sendMessage(m.chat, buttonMessage, {quoted: fgif})
-	//conn.sendMessage(m.chat, { video: { url: x.link }, caption: caption3 , footer: await shortUrl(x.link), buttons }, { quoted: fgif })
+    */
+	conn.sendHydrated(m.chat, `${htki} ᴛɪᴋᴛᴏᴋ ᴡᴍ ${htka}`, caption3, `${await shortUrl(x.link)}`, x.link, '🌎 s ᴏ ᴜ ʀ ᴄ ᴇ', null, null, [
+      ['🎀 Menu', '/menu']
+    ], m)
 }
 
 if (command == 'tiktokdl') {
@@ -91,11 +102,9 @@ if (!args[0]) throw `Use example ${usedPrefix}${command} https://www.tiktok.com/
     const { author: { nickname }, video, description } = await tiktokdl(args[0])
     const url = video.no_watermark || video.no_watermark2 || video.no_watermark_raw
     if (!url) throw 'Can\'t download video!'
-    conn.sendHydrated(m.chat, `${htki} ᴛɪᴋᴛᴏᴋ ᴡᴍ ${htka}`,`➔ ɴɪᴄᴋɴᴀᴍᴇ ${nickname}${description ? `\n➔ ᴅᴇsᴄʀɪᴘᴛɪᴏɴ:\n${description}` : ''}`, await(await fetch(url)).buffer(), 
-url, '🌎 s ᴏ ᴜ ʀ ᴄ ᴇ', null,null, [
-['ᴅᴏɴᴀꜱɪ', `.donasi`],
-[null,null],
-[null,null]], m)
+    conn.sendHydrated(m.chat, `${htki} ᴛɪᴋᴛᴏᴋ ᴡᴍ ${htka}`, `➔ ɴɪᴄᴋɴᴀᴍᴇ ${nickname}${description ? `\n➔ ᴅᴇsᴄʀɪᴘᴛɪᴏɴ:\n${description}` : ''}`, `${await shortUrl(url)}`, url, '🌎 s ᴏ ᴜ ʀ ᴄ ᴇ', null, null, [
+      ['🎀 Menu', '/menu']
+    ], m)
 }
 
 }
