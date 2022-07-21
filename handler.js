@@ -9,7 +9,6 @@ import fetch from 'node-fetch'
 /**
  * @type {import('@adiwajshing/baileys')}
  */
-const { proto } = (await import('@adiwajshing/baileys')).default
 const isNumber = x => typeof x === 'number' && !isNaN(x)
 const delay = ms => isNumber(ms) && new Promise(resolve => setTimeout(function () {
     clearTimeout(this)
@@ -1458,8 +1457,11 @@ export async function participantsUpdate({ id, participants, action }) {
             if (!text)
                 text = (chat.sDemote || this.sdemote || conn.sdemote || '@user ```is no longer Admin```')
             text = text.replace('@user', '@' + participants[0].split('@')[0])
-            if (chat.detect)
-                this.sendMessage(id, { text, mentions: this.parseMention(text) })
+            if (chat.detect) return
+                conn.sendHydrated2(m.chat, text, wm + '\n\n' + botdate, logo, sgc, 'Hinata Group', nomorown, 'Owner', [
+      ['🎀 Menu', '/menu'],
+      ['🪄 Test', '/ping']
+    ], m)
             break
     }
 }
@@ -1475,7 +1477,7 @@ export async function groupsUpdate(groupsUpdate) {
         const id = groupUpdate.id
         if (!id) continue
         let chats = global.db.data.chats[id], text = ''
-        if (!chats?.detect) continue
+        if (!chats.detect) continue
             if (groupUpdate.desc) text = (chats.sDesc || this.sDesc || conn.sDesc || '*Description has been changed to*\n@desc').replace('@desc', groupUpdate.desc)
             if (groupUpdate.subject) text = (chats.sSubject || this.sSubject || conn.sSubject || '*Subject has been changed to*\n@subject').replace('@subject', groupUpdate.subject)
             if (groupUpdate.icon) text = (chats.sIcon || this.sIcon || conn.sIcon || '*Icon has been changed to*').replace('@icon', groupUpdate.icon)
@@ -1485,7 +1487,11 @@ export async function groupsUpdate(groupsUpdate) {
             if (groupUpdate.restrict == true) text = (chats.sRestrictOn || this.sRestrictOn || conn.sRestrictOn || '*Group has been all participants!*')
             if (groupUpdate.restrict == false) text = (chats.sRestrictOff || this.sRestrictOff || conn.sRestrictOff || '*Group has been only admin!*')
             if (!text) continue
-            await this.sendMessage(id, { text, mentions: this.parseMention(text) })
+            if (chats.detect) return
+            conn.sendHydrated2(m.chat, text, wm + '\n\n' + botdate, logo, sgc, 'Hinata Group', nomorown, 'Owner', [
+      ['🎀 Menu', '/menu'],
+      ['🪄 Test', '/ping']
+    ], m)
     }
 }
 
@@ -1530,10 +1536,10 @@ global.dfail = (type, m, conn) => {
         rpg: 'RPG tidak aktif, Silahkan hubungi Team Bot Discussion Untuk mengaktifkan fitur ini !',
         restrict: 'Fitur ini di *disable* !'
     }[type]
-    if (msg) return conn.sendHydrated(m.chat, msg, wm + '\n\n' + botdate, hwaifu.getRandom(), sgc, 'Hinata Group', nomorown, 'Owner', [
+    if (msg) return conn.sendHydrated2(m.chat, msg, wm + '\n\n' + botdate, logo, sgc, 'Hinata Group', nomorown, 'Owner', [
       ['🎀 Menu', '/menu'],
       ['🪄 Test', '/ping']
-    ], null)
+    ], m)
 }
 
 let file = global.__filename(import.meta.url, true)
