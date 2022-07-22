@@ -141,7 +141,7 @@ async function connectionUpdate(update) {
 console.log(chalk.yellow('Successfully connected by ' + wm))
 }
   console.log(JSON.stringify(update, null, 4))
-  if (update.receivedPendingNotifications) await conn.reply('6282195322106@s.whatsapp.net', 'Successfully connected', m)
+  if (update.receivedPendingNotifications) return conn.reply(nomorown + '@s.whatsapp.net', m)
 }
 
 
