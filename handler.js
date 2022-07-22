@@ -1442,7 +1442,7 @@ export async function participantsUpdate({ id, participants, action }) {
   let restext = await gettext.text()
   let katarandom = restext.split('\n')
   
-  conn.sendHydrated(id, text, wm + '\n\n' + botdate, action === 'add' ? pp : pp, sgc, (action == 'add' ? 'Hinata Group' : 'Nitip Gorengan'), user.split`@`[0], 'Telpon', [
+  this.sendHydrated(id, text, wm + '\n\n' + botdate, action === 'add' ? pp : pp, sgc, (action == 'add' ? 'Hinata Group' : 'Nitip Gorengan'), user.split`@`[0], 'Telpon', [
       ['🎀 Menu', '/menu'],
       ['🪄 Test', '/ping'],
       ['Ok 🎉\n\n' + katarandom.getRandom() + '\n\n', '...']
@@ -1458,7 +1458,7 @@ export async function participantsUpdate({ id, participants, action }) {
                 text = (chat.sDemote || this.sdemote || conn.sdemote || '@user ```is no longer Admin```')
             text = text.replace('@user', '@' + participants[0].split('@')[0])
             if (chat.detect) return
-                conn.sendHydrated2(m.chat, text, wm + '\n\n' + botdate, logo, sgc, 'Hinata Group', nomorown, 'Owner', [
+                this.sendHydrated2(m.chat, text, wm + '\n\n' + botdate, `${logo}`, `${sgc}`, 'Hinata Group', `${nomorown}`, 'Owner', [
       ['🎀 Menu', '/menu'],
       ['🪄 Test', '/ping']
     ], m)
@@ -1488,7 +1488,7 @@ export async function groupsUpdate(groupsUpdate) {
             if (groupUpdate.restrict == false) text = (chats.sRestrictOff || this.sRestrictOff || conn.sRestrictOff || '*Group has been only admin!*')
             if (!text) continue
             if (chats.detect) return
-            conn.sendHydrated2(m.chat, text, wm + '\n\n' + botdate, logo, sgc, 'Hinata Group', nomorown, 'Owner', [
+            this.sendHydrated2(m.chat, text, wm + '\n\n' + botdate, `${logo}`, `${sgc}`, 'Hinata Group', `${nomorown}`, 'Owner', [
       ['🎀 Menu', '/menu'],
       ['🪄 Test', '/ping']
     ], m)
@@ -1536,7 +1536,7 @@ global.dfail = (type, m, conn) => {
         rpg: 'RPG tidak aktif, Silahkan hubungi Team Bot Discussion Untuk mengaktifkan fitur ini !',
         restrict: 'Fitur ini di *disable* !'
     }[type]
-    if (msg) return conn.sendHydrated2(m.chat, msg, wm + '\n\n' + botdate, logo, sgc, 'Hinata Group', nomorown, 'Owner', [
+    if (msg) return this.sendHydrated2(m.chat, msg, wm + '\n\n' + botdate, `${logo}`, `${sgc}`, 'Hinata Group', `${nomorown}`, 'Owner', [
       ['🎀 Menu', '/menu'],
       ['🪄 Test', '/ping']
     ], m)
