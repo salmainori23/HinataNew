@@ -50,13 +50,12 @@ return `
 
 /*FreeSound*/
 if (command == 'sfx3') {
-if (!one || !two) throw `Contoh penggunaan ${usedPrefix}${command} 2 9
+if (!one || !two) throw `Contoh penggunaan ${usedPrefix}${command} drum|2
 *ket:*
-2 : page site
-9 : urutan sound
+drum : nama sound
+2 : urutan sound
 
-_Batas page ± 500_
-_Batas urutan 10_
+_Ada Batas urutan_
 `
     let gas = await fetch(`https://freesound.org/apiv2/search/text/?format=json&query=${one}&token=TJEbxX84wKTySiEtUPxhm8b2WCi5Izak0h9nNDbO`)
     let json = await gas.json()
@@ -70,7 +69,7 @@ let teks = `*Name :* ${name}
 *license :* ${license}
 *username :* ${username}`
   await conn.sendButton(m.chat, teks, wm, null, [
-                ['Get!', `${usedPrefix}sfx4 ${id}`]
+                ['Detail', `${usedPrefix}sfx4 ${id}`]
             ], m)
 }
 
@@ -85,7 +84,7 @@ let teks = `*Name :* ${xx.name}
 *filesize :* ${xx.filesize}
 *username :* ${xx.username}`
   await conn.sendButton(m.chat, teks, wm, xx.images['spectral_bw_l'], [
-                ['Get!', usedPrefix + 'get https://freesound.org/apiv2/sounds/' + xx.previews['preview-hq-mp3']]
+                ['Audio', usedPrefix + 'get ' + xx.previews['preview-hq-mp3']]
             ], m)
 }
 
@@ -104,7 +103,7 @@ let teks = `*Name :* ${xx[1][0].name}
 *longitude :* ${xx[1][0].longitude}
 *latitude :* ${xx[1][0].latitude}`
   await conn.sendButton(m.chat, teks, wm, null, [
-                ['Map!', `${usedPrefix}get https://static-maps.yandex.ru/1.x/?lang=id-ID&ll=${xx[1][0].longitude},${xx[1][0].latitude}&z=12&l=map&size=600,300`]
+                ['Map', `${usedPrefix}get https://static-maps.yandex.ru/1.x/?lang=id-ID&ll=${xx[1][0].longitude},${xx[1][0].latitude}&z=12&l=map&size=600,300`]
             ], m)
 }
 

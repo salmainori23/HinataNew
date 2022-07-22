@@ -3,6 +3,7 @@ const isLinkYt = /youtube.com|youtu.be/i // tambahin sendiri
 const isLinkTel = /t.me/i // tambahin sendiri
 const isLinkFb = /facebook.com|fb.me/i // tambahin sendiri
 const isLinkIg = /instagram.com/i // tambahin sendiri
+const isLinkWa = /tiktok.com/i // tambahin sendiri
 const isLinkHttp = /http|https/i // tambahin sendiri
 
 export async function before(m, { conn, args, usedPrefix, command, isAdmin, isBotAdmin }) {
@@ -82,6 +83,20 @@ export async function before(m, { conn, args, usedPrefix, command, isAdmin, isBo
     
     await conn.sendButton(m.chat, `*Limit anda di reset ke 0*
     Karena Mengirim Link Instagram
+    Ketik *.limit* untuk cek limit`, wm, null, [
+        ['Ngechit', `${usedPrefix}ngechit`]
+    ], m)
+        } else if (!bot.restrict) return m.reply('Gk bisa gw kick!')
+    }
+    
+    if (chat.antiLinkWa && isAntiLinkWa) {
+        await conn.sendButton(m.chat, `*Link Terdeteksi!*${isBotAdmin ? '' : '\n\n_Bot bukan atmin_'}`, author, ['off antilinkwa', '/disable antilinkwa'], m)
+        if (isBotAdmin && bot.restrict) {
+            // await conn.groupParticipantsUpdate(m.chat, [m.sender], 'remove')
+    global.db.data.users[m.sender].limit = 0
+    
+    await conn.sendButton(m.chat, `*Limit anda di reset ke 0*
+    Karena Mengirim Link Tiktok
     Ketik *.limit* untuk cek limit`, wm, null, [
         ['Ngechit', `${usedPrefix}ngechit`]
     ], m)

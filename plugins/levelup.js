@@ -31,7 +31,7 @@ Kurang *${max - user.exp}* lagi! ✨
             let img = await levelup(teks, user.level)
             conn.sendButton(m.chat, str, botdate, img, [['INVENTORY', '.inv']], m)
             } catch (e) {
-            conn.sendButton(m.chat, str, botdate, hwaifu.getRandon(), [['INVENTORY', '.inv']], m)
+            conn.sendButton(m.chat, str, botdate, hwaifu.getRandom(), [['INVENTORY', '.inv']], m)
             }
 
     }
