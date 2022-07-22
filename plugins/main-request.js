@@ -1,5 +1,4 @@
 let handler = async (m, { conn, text, command }) => {
-const data = global.owner.filter(([id, isCreator]) => id && isCreator)//to get owner
 
   if (/^(re(quest)|req)$/.test(command)) {
     if (!text) return m.reply("what do you report?")
@@ -10,7 +9,7 @@ const data = global.owner.filter(([id, isCreator]) => id && isCreator)//to get o
 *Pesan:* ${text}
 `.trim()
 
-conn.reply(data.id + "@s.whatsapp.com", caption, m, { mentions: conn.parseMention(caption) })
+conn.reply(nomorown + "@s.whatsapp.com", caption, m.quoted ? caption + m.quoted.text : caption, { mentions: conn.parseMention(caption) })
 
    } else if (/^(re(port)|bug)$/.test(command)) {
    if (!text) return m.reply("what do you report?")
@@ -21,10 +20,10 @@ conn.reply(data.id + "@s.whatsapp.com", caption, m, { mentions: conn.parseMentio
 *Pesan:* ${text}
 `.trim()
 
-conn.reply(data.id + "@s.whatsapp.com", caption2, m, { mentions: conn.parseMention(caption2) })
+conn.reply(nomorown + "@s.whatsapp.com", caption2, m.quoted ? caption2 + m.quoted.text : caption2, { mentions: conn.parseMention(caption2) })
   }
 }
-handler.help = ['request', 'report'].map(v => v + '[teks]')
+handler.help = ['request', 'report'].map(v => v + ' [teks]')
 handler.tags = ['main']
 handler.command = /^(re(quest|port)|req|bug)$/i
 
