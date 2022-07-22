@@ -2,6 +2,8 @@ let linkRegex = /chat.whatsapp.com\/([0-9A-Za-z]{20,24})( [0-9]{1,3})?/i
 import { readFileSync } from 'fs'
 
 let handler = async (m, { conn, text, usedPrefix, command, isOwner }) => {
+let who = m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.fromMe ? conn.user.jid : m.sender
+let name = await conn.getName(who)
 let frep = { quoted: fgif, fileLength: fsizedoc, contextInfo: { externalAdReply: { showAdAttribution: true,
 title: `「 👋 Hai ${name} 」`,
 sourceUrl: sgc,
@@ -16,7 +18,7 @@ let imgr = thumbnailUrl.getRandom()
     let name = await conn.getName(res).catch(_ => null)
     expired = Math.floor(Math.min(5, Math.max(999, isOwner ? expired && expired.isNumber() ? parseInt(expired) : 0 : 3)))
     let caption = `*Berhasil join grup* ${name || res} ${expired ? `selama *${expired}* hari` : ''}\n*Jangan lupa baca rules ngap!*`
-    await conn.sendButton(m.chat, caption, wm, imgr, [
+    await conn.sendButton(m.chat, caption, wm, imgr + 'join', [
                 ['Rules', `${usedPrefix}rules`]
             ], m, frep)
             

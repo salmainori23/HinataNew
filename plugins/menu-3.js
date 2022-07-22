@@ -269,10 +269,10 @@ let handler = async (m, { conn, command, groupMetadata, usedPrefix: _p, __dirnam
   }
 ]
 
-let tek = `*Hai ${conn.getName(m.sender)}* 👋
+let tek = `👋 Hai @${who.split("@")[0]}
 
 *YOUR PROFILE*
-*🏷️ Nama:* *(${name})* ${registered ? '(' + name + ') ' : ''} ( @${who.split("@")[0]} )
+*🏷️ Nama:* *${name}* ${registered ? '(' + name + ') ' : ''}
 *💲 Money:* *RP* ${money}
 *🏆 Level* ${level}
 *🎋 Role:* ${role}

@@ -195,7 +195,7 @@ thumbnail: readFileSync('./thumbnail.jpg')
     }
     text = text.replace(new RegExp(`%(${Object.keys(replace).sort((a, b) => b.length - a.length).join`|`})`, 'g'), (_, name) => '' + replace[name])
     /* Button */
-    conn.sendButton(m.chat, text.trim(), `By @${who.split("@")[0]}`, await( await fetch(pp)).buffer(), [['Menu', `/menu`],['Owner', `/owner`]], m, frep)
+    await conn.sendButton(m.chat, text.trim(), `By @${who.split("@")[0]}`, pp, [['Menu', `/menu`],['Owner', `/owner`]], m, frep)
   /* Button */
   } catch (e) {
     conn.reply(m.chat, 'Maaf, menu sedang error', m)
