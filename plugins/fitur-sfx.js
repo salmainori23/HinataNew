@@ -76,12 +76,12 @@ let teks = `*Name :* ${name}
 if (command == 'sfx4') {
 if (!text) throw `Contoh:
 ${usedPrefix + command} 1234`
-let f = await fetch(`https://freesound.org/apiv2/sounds/${text}&token=TJEbxX84wKTySiEtUPxhm8b2WCi5Izak0h9nNDbO`)
+let f = await fetch(`https://freesound.org/apiv2/sounds/${text}/?format=json&token=TJEbxX84wKTySiEtUPxhm8b2WCi5Izak0h9nNDbO`)
 let xx = await f.json()
 
 let teks = `*Name :* ${xx.name}
 *ID :* ${xx.id}
-*filesize :* ${xx.filesize}
+*filesize :* ${xx.filesize} byte
 *username :* ${xx.username}`
   await conn.sendButton(m.chat, teks, wm, xx.images['spectral_bw_l'], [
                 ['Audio', usedPrefix + 'get ' + xx.previews['preview-hq-mp3']]

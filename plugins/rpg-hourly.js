@@ -18,7 +18,7 @@ let handler = async (m,{ conn} ) => {
     user[reward] += rewards[reward]
     text += `*+${rewards[reward]}* ${global.rpg.emoticon(reward)}${reward}\n`
   }
-  conn.sendButton(m.chat,'*━┈━┈━『 HOURLY 』━┈━┈━*', text.trim(), null, [['Inventory', '.inv'], ['Daily', '.daily']],m)
+  conn.sendButton(m.chat,`${htki} HOURLY ${htka}`, text.trim(), null, [['Inventory', '.inv'], ['Daily', '.daily']],m)
   user.lasthourly = new Date * 1
 }
 handler.help = ['hourly']
