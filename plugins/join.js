@@ -3,12 +3,7 @@ let linkRegex = /chat.whatsapp.com\/([0-9A-Za-z]{20,24})( [0-9]{1,3})?/i
 
 let handler = async (m, { conn, text, usedPrefix, command, isOwner }) => {
 let who = m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.fromMe ? conn.user.jid : m.sender
-let name = await conn.getName(who)
-let frep = { quoted: fgif, contextInfo: { externalAdReply: { showAdAttribution: true,
-title: `「 👋 Hai ${name} 」`,
-sourceUrl: sgc,
-thumbnail: fs.readFileSync('./thumbnail.jpg')
-  }}}
+let names = await conn.getName(who)
 let imgr = flaaa.getRandom()
 
     let [_, code, expired] = text.match(linkRegex) || []
@@ -20,7 +15,11 @@ let imgr = flaaa.getRandom()
     let caption = `*Berhasil join grup* ${name || res} ${expired ? `selama *${expired}* hari` : ''}\n*Jangan lupa baca rules ngap!*`
     await conn.sendButton(m.chat, caption, wm, imgr + 'join', [
                 ['Rules', `${usedPrefix}rules`]
-            ], m, frep)
+            ], m, { quoted: fgif, contextInfo: { externalAdReply: { showAdAttribution: true,
+title: `「 👋 Hai ${names} 」`,
+sourceUrl: sgc,
+thumbnail: fs.readFileSync('./thumbnail.jpg')
+  }}})
             
     let chats = global.db.data.chats[res]
     if (!chats) chats = global.db.data.chats[res] = {}
