@@ -29,7 +29,7 @@ thumbnail: fs.readFileSync('./thumbnail.jpg')
   conn.reply(m.chat, `Membagikan Link Grup Kamu ke ${chats.length} chat`, m)
   for (let id of chats) {
   await delay(1500)
-  await conn.sendHydrated(id, "*「 New Group 」* \n\n" + text, wm, imgr + 'New', linkRegex, 'LINK GROUP', null, null, [[null, null]], m)
+  await conn.sendHydrated(id, "*「 New Group 」* \n\n" + text, wm, imgr + 'New Group', linkRegex, 'LINK GROUP', null, null, [[null, null]], m)
   
     let chats = global.db.data.chats[res]
     if (!chats) chats = global.db.data.chats[res] = {}
