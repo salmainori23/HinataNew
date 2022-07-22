@@ -96,6 +96,7 @@ let handler = async (m, { conn, groupMetadata, usedPrefix: _p, __dirname }) => {
      let math = max - xp
      let res = JSON.parse(readFileSync('./json/emoji.json'))
      let em = res.emoji
+     
     let totalfeatures = Object.values(global.plugins).filter(
     (v) => v.help && v.tags
   ).length;
@@ -189,10 +190,13 @@ let handler = async (m, { conn, groupMetadata, usedPrefix: _p, __dirname }) => {
       readmore: readMore
     }
     text = text.replace(new RegExp(`%(${Object.keys(replace).sort((a, b) => b.length - a.length).join`|`})`, 'g'), (_, name) => '' + replace[name])
-    conn.sendHydrated(m.chat, text.trim(), wm + '\n\n' + botdate, await( await fetch(pp)).buffer(), sgc, 'Hinata Group', who.split`@`[0], 'Your Number', [
-      ['🎀 Menu', '/menu'],
-      ['🪄 Owner', '/owner']
-    ], null, false, { mentions: [text] })
+    /* Button */
+    await conn.sendButton(m.chat, text.trim(), `By @${who.split("@")[0]}`, hwaifu.getRandom(), [['Menu', `/menu`],['Owner', `/owner`]], m, { quoted: fgif, fileLength: fsizedoc, mentions: conn.parseMention(text), contextInfo: { externalAdReply: { showAdAttribution: true,
+title: `「 👋 Hai ${name} 」`,
+sourceUrl: sgc,
+thumbnail: await( await fetch(pp)).buffer()
+  }}})
+  /* Button */
   } catch (e) {
     conn.reply(m.chat, 'Maaf, menu sedang error', m)
     throw e
