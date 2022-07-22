@@ -40,8 +40,8 @@ let tags = {
   'nocategory': 'No Category',
 }
 let emot = `${pickRandom(['⎔', '✦', '⭑', 'ᯬ', '⭔', '◉', '⬟', '▢', '᭻', '»', '〆', '々', '⛥', '✗', '⛊', '⚜', '⚝', '⚚', '♪'])}`
-let res = JSON.parse(readFileSync('./json/emoji.json'))
-let em = res.emoji
+let rus = JSON.parse(readFileSync('./json/emoji.json'))
+let emm = rus.emoji
 
 const defaultMenu = {
   before: `
@@ -60,7 +60,7 @@ Hai, *%name!*
 *Note:*
 _Jika Respon Tidak Muncul Kemungkinan Terjadi Error_
 `.trimStart(),
-  header: `${cmenut} *%category* ${em.getRandom()}`,
+  header: `${cmenut} *%category* ${emm.getRandom()}`,
   body: `┊${emot} %cmd %islimit %isPremium`,
   footer: `${cmenuf}`,
   after: `${cmenua}`,
@@ -96,7 +96,7 @@ let handler = async (m, { conn, groupMetadata, usedPrefix: _p, __dirname }) => {
      let math = max - xp
      let res = JSON.parse(readFileSync('./json/emoji.json'))
      let em = res.emoji
-     let frep = { quoted: fgif, fileLength: fsizedoc, mentions: [who], contextInfo: { externalAdReply: { showAdAttribution: true,
+     let frep = { quoted: fgif, mentions: [who], contextInfo: { externalAdReply: { showAdAttribution: true,
 title: `「 👋 Hai ${name} 」`,
 sourceUrl: sgc,
 thumbnail: readFileSync('./thumbnail.jpg')
@@ -195,7 +195,7 @@ thumbnail: readFileSync('./thumbnail.jpg')
     }
     text = text.replace(new RegExp(`%(${Object.keys(replace).sort((a, b) => b.length - a.length).join`|`})`, 'g'), (_, name) => '' + replace[name])
     /* Button */
-    await conn.sendButton(m.chat, text.trim(), `By @${who.split("@")[0]}`, pp, [['Menu', `/menu`],['Owner', `/owner`]], m, frep)
+    await conn.sendButton(m.chat, text.trim(), `${em.getRandom()} By @${who.split("@")[0]}`, pp, [['Menu', `/menu`],['Owner', `/owner`]], m, frep)
   /* Button */
   } catch (e) {
     conn.reply(m.chat, 'Maaf, menu sedang error', m)

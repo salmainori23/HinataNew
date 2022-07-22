@@ -7,8 +7,8 @@ let handler = async (m, { conn, args, text, usedPrefix, command }) => {
 let who = m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.fromMe ? conn.user.jid : m.sender
 let name = await conn.getName(who)
 let fdoc = {quoted:{key : {participant : '0@s.whatsapp.net'},message: {documentMessage: {title: `${command}`}}}}
-let frep = { quoted: fgif, fileLength: fsizedoc, contextInfo: { externalAdReply: { showAdAttribution: true,
-title: `「 👋 Hai ${conn.getName(who)} 」`,
+let frep = { quoted: fgif, contextInfo: { externalAdReply: { showAdAttribution: true,
+title: `「 👋 Hai ${name} 」`,
 sourceUrl: sgc,
 thumbnail: readFileSync('./thumbnail.jpg')
   }}}
