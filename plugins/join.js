@@ -1,8 +1,12 @@
 let linkRegex = /chat.whatsapp.com\/([0-9A-Za-z]{20,24})( [0-9]{1,3})?/i
-import fs from 'fs'
+import { readFileSync } from 'fs'
 
 let handler = async (m, { conn, text, usedPrefix, command, isOwner }) => {
-let frep = { contextInfo: { externalAdReply: {title: global.wm, body: global.author, sourceUrl: snh, thumbnail: fs.readFileSync('./thumbnail.jpg')}}}
+let frep = { quoted: fgif, fileLength: fsizedoc, contextInfo: { externalAdReply: { showAdAttribution: true,
+title: `「 👋 Hai ${name} 」`,
+sourceUrl: sgc,
+thumbnail: readFileSync('./thumbnail.jpg')
+  }}}
 let imgr = thumbnailUrl.getRandom()
 
     let [_, code, expired] = text.match(linkRegex) || []

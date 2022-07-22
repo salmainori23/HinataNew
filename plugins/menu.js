@@ -96,7 +96,11 @@ let handler = async (m, { conn, groupMetadata, usedPrefix: _p, __dirname }) => {
      let math = max - xp
      let res = JSON.parse(readFileSync('./json/emoji.json'))
      let em = res.emoji
-     
+     let frep = { quoted: fgif, fileLength: fsizedoc, mentions: [who], contextInfo: { externalAdReply: { showAdAttribution: true,
+title: `「 👋 Hai ${name} 」`,
+sourceUrl: sgc,
+thumbnail: readFileSync('./thumbnail.jpg')
+  }}}
     let totalfeatures = Object.values(global.plugins).filter(
     (v) => v.help && v.tags
   ).length;
@@ -191,11 +195,7 @@ let handler = async (m, { conn, groupMetadata, usedPrefix: _p, __dirname }) => {
     }
     text = text.replace(new RegExp(`%(${Object.keys(replace).sort((a, b) => b.length - a.length).join`|`})`, 'g'), (_, name) => '' + replace[name])
     /* Button */
-    await conn.sendButton(m.chat, text.trim(), `By @${who.split("@")[0]}`, hwaifu.getRandom(), [['Menu', `/menu`],['Owner', `/owner`]], m, { quoted: fgif, fileLength: fsizedoc, mentions: conn.parseMention(text), contextInfo: { externalAdReply: { showAdAttribution: true,
-title: `「 👋 Hai ${name} 」`,
-sourceUrl: sgc,
-thumbnail: await( await fetch(pp)).buffer()
-  }}})
+    conn.sendButton(m.chat, text.trim(), `By @${who.split("@")[0]}`, await( await fetch(pp)).buffer(), [['Menu', `/menu`],['Owner', `/owner`]], m, frep)
   /* Button */
   } catch (e) {
     conn.reply(m.chat, 'Maaf, menu sedang error', m)

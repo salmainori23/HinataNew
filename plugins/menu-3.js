@@ -30,16 +30,6 @@ _Jika Respon Tidak Muncul Kemungkinan Terjadi Error_
 }
 let handler = async (m, { conn, command, groupMetadata, usedPrefix: _p, __dirname, args }) => {
 
-let ktnya = ['\n\n\n' + htjava + ' Mungkin menu ini bermanfaat? ' + htjava,
- '\n\n\n' + htjava + ' Terimakasih sudah menggunakan bot ini ' + htjava,
- '\n\n\n' + htjava + ' Semoga gak erorr ' + htjava,
- '\n\n\n' + htjava + ' Jika lama kemungkiman erorr atau delay ' + htjava,
- '\n\n\n' + htjava + ' Menampilkan menu ' + htjava,
- '\n\n\n' + htjava + ' Wait... ' + htjava,
- '\n\n\n' + htjava + ' Dua tiga kucing berlari ' + htjava,
- '\n\n\n' + htjava + ' Bentar bang akan kutampilkan menunya ' + htjava,
- '\n\n\n' + htjava + ' Prosess... ' + htjava]
-let ktx = ktnya.getRandom()
      let res = JSON.parse(readFileSync('./json/emoji.json'))
      let em = res.emoji
     let who = m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.fromMe ? conn.user.jid : m.sender
@@ -68,6 +58,16 @@ let ktx = ktnya.getRandom()
       }
      }
      let math = max - xp
+     let ktnya = [`\n\n\n ${em.getRandom()} Hai *${name}* : _Mungkin menu ini bermanfaat?_`,
+ `\n\n\n ${em.getRandom()} Hai *${name}* : _Terimakasih sudah menggunakan bot ini_`,
+ `\n\n\n ${em.getRandom()} Hai *${name}* : _Semoga gak erorr_`,
+ `\n\n\n ${em.getRandom()} Hai *${name}* : _Jika lama kemungkiman erorr atau delay_`,
+ `\n\n\n ${em.getRandom()} Hai *${name}* : _Menampilkan menu_`,
+ `\n\n\n ${em.getRandom()} Hai *${name}* : _Wait..._`,
+ `\n\n\n ${em.getRandom()} Hai *${name}* : _Dua tiga kucing berlari_`,
+ `\n\n\n ${em.getRandom()} Hai *${name}* : _Bentar bang akan kutampilkan menunya_`,
+ `\n\n\n ${em.getRandom()} Hai *${name}* : _Prosess..._`]
+ let ktx = ktnya.getRandom()
      let tags
      let teks = `${args[0]}`.toLowerCase()
   let arrayMenu = ['all', 'absen', 'admin', 'advanced', 'anonymous', 'audio', 'Baileys', 'database', 'downloader', 'edukasi', 'fun', 'game', 'group', 'host', 'info', 'internet', 'jadian', 'jadibot', 'kerang', 'main', 'maker', 'nocategory', 'nsfw', 'nulis', 'owner', 'premium', 'primbon', 'quotes', 'quran', 'random', 'rpg', 'sticker', 'tools', 'vote', 'xp']
@@ -287,7 +287,7 @@ const listMessage = {
   sections
 }
   if (teks == '404') {
-  	return conn.sendMessage(m.chat, listMessage, {quoted: fgif})
+  	return conn.sendMessage(m.chat, listMessage, { quoted: fgif })
     }
     
     let _package = JSON.parse(await promises.readFile(join(__dirname, '../package.json')).catch(_ => ({}))) || {}
