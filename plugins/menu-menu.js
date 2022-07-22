@@ -39,6 +39,7 @@ let pp = await conn.profilePictureUrl(who).catch(_ => hwaifu.getRandom())
      let lin_ = ["https://www.youtube.com","https://www.instagram.com","https://www.facebook.com"]
      
   let cap = `*${htki} Information ${htka}*
+
 *🏷️ Nama:* *(${name})*
 *💲 Money:* *RP* ${money}
 *🏆 Level* ${level}
