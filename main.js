@@ -27,13 +27,10 @@ import { tmpdir } from 'os'
 import { format } from 'util'
 import { makeWASocket, protoType, serialize } from './lib/simple.js'
 import { Low, JSONFile } from 'lowdb'
-
-/*
 import {
   mongoDB,
   mongoDBV2
 } from './lib/mongoDB.js'
-*/
 import store from './lib/store.js'
 
 const {
@@ -69,7 +66,6 @@ global.db = new Low(
 
 
 global.DATABASE = global.db // Backwards Compatibility
-/*
 global.loadDatabase = async function loadDatabase() {
   if (global.db.READ) return new Promise((resolve) => setInterval(async function () {
     if (!global.db.READ) {
@@ -93,14 +89,13 @@ global.loadDatabase = async function loadDatabase() {
   global.db.chain = chain(global.db.data)
 }
 loadDatabase()
-*/
 
 global.authFile = `${opts._[0] || 'session'}.data.json`
 const { state, saveState } = store.useSingleFileAuthState(global.authFile)
 
 const connectionOptions = {
 printQRInTerminal: true,
-auth: state
+auth: saveState
 }
 
 global.conn = makeWASocket(connectionOptions)
@@ -142,7 +137,7 @@ async function connectionUpdate(update) {
 console.log(chalk.yellow('Successfully connected by ' + wm))
 }
   console.log(JSON.stringify(update, null, 4))
-  if (update.receivedPendingNotifications) return conn.reply(nomorown + '@s.whatsapp.net', m)
+  if (update.receivedPendingNotifications) return this.sendButton(nomorown + '@s.whatsapp.net', 'Successfully connected by ' + wm, botdate, null, [['MENU', '/menu']], null)
 }
 
 
