@@ -40,7 +40,7 @@ let pp = await conn.profilePictureUrl(who).catch(_ => hwaifu.getRandom())
      
   let cap = `*${htki} Information ${htka}*
 
-*🏷️ Nama:* *(${name})*
+*🏷️ Nama:* *${name}*
 *💲 Money:* *RP* ${money}
 *🏆 Level* ${level}
 *🎋 Role:* ${role}

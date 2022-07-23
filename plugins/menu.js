@@ -40,8 +40,8 @@ let tags = {
   'nocategory': 'No Category',
 }
 let emot = `${pickRandom(['⎔', '✦', '⭑', 'ᯬ', '⭔', '◉', '⬟', '▢', '᭻', '»', '〆', '々', '⛥', '✗', '⛊', '⚜', '⚝', '⚚', '♪'])}`
-let ros = JSON.parse(readFileSync('./json/emoji.json'))
-let emo = ros.emoji
+let rus = JSON.parse(readFileSync('./json/emoji.json'))
+let emm = rus.emoji
 
 const defaultMenu = {
   before: `
@@ -60,7 +60,7 @@ Hai, *%name!*
 *Note:*
 _Jika Respon Tidak Muncul Kemungkinan Terjadi Error_
 `.trimStart(),
-  header: `${cmenut} *%category* ${emo.getRandom()}`,
+  header: `${cmenut} *%category* ${emm.getRandom()}`,
   body: `┊${emot} %cmd %islimit %isPremium`,
   footer: `${cmenuf}`,
   after: `${cmenua}`,
@@ -189,7 +189,7 @@ let handler = async (m, { conn, groupMetadata, usedPrefix: _p, __dirname }) => {
       readmore: readMore
     }
     text = text.replace(new RegExp(`%(${Object.keys(replace).sort((a, b) => b.length - a.length).join`|`})`, 'g'), (_, name) => '' + replace[name])
-    conn.sendHydrated(m.chat, text.trim(), wm + '\n\n' + botdate, await( await fetch(pp)).buffer(), sgc, 'Hinata Group', who.split`@`[0], 'Your Number', [
+    conn.sendHydrated(m.chat, text.trim(), wm + '\n\n' + botdate, hwaifu.getRandom(), sgc, 'Hinata Group', who.split`@`[0], em.getRandom() + ' Your Number', [
       ['🎀 Menu', '/menu'],
       ['🪄 Owner', '/owner']
     ], null, false, { mentions: [text] })
