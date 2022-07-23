@@ -1,15 +1,13 @@
-process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0'
-import './config.js'
+process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
+import './config.js';
 
-import { createRequire } from "module" // Bring in the ability to create the 'require' method
+import { createRequire } from "module"; // Bring in the ability to create the 'require' method
 import path, { join } from 'path'
 import { fileURLToPath, pathToFileURL } from 'url'
 import { platform } from 'process'
-global.__filename = function filename(pathURL = import.meta.url, rmPrefix = platform !== 'win32') { return rmPrefix ? /file:\/\/\//.test(pathURL) ? fileURLToPath(pathURL) : pathURL : pathToFileURL(pathURL).toString() }
-global.__dirname = function dirname(pathURL) { return path.dirname(global.__filename(pathURL, true)) }
-global.__require = function require(dir = import.meta.url) { return createRequire(dir) }
+global.__filename = function filename(pathURL = import.meta.url, rmPrefix = platform !== 'win32') { return rmPrefix ? /file:\/\/\//.test(pathURL) ? fileURLToPath(pathURL) : pathURL : pathToFileURL(pathURL).toString() }; global.__dirname = function dirname(pathURL) { return path.dirname(global.__filename(pathURL, true)) }; global.__require = function require(dir = import.meta.url) { return createRequire(dir) }
 
-import * as ws from 'ws'
+import * as ws from 'ws';
 import {
   readdirSync,
   statSync,
@@ -17,26 +15,22 @@ import {
   existsSync,
   readFileSync,
   watch
-} from 'fs'
-import yargs from 'yargs'
-import { spawn } from 'child_process'
-import lodash from 'lodash'
-import chalk from 'chalk'
-import syntaxerror from 'syntax-error'
-import { tmpdir } from 'os'
-import { format } from 'util'
-import { makeWASocket, protoType, serialize } from './lib/simple.js'
-import { Low, JSONFile } from 'lowdb'
-
-/*
+} from 'fs';
+import yargs from 'yargs';
+import { spawn } from 'child_process';
+import lodash from 'lodash';
+import syntaxerror from 'syntax-error';
+import { tmpdir } from 'os';
+import { format } from 'util';
+import { makeWASocket, protoType, serialize } from './lib/simple.js';
+import { Low, JSONFile } from 'lowdb';
+import pino from 'pino';
 import {
   mongoDB,
   mongoDBV2
-} from './lib/mongoDB.js'
-*/
-import store from './lib/store.js'
-
+} from './lib/mongoDB.js';
 const {
+  useSingleFileAuthState,
   DisconnectReason
 } = await import('@adiwajshing/baileys')
 
@@ -56,9 +50,7 @@ global.timestamp = {
 const __dirname = global.__dirname(import.meta.url)
 
 global.opts = new Object(yargs(process.argv.slice(2)).exitProcess(false).parse())
-global.prefix = new RegExp('^[' + (opts['prefix'] || '‎xzXZ/i!#$%+£¢€¥^°=¶∆×÷π√✓©®:;?&.\\-').replace(/[|\\{}()[\]^$+*?.\-\^]/g, '\\$&') + ']')
-
-// global.opts['db'] = process.env['db']
+global.prefix = new RegExp('^[' + (opts['prefix'] || '‎\/!#.\\').replace(/[|\\{}()[\]^$+*?.\-\^]/g, '\\$&') + ']')
 
 global.db = new Low(
   /https?:\/\//.test(opts['db'] || '') ?
@@ -93,13 +85,13 @@ global.loadDatabase = async function loadDatabase() {
 }
 loadDatabase()
 
-
 global.authFile = `${opts._[0] || 'session'}.data.json`
-const { state, saveState } = store.useSingleFileAuthState(global.authFile)
+const { state, saveState } = useSingleFileAuthState(global.authFile)
 
 const connectionOptions = {
-printQRInTerminal: true,
-auth: state
+  printQRInTerminal: true,
+  auth: state,
+  // logger: pino({ level: 'trace' })
 }
 
 global.conn = makeWASocket(connectionOptions)
@@ -137,18 +129,13 @@ async function connectionUpdate(update) {
     global.timestamp.connect = new Date
   }
   if (global.db.data == null) loadDatabase()
-  if (connection == 'open') {
-console.log(chalk.yellow('Successfully connected by ' + wm))
-}
-  console.log(JSON.stringify(update, null, 4))
-  if (update.receivedPendingNotifications) return conn.reply(nomorown + '@s.whatsapp.net', null)
 }
 
 
 process.on('uncaughtException', console.error)
 // let strQuot = /(["'])(?:(?=(\\?))\2.)*?\1/
 
-let isInit = true
+let isInit = true;
 let handler = await import('./handler.js')
 global.reloadHandler = async function (restatConn) {
   try {
@@ -173,33 +160,27 @@ global.reloadHandler = async function (restatConn) {
     conn.ev.off('creds.update', conn.credsUpdate)
   }
 
-  conn.welcome = '               [ *WELCOME* ]\n╭───────────⸙\n│⫹⫺ in @subject\n╰┬──────────⸙\n╭┫( 👋 Hallo @user)\n││ \n│┣─[ *INTRO* ]\n││ *Nama:*\n││ *Umur:*\n││ *Gender:*\n│╰──────────⸙\n╰[ *DESCRIPTION* ]\n@desc'
-  conn.bye = '               [ *GOODBYE* ]\n╭───────────⸙\n│⫹⫺ Sayonara *@user* 👋\n│╰──────────⸙'
-  conn.spromote = '*@user* Sekarang jadi admin!'
-  conn.sdemote = '*@user* Sekarang bukan lagi admin!'
-  conn.sDesc = 'Deskripsi telah diubah menjadi \n@desc'
-  conn.sSubject = 'Judul grup telah diubah menjadi \n@subject'
+  conn.welcome = '✦━━━━━━[ *WELCOME* ]━━━━━━✦\n\n┏––––––━━━━━━━━•\n│⫹⫺ @subject\n┣━━━━━━━━┅┅┅\n│( 👋 Hallo @user)\n├[ *INTRO* ]—\n│ *Nama:* \n│ *Umur:* \n│ *Gender:*\n┗––––––━━┅┅┅\n\n––––––┅┅ *DESCRIPTION* ┅┅––––––\n@desc'
+  conn.bye = '✦━━━━━━[ *GOOD BYE* ]━━━━━━✦\nSayonara *@user* 👋( ╹▽╹ )'
+  conn.spromote = 'Selamat @user sekarang admin!'
+  conn.sdemote = 'Maaf @user sekarang bukan admin!'
+  conn.sDesc = 'Deskripsi telah diubah ke \n@desc'
+  conn.sSubject = 'Judul grup telah diubah ke \n@subject'
   conn.sIcon = 'Icon grup telah diubah!'
   conn.sRevoke = 'Link group telah diubah ke \n@revoke'
-  conn.sAnnounceOn = 'Group telah di tutup!\nsekarang hanya admin yang dapat mengirim pesan.'
-  conn.sAnnounceOff = 'Group telah di buka!\nsekarang semua peserta dapat mengirim pesan.'
-  conn.sRestrictOn = 'Edit Info Grup di ubah ke hanya admin!'
-  conn.sRestrictOff = 'Edit Info Grup di ubah ke semua peserta!'
-  
   conn.handler = handler.handler.bind(global.conn)
   conn.participantsUpdate = handler.participantsUpdate.bind(global.conn)
   conn.groupsUpdate = handler.groupsUpdate.bind(global.conn)
   conn.onDelete = handler.deleteUpdate.bind(global.conn)
   conn.connectionUpdate = connectionUpdate.bind(global.conn)
-  conn.credsUpdate = saveState.bind(global.conn, true)
-  
+  conn.credsUpdate = saveState.bind(global.conn)
+
   conn.ev.on('messages.upsert', conn.handler)
   conn.ev.on('group-participants.update', conn.participantsUpdate)
   conn.ev.on('groups.update', conn.groupsUpdate)
   conn.ev.on('message.delete', conn.onDelete)
   conn.ev.on('connection.update', conn.connectionUpdate)
   conn.ev.on('creds.update', conn.credsUpdate)
-  
   isInit = false
   return true
 }
@@ -225,12 +206,12 @@ global.reload = async (_ev, filename) => {
   if (pluginFilter(filename)) {
     let dir = global.__filename(join(pluginFolder, filename), true)
     if (filename in global.plugins) {
-      if (existsSync(dir)) conn.logger.info(` updated plugin - '${filename}'`)
+      if (existsSync(dir)) conn.logger.info(`re - require plugin '${filename}'`)
       else {
-        conn.logger.warn(`deleted plugin - '${filename}'`)
+        conn.logger.warn(`deleted plugin '${filename}'`)
         return delete global.plugins[filename]
       }
-    } else conn.logger.info(`new plugin - '${filename}'`)
+    } else conn.logger.info(`requiring new plugin '${filename}'`)
     let err = syntaxerror(readFileSync(dir), filename, {
       sourceType: 'module',
       allowAwaitOutsideFunction: true
@@ -291,65 +272,6 @@ async function _quickTest() {
   if (!s.convert && !s.magick && !s.gm) conn.logger.warn('Stickers may not work without imagemagick if libwebp on ffmpeg doesnt isntalled (pkg install imagemagick)')
 }
 
-// EXPIRED
-async function expired() {
-	return new Promise(async (resolve, reject) => {
-		let user = Object.keys(global.db.data.users)
-		let chat = Object.keys(global.db.data.chats)
-		for (let jid of user) {
-			var users = global.db.data.users[jid]
-			var {
-				name,
-				premium,
-				expired
-			} = users
-			if (users.premium) {
-				if (Date.now() >= users.expired) {
-					users.premium = false
-					users.expired = 0
-					users.limitjoinprem = 0
-					users.limitjoinfree = 0
-					conn.reply(jid, 'Hai\nmasa premium kamu sekarang sudah habis.\njika ingin memperpanjang lagi silahkan chat owner.\nterima kasih telah menggunakan bot :)\n' + `owner: @${nomorown}`, null, {
-						mentions: [nomorown + '@s.whatsapp.net']
-					})
-					resolve(console.log(`masa premium ${name} sudah habis`))
-				}
-			}
-			if (users.sewa) {
-				if (users.limitjoinprem == 0) {
-					users.sewa = false
-					users.limitjoinfree = 1
-				}
-			}
-		}
-		for (let id of chat) {
-			if (id.endsWith('g.us')) {
-				var chats = global.db.data.chats[id]
-				if (chats.grouprental) {
-					if (Date.now() >= chats.expired) {
-						chats.grouprental = false
-						chats.expired = 0
-						await conn.reply(id, `Masa menetap di ${await conn.getName(id)} sudah habis.\nBot sebentar lagi akan keluar.\nterima kasih telah menggunakan bot kami.\nChat owner kami jika ingin menyewa lagi :)\nowner: @${nomorown}`, null, {
-							mentions: [nomorown + '@s.whatsapp.net']
-						})
-						await delay(3000)
-						await conn.groupLeave(id)
-						resolve(console.log(`Masa menetap di ${await conn.getName(id)} sudah habis`))
-					}
-				}
-			}
-		}
-	})
-}
-setInterval(async () => {
-	var b = await expired()
-}, 1000)
-setInterval(async () => {
-	var a = await clearTmp()
-	console.log(chalk.cyanBright(`successfully clear tmp`))
-}, 180000)
-
-// Batas
 _quickTest()
-  .then(() => conn.logger.info('Quick Test Done'))
+  .then(() => conn.logger.info('☑️ Quick Test Done'))
   .catch(console.error)
