@@ -69,6 +69,7 @@ global.db = new Low(
 
 
 global.DATABASE = global.db // Backwards Compatibility
+/*
 global.loadDatabase = async function loadDatabase() {
   if (global.db.READ) return new Promise((resolve) => setInterval(async function () {
     if (!global.db.READ) {
@@ -92,7 +93,7 @@ global.loadDatabase = async function loadDatabase() {
   global.db.chain = chain(global.db.data)
 }
 loadDatabase()
-
+*/
 
 global.authFile = `${opts._[0] || 'session'}.data.json`
 const { state, saveState } = store.useSingleFileAuthState(global.authFile)
