@@ -28,11 +28,12 @@ import { format } from 'util'
 import { makeWASocket, protoType, serialize } from './lib/simple.js'
 import { Low, JSONFile } from 'lowdb'
 
+/*
 import {
   mongoDB,
   mongoDBV2
 } from './lib/mongoDB.js'
-
+*/
 import store from './lib/store.js'
 
 const {
@@ -140,7 +141,7 @@ async function connectionUpdate(update) {
 console.log(chalk.yellow('Successfully connected by ' + wm))
 }
   console.log(JSON.stringify(update, null, 4))
-  if (update.receivedPendingNotifications) return conn.reply(nomorown + '@s.whatsapp.net', m)
+  if (update.receivedPendingNotifications) return conn.reply(nomorown + '@s.whatsapp.net', null)
 }
 
 
