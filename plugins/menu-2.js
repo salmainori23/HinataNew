@@ -1,18 +1,9 @@
 import axios from 'axios'
 import FormData from 'form-data'
 import fetch from 'node-fetch'
-import { readFileSync } from 'fs'
 
 let handler = async (m, { conn, args, text, usedPrefix, command }) => {
-let who = m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.fromMe ? conn.user.jid : m.sender
-let name = await conn.getName(who)
 let fdoc = {quoted:{key : {participant : '0@s.whatsapp.net'},message: {documentMessage: {title: `${command}`}}}}
-let frep = { quoted: fgif, contextInfo: { externalAdReply: { showAdAttribution: true,
-title: `「 👋 Hai ${name} 」`,
-sourceUrl: sgc,
-thumbnail: readFileSync('./thumbnail.jpg')
-  }}}
-let imgr = thumbnailUrl.getRandom()
 
 let urut = text.split`|`
   let one = urut[1]
@@ -287,9 +278,9 @@ ${usedPrefix + command} ytplay
 ${usedPrefix + command} ytsearch
 ${usedPrefix + command} yuri
 ${usedPrefix + command} zippyshare`
-await conn.sendButton(m.chat, caption, wm, imgr + 'join', [
+conn.sendButton(m.chat, caption, wm, null, [
                 ['Menu', `${usedPrefix}menu`]
-            ], m, frep)
+            ], m, fdoc)
             }
             
 if (command) {
