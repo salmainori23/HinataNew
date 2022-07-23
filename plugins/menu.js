@@ -1,7 +1,7 @@
 import { promises, readFileSync } from 'fs'
 import { join } from 'path'
 import { xpRange } from '../lib/levelling.js'
-import { fetch } from 'node-fetch'
+import fetch from 'node-fetch'
 
 let tags = {
   'main': 'Main',
