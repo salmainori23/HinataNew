@@ -1443,7 +1443,7 @@ export async function participantsUpdate({ id, participants, action }) {
   let restext = await gettext.text()
   let katarandom = restext.split('\n')
   
-  this.sendHydrated2(id, text, wm + '\n\n' + botdate, action === 'add' ? pp : pp, sgc, (action == 'add' ? 'Hinata Group' : 'Nitip Gorengan'), user.split`@`[0], 'Telpon', [
+  this.sendHydrated2(id, text, wm + '\n\n' + botdate, action === 'add' ? pp : pp, sgc, (action == 'add' ? 'Hinata Group' : 'Nitip Gorengan'), null, null, [
       ['🎀 Menu', '/menu'],
       ['🪄 Test', '/ping'],
       ['Ok 🎉\n\n' + katarandom.getRandom() + '\n\n', '...']
@@ -1453,15 +1453,14 @@ export async function participantsUpdate({ id, participants, action }) {
             }
             break
         case 'promote':
-            text = (chat.sPromote || this.spromote || conn.spromote || '@user ```is now Admin```')
+            text = (chat.sPromote || this.spromote || conn.spromote || '@user *is now Admin*')
         case 'demote':
            if (!text)
-                text = (chat.sDemote || this.sdemote || conn.sdemote || '@user ```is no longer Admin```')
+                text = (chat.sDemote || this.sdemote || conn.sdemote || '@user *is no longer Admin*')
             text = text.replace('@user', '@' + participants[0].split('@')[0])
             if (chat.detect) return
-                this.sendHydrated2(id, text, wm + '\n\n' + botdate, logo, sgc, 'Hinata Group', nomorown, 'Owner', [
-      ['🎀 Menu', '/menu'],
-      ['🪄 Test', '/ping']
+                this.sendHydrated(id, text.trim(), botdate, null, null, null, null, null, [
+      [null, null]
     ], null)
             break
     }
@@ -1477,7 +1476,7 @@ export async function groupsUpdate(groupsUpdate) {
         const id = groupUpdate.id
         if (!id) continue
         let chats = global.db.data.chats[id], text = ''
-        if (!chats.detect) continue
+        if (!chats?.detect) continue
             if (groupUpdate.desc) text = (chats.sDesc || this.sDesc || conn.sDesc || '*Description has been changed to*\n@desc').replace('@desc', groupUpdate.desc)
             if (groupUpdate.subject) text = (chats.sSubject || this.sSubject || conn.sSubject || '*Subject has been changed to*\n@subject').replace('@subject', groupUpdate.subject)
             if (groupUpdate.icon) text = (chats.sIcon || this.sIcon || conn.sIcon || '*Icon has been changed to*').replace('@icon', groupUpdate.icon)
@@ -1487,9 +1486,8 @@ export async function groupsUpdate(groupsUpdate) {
             if (groupUpdate.restrict == true) text = (chats.sRestrictOn || this.sRestrictOn || conn.sRestrictOn || '*Group has been all participants!*')
             if (groupUpdate.restrict == false) text = (chats.sRestrictOff || this.sRestrictOff || conn.sRestrictOff || '*Group has been only admin!*')
             if (!text) continue
-            this.sendHydrated2(id, text, wm + '\n\n' + botdate, logo, sgc, 'Hinata Group', nomorown, 'Owner', [
-      ['🎀 Menu', '/menu'],
-      ['🪄 Test', '/ping']
+            this.sendHydrated(id, text.trim(), botdate, null, null, null, null, null, [
+      [null, null]
     ], null)
     }
 }
@@ -1522,22 +1520,33 @@ dfail
  */
 global.dfail = (type, m, conn) => {
     let msg = {
-        rowner: '*AKSES DITOLAK*\nPerintah ini hanya dapat digunakan oleh *OWWNER* !',
-        owner: '*AKSES DITOLAK*\nPerintah ini hanya dapat digunakan oleh *Owner Bot* !',
-        mods: '*AKSES DITOLAK*\nPerintah ini hanya dapat digunakan oleh *Moderator* !',
-        premium: '*AKSES DITOLAK*\nPerintah ini hanya untuk member *Premium* !',
-        group: '*AKSES DITOLAK*\nPerintah ini hanya dapat digunakan di grup !',
-        private: '*AKSES DITOLAK*\nPerintah ini hanya dapat digunakan di Chat Pribadi !',
-        admin: '*AKSES DITOLAK*\nPerintah ini hanya untuk *Admin* grup !',
-        botAdmin: '*AKSES DITOLAK*\nJadikan bot sebagai *Admin* untuk menggunakan perintah ini !',
-        unreg: 'Silahkan daftar untuk menggunakan fitur ini dengan cara mengetik:\n\n*#daftar nama.umur*\n\nContoh: *#daftar Hinata.18* !',
-        nsfw: 'NSFW tidak aktif, Silahkan hubungi Team Bot Discussion untuk mengaktifkan fitur ini !',
-        rpg: 'RPG tidak aktif, Silahkan hubungi Team Bot Discussion Untuk mengaktifkan fitur ini !',
-        restrict: 'Fitur ini di *disable* !'
+        rowner: `*${htki} ALERT ${htka}*
+${htjava} Perintah ini hanya dapat digunakan oleh *OWWNER* !`,
+        owner: `*${htki} ALERT ${htka}*
+${htjava} Perintah ini hanya dapat digunakan oleh *Owner Bot* !`,
+        mods: `*${htki} ALERT ${htka}*
+${htjava} Perintah ini hanya dapat digunakan oleh *Moderator* !`,
+        premium: `*${htki} ALERT ${htka}*
+${htjava} Perintah ini hanya untuk member *Premium* !`,
+        group: `*${htki} ALERT ${htka}*
+${htjava} Perintah ini hanya dapat digunakan di grup !`,
+        private: `*${htki} ALERT ${htka}*
+${htjava} Perintah ini hanya dapat digunakan di Chat Pribadi !`,
+        admin: `*${htki} ALERT ${htka}*
+${htjava} Perintah ini hanya untuk *Admin* grup !`,
+        botAdmin: `*${htki} ALERT ${htka}*
+${htjava} Jadikan bot sebagai *Admin* untuk menggunakan perintah ini !`,
+        unreg: `*${htki} ALERT ${htka}*
+${htjava} Silahkan daftar untuk menggunakan fitur ini dengan cara mengetik:\n\n*#daftar nama.umur*\n\nContoh: *#daftar Hinata.18* !`,
+        nsfw: `*${htki} ALERT ${htka}*
+${htjava} NSFW tidak aktif, Silahkan hubungi Team Bot Discussion untuk mengaktifkan fitur ini !`,
+        rpg: `*${htki} ALERT ${htka}*
+${htjava} RPG tidak aktif, Silahkan hubungi Team Bot Discussion Untuk mengaktifkan fitur ini !`,
+        restrict: `*${htki} ALERT ${htka}*
+${htjava} Fitur ini di *disable* !`
     }[type]
-    if (msg) return conn.sendHydrated2(m.chat, msg, wm + '\n\n' + botdate, logo, sgc, 'Hinata Group', nomorown, 'Owner', [
-      ['🎀 Menu', '/menu'],
-      ['🪄 Test', '/ping']
+    if (msg) return conn.sendHydrated(m.chat, msg, botdate, null, null, null, null, null, [
+      [null, null]
     ], null)
 }
 

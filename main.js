@@ -112,8 +112,8 @@ if (!opts['test']) {
 }
 if (opts['server']) (await import('./server.js')).default(global.conn, PORT)
 
-
-function clearTmp() {
+/* Clear */
+async function clearTmp() {
   const tmp = [tmpdir(), join(__dirname, './tmp')]
   const filename = []
   tmp.forEach(dirname => readdirSync(dirname).forEach(file => filename.push(join(dirname, file))))
@@ -123,7 +123,12 @@ function clearTmp() {
     return false
   })
 }
+setInterval(async () => {
+	var a = await clearTmp()
+	console.log(chalk.cyanBright(`successfully clear tmp`))
+}, 180000)
 
+/* Update */
 async function connectionUpdate(update) {
   const { connection, lastDisconnect, isNewLogin } = update
   if (isNewLogin) conn.isInit = true
@@ -139,7 +144,6 @@ console.log(chalk.yellow('Successfully connected by ' + wm))
   console.log(JSON.stringify(update, null, 4))
   if (update.receivedPendingNotifications) return this.sendButton(nomorown + '@s.whatsapp.net', 'Successfully connected by ' + wm, botdate, null, [['MENU', '/menu']], null)
 }
-
 
 process.on('uncaughtException', console.error)
 // let strQuot = /(["'])(?:(?=(\\?))\2.)*?\1/
@@ -286,64 +290,6 @@ async function _quickTest() {
   if (s.ffmpeg && !s.ffmpegWebp) conn.logger.warn('Stickers may not animated without libwebp on ffmpeg (--enable-ibwebp while compiling ffmpeg)')
   if (!s.convert && !s.magick && !s.gm) conn.logger.warn('Stickers may not work without imagemagick if libwebp on ffmpeg doesnt isntalled (pkg install imagemagick)')
 }
-
-// EXPIRED
-async function expired() {
-	return new Promise(async (resolve, reject) => {
-		let user = Object.keys(global.db.data.users)
-		let chat = Object.keys(global.db.data.chats)
-		for (let jid of user) {
-			var users = global.db.data.users[jid]
-			var {
-				name,
-				premium,
-				expired
-			} = users
-			if (users.premium) {
-				if (Date.now() >= users.expired) {
-					users.premium = false
-					users.expired = 0
-					users.limitjoinprem = 0
-					users.limitjoinfree = 0
-					conn.reply(jid, 'Hai\nmasa premium kamu sekarang sudah habis.\njika ingin memperpanjang lagi silahkan chat owner.\nterima kasih telah menggunakan bot :)\n' + `owner: @${nomorown}`, null, {
-						mentions: [nomorown + '@s.whatsapp.net']
-					})
-					resolve(console.log(`masa premium ${name} sudah habis`))
-				}
-			}
-			if (users.sewa) {
-				if (users.limitjoinprem == 0) {
-					users.sewa = false
-					users.limitjoinfree = 1
-				}
-			}
-		}
-		for (let id of chat) {
-			if (id.endsWith('g.us')) {
-				var chats = global.db.data.chats[id]
-				if (chats.grouprental) {
-					if (Date.now() >= chats.expired) {
-						chats.grouprental = false
-						chats.expired = 0
-						await conn.reply(id, `Masa menetap di ${await conn.getName(id)} sudah habis.\nBot sebentar lagi akan keluar.\nterima kasih telah menggunakan bot kami.\nChat owner kami jika ingin menyewa lagi :)\nowner: @${nomorown}`, null, {
-							mentions: [nomorown + '@s.whatsapp.net']
-						})
-						await delay(3000)
-						await conn.groupLeave(id)
-						resolve(console.log(`Masa menetap di ${await conn.getName(id)} sudah habis`))
-					}
-				}
-			}
-		}
-	})
-}
-setInterval(async () => {
-	var b = await expired()
-}, 1000)
-setInterval(async () => {
-	var a = await clearTmp()
-	console.log(chalk.cyanBright(`successfully clear tmp`))
-}, 180000)
 
 // Batas
 _quickTest()
