@@ -95,7 +95,7 @@ const { state, saveState } = store.useSingleFileAuthState(global.authFile)
 
 const connectionOptions = {
 printQRInTerminal: true,
-auth: saveState
+auth: state
 }
 
 global.conn = makeWASocket(connectionOptions)
