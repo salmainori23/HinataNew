@@ -1454,14 +1454,11 @@ export async function participantsUpdate({ id, participants, action }) {
         case 'promote':
             text = (chat.sPromote || this.spromote || conn.spromote || '@user ```is now Admin```')
         case 'demote':
-           // if (!text)
+           if (!text)
                 text = (chat.sDemote || this.sdemote || conn.sdemote || '@user ```is no longer Admin```')
             text = text.replace('@user', '@' + participants[0].split('@')[0])
             if (chat.detect) return
-                conn.sendHydrated(id, text, wm + '\n\n' + botdate, logo, sgc, 'Hinata Group', nomorown, 'Owner', [
-      ['🎀 Menu', '/menu'],
-      ['🪄 Test', '/ping']
-    ], null)
+                this.sendMessage(id, { text, mentions: this.parseMention(text) })
             break
     }
 }
@@ -1471,12 +1468,12 @@ export async function participantsUpdate({ id, participants, action }) {
  * @param {import('@adiwajshing/baileys').BaileysEventMap<unknown>['groups.update']} groupsUpdate 
  */
 export async function groupsUpdate(groupsUpdate) {
-   // if (opts['self']) return
+   if (opts['self']) return
     for (const groupUpdate of groupsUpdate) {
         const id = groupUpdate.id
-        //if (!id) continue
+        if (!id) continue
         let chats = global.db.data.chats[id], text = ''
-        // if (!chats.detect) continue
+        if (!chats.detect) continue
             if (groupUpdate.desc) text = (chats.sDesc || this.sDesc || conn.sDesc || '*Description has been changed to*\n@desc').replace('@desc', groupUpdate.desc)
             if (groupUpdate.subject) text = (chats.sSubject || this.sSubject || conn.sSubject || '*Subject has been changed to*\n@subject').replace('@subject', groupUpdate.subject)
             if (groupUpdate.icon) text = (chats.sIcon || this.sIcon || conn.sIcon || '*Icon has been changed to*').replace('@icon', groupUpdate.icon)
@@ -1485,12 +1482,8 @@ export async function groupsUpdate(groupsUpdate) {
             if (groupUpdate.announce == false) text = (chats.sAnnounceOff || this.sAnnounceOff || conn.sAnnounceOff || '*Group has been open!*')
             if (groupUpdate.restrict == true) text = (chats.sRestrictOn || this.sRestrictOn || conn.sRestrictOn || '*Group has been all participants!*')
             if (groupUpdate.restrict == false) text = (chats.sRestrictOff || this.sRestrictOff || conn.sRestrictOff || '*Group has been only admin!*')
-            // if (!text) continue
-            if (chats.detect) return
-            conn.sendHydrated(id, text, wm + '\n\n' + botdate, logo, sgc, 'Hinata Group', nomorown, 'Owner', [
-      ['🎀 Menu', '/menu'],
-      ['🪄 Test', '/ping']
-    ], null)
+            if (!text) continue
+            await this.sendMessage(id, { text, mentions: this.parseMention(text) })
     }
 }
 
@@ -1508,7 +1501,7 @@ export async function deleteUpdate(message) {
         let chat = global.db.data.chats[msg.chat] || {}
         if (chat.delete)
             return
-            conn.sendButton(msg.key.remoteJid, `Terdeteksi @${participant.split`@`[0]} telah menghapus pesan!`, wm, null, [['disable delete', '/disable delete']], msg, {
+            await this.sendButton(msg.key.remoteJid, `Terdeteksi @${participant.split`@`[0]} telah menghapus pesan!`, wm, false, [['disable delete', '/disable delete']], msg, {
                 mentions: [participant]
             })
         this.copyNForward(msg.chat, msg).catch(e => console.log(e, msg))
@@ -1535,10 +1528,7 @@ global.dfail = (type, m, conn) => {
         rpg: 'RPG tidak aktif, Silahkan hubungi Team Bot Discussion Untuk mengaktifkan fitur ini !',
         restrict: 'Fitur ini di *disable* !'
     }[type]
-    if (msg) return conn.sendHydrated(m.chat, msg, wm + '\n\n' + botdate, logo, sgc, 'Hinata Group', nomorown, 'Owner', [
-      ['🎀 Menu', '/menu'],
-      ['🪄 Test', '/ping']
-    ], m)
+    if (msg) return conn.sendHydrated2(m.chat, msg, author, `${logo}`, `${webs}`, "Website", `${gcwangsaf}`, "GROUP WHATSAPP", [["Owner", ".donasi"]], m)
 }
 
 let file = global.__filename(import.meta.url, true)
