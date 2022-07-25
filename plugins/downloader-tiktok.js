@@ -54,7 +54,7 @@ let caption2 = `*TIKTOK WM*
 'headerType': 6}
     await conn.sendMessage(m.chat, buttonMessage, {quoted: fgif})
     */
-    conn.sendHydrated(m.chat, `${htki} ᴛɪᴋᴛᴏᴋ ᴡᴍ ${htka}`, caption3, `${await shortUrl(linkwm)}`, linkwm, '🌎 s ᴏ ᴜ ʀ ᴄ ᴇ', null, null, [
+    conn.sendHydrated(m.chat, `${htki} ᴛɪᴋᴛᴏᴋ ᴡᴍ ${htka}`, caption2, `${await shortUrl(linkwm)}`, linkwm, '🌎 s ᴏ ᴜ ʀ ᴄ ᴇ', null, null, [
       ['🎀 Menu', '/menu']
     ], m)
 }

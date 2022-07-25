@@ -2,13 +2,12 @@ import fetch from 'node-fetch'
 
 let handler = async(m, { conn, usedPrefix, text, args, command }) => {
 if (!text) throw `Contoh penggunaan ${usedPrefix}${command} https://s.id`
-
 let caption = `Nihh banh ${command} nya`
-let url = `https://violetics.pw/api/media/ssweb?apikey=beta&url=${text}`
-await conn.sendHydrated(m.chat, caption, wm, url, null, null, null, null, [
-      ['Menu', usedPrefix + 'menu']
-    ], m)
-
+let url = `https://shot.screenshotapi.net/screenshot?&url=${text}&full_page=true`
+let ini = await fetch(url)
+let has = await ini.json()
+let ilnya = has.screenshot
+await conn.sendFile(m.chat, ilnya, wm, wm, ftoko )
 }
 handler.help = ['ssweb url']
 handler.command = ['ss', 'ssweb', 'ssf']

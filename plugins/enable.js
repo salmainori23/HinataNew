@@ -7,6 +7,7 @@ let fdoc = {quoted:{key : {participant : '0@s.whatsapp.net'},message: {documentM
 	rows: [
 	{title: `✨ ${htjava} Welcome`, rowId: `${usedPrefix + command} welcome`},
 	{title: `🚫 ${htjava} Delete`, rowId: `${usedPrefix + command} delete`},
+	{title: `🔞 ${htjava} NSFW`, rowId: `${usedPrefix + command} nsfw`},
 	{title: `🌎 ${htjava} Public`, rowId: `${usedPrefix + command} public`},
 	{title: `🗣️ ${htjava} Simi`, rowId: `${usedPrefix + command} simi`},
 	{title: `🔗 ${htjava} Anti Link Wa`, rowId: `${usedPrefix + command} antilinkwa`},
@@ -189,6 +190,15 @@ const listMessage = {
         }
       }
       chat.antiLinkHttp = isEnable
+      break
+      case 'nsfw':
+      if (m.isGroup) {
+        if (!(isAdmin || isOwner)) {
+          global.dfail('admin', m, conn)
+          throw false
+        }
+      }
+      chat.nsfw = isEnable
       break
       case 'antivirtex':
       if (m.isGroup) {
