@@ -19,8 +19,7 @@ let caption = `${htki} *TIKTOK* ${htka}
 🧏 *Nickname:* ${nickname}
 🔗 *Url:* ${await shortUrl(url)}
 
-*Description:* ${description}
-`
+*Description:* ${description}`
 	conn.sendHydrated(m.chat, `${htki} ᴛɪᴋᴛᴏᴋ ᴡᴍ ${htka}`, caption, `${await shortUrl(url)}`, url, '🌎 s ᴏ ᴜ ʀ ᴄ ᴇ', null, null, [
       ['🎀 Menu', '/menu']
     ], m)
@@ -30,30 +29,7 @@ if (command == 'tiktokwm') {
 let linkwm = `https://api.lolhuman.xyz/api/tiktokwm?apikey=9b817532fadff8fc7cb86862&url=${args[0]}`
 if (!linkwm) throw 'Can\'t download video!'
 let caption2 = `*TIKTOK WM*
-*Url:* ${await shortUrl(`${args[0]}`)}
-`
-/*
-	let buttonMessage= {
-'video': {'url': linkwm},
-'mimetype': "video/mp4",
-'fileLength': fsizedoc,
-'jpegThumbnail': await (await fetch(pp)).buffer(),
-'contextInfo': {
-'externalAdReply': {
-'showAdAttribution': true,
-'mediaUrl': gcwangsaf,
-'mediaType': 2,
-'previewType': 'pdf',
-'title': `👋 Hai, ${name}` ,
-'body': 'Role ',
-'thumbnail': await (await fetch(hwaifu.getRandom())).buffer(),
-'sourceUrl': gcwangsaf}},
-'caption': caption2,
-'footer': wm,
-'buttons': buttons,
-'headerType': 6}
-    await conn.sendMessage(m.chat, buttonMessage, {quoted: fgif})
-    */
+*Url:* ${await shortUrl(`${args[0]}`)}`
     conn.sendHydrated(m.chat, `${htki} ᴛɪᴋᴛᴏᴋ ᴡᴍ ${htka}`, caption2, `${await shortUrl(linkwm)}`, linkwm, '🌎 s ᴏ ᴜ ʀ ᴄ ᴇ', null, null, [
       ['🎀 Menu', '/menu']
     ], m)
@@ -68,30 +44,7 @@ let caption3 = `*TIKTOK NO WM*
 *Title:* ${x.title}
 *Keyword:* ${x.keywords}
 *Description:* ${x.description}
-*Url:* ${await shortUrl(x.link)}
-`
-/*
-let buttonMessage = {
-'video': {'url': x.link},
-'mimetype': "video/mp4",
-'fileLength': fsizedoc,
-'jpegThumbnail': await (await fetch(pp)).buffer(),
-'contextInfo': {
-'externalAdReply': {
-'showAdAttribution': true,
-'mediaUrl': gcwangsaf,
-'mediaType': 2,
-'previewType': 'pdf',
-'title': `👋 Hai, ${name}` ,
-'body': 'Role ',
-'thumbnail': await (await fetch(hwaifu.getRandom())).buffer(),
-'sourceUrl': gcwangsaf}},
-'caption': caption3,
-'footer': wm,
-'buttons': buttons,
-'headerType': 6}
-    await conn.sendMessage(m.chat, buttonMessage, {quoted: fgif})
-    */
+*Url:* ${await shortUrl(x.link)}`
 	conn.sendHydrated(m.chat, `${htki} ᴛɪᴋᴛᴏᴋ ᴡᴍ ${htka}`, caption3, `${await shortUrl(x.link)}`, x.link, '🌎 s ᴏ ᴜ ʀ ᴄ ᴇ', null, null, [
       ['🎀 Menu', '/menu']
     ], m)
