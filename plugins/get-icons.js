@@ -31,7 +31,13 @@ if (!text) throw `Contoh penggunaan ${usedPrefix}${command} https://t.me/addstic
     throw stiker.toString()
   }
   
+  if (command == 'urltopdf') {
+if (!text) throw `Contoh penggunaan ${usedPrefix}${command} https://t.me/addsticker/...`
+    let gas = `https://api.html2pdf.app/v1/generate?url=${text}&apiKey=DzhGk9fhdPope6j8PmVmbxoNDDiWbsFpdeKZfMMrrxtsl3pXCRbfYOd7N4HovaJ1`
+    return conn.sendFile(m.chat, gas, 'hasil.pdf', 'Hasil', m)
+  }
+  
 }
-handler.command = ['gettenor', 'getteles']
+handler.command = ['gettenor', 'getteles', 'urltopdf']
 
 export default handler
