@@ -2,10 +2,10 @@ import fetch from 'node-fetch'
 let timeout = 120000
 let poin = 4999
 let handler = async (m, { conn, usedPrefix }) => {
-    conn.tebakanime = conn.tebakanime ? conn.tebakanime : {}
+    conn.tebakanjime = conn.tebakanjime ? conn.tebakanjime : {}
     let id = m.chat
-    if (id in conn.tebakanime) {
-        conn.sendButton(m.chat, 'Masih ada soal belum terjawab di chat ini', author, null, buttons, conn.tebakanime[id][0])
+    if (id in conn.tebakanjime) {
+        conn.sendButton(m.chat, 'Masih ada soal belum terjawab di chat ini', author, null, buttons, conn.tebakanjime[id][0])
         throw false
     }
     let res = await fetch(`http://zekais-api.herokuapp.com/tebakanime`)
@@ -16,14 +16,14 @@ Timeout *${(timeout / 1000).toFixed(2)} detik*
 Ketik ${usedPrefix}hani untuk hint
 Bonus: ${poin} XP
     `.trim()
-    conn.tebakanime[id] = [
+    conn.tebakanjime[id] = [
         await conn.sendButton(m.chat, caption, author, json.image, buttons, m),
         json, poin,
         setTimeout(() => {
-            if (conn.tebakanime[id]) conn.sendButton(m.chat, `Waktu habis!\nJawabannya adalah *${json.name}*\n*Desk:* ${json.desc}`, author, null, [
+            if (conn.tebakanjime[id]) conn.sendButton(m.chat, `Waktu habis!\nJawabannya adalah *${json.name}*\n*Desk:* ${json.desc}`, author, null, [
                 ['tebakanime', '/tebakanime']
-            ], conn.tebakanime[id][0])
-            delete conn.tebakanime[id]
+            ], conn.tebakanjime[id][0])
+            delete conn.tebakanjime[id]
         }, timeout)
     ]
 }

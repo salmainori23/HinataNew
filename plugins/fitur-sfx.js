@@ -102,8 +102,8 @@ let teks = `*Name :* ${xx[1][0].name}
 *City :* ${xx[1][0].capitalCity}
 *longitude :* ${xx[1][0].longitude}
 *latitude :* ${xx[1][0].latitude}`
-  await conn.sendButton(m.chat, teks, wm, null, [
-                ['Map', `${usedPrefix}get https://static-maps.yandex.ru/1.x/?lang=id-ID&ll=${xx[1][0].longitude},${xx[1][0].latitude}&z=12&l=map&size=600,300`]
+  await conn.sendButton(m.chat, teks, wm, `https://static-maps.yandex.ru/1.x/?lang=id-ID&ll=${xx[1][0].longitude},${xx[1][0].latitude}&z=12&l=map&size=600,300`, [
+                ['Menu', `${usedPrefix}menu`]
             ], m)
 }
 

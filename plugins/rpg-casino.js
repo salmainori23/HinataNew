@@ -1,5 +1,6 @@
 let buatall = 1
 let handler = async (m, { conn, args, usedPrefix, DevMode }) => {
+let imgr = flaaa.getRandom()
     conn.casino = conn.casino ? conn.casino : {}
     if (m.chat in conn.casino) return m.reply ('Masih ada yang melakukan casino disini, tunggu sampai selesai!!')
     else conn.casino[m.chat] = true
@@ -14,15 +15,15 @@ let handler = async (m, { conn, args, usedPrefix, DevMode }) => {
         if (args.length < 1) return conn.reply(m.chat, usedPrefix + 'casino <jumlah>\n ' + usedPrefix + 'casino 1000', m)
         if (global.db.data.users[m.sender].exp >= count * 1) {
             global.db.data.users[m.sender].exp -= count * 1
-            //await m.reply('') //Kwkwwkkwlwlw
             if (Aku > Kamu) {
-                conn.reply(m.chat, `💰 Casino 💰\n*Kamu:* ${Kamu} Point\n*Computer:* ${Aku} Point\n\n*You LOSE*\nKamu kehilangan ${count} Uang(xp)`.trim(), m)
-            } else if (Aku < Kamu) {
-                global.db.data.users[m.sender].exp += count * 2
-                conn.reply(m.chat, `💰 Casino 💰\n*Kamu:* ${Kamu} Point\n*Computer:* ${Aku} Point\n\n*You Win*\nKamu mendapatkan ${count * 2} Uang(xp)`.trim(), m)
-            } else {
-                global.db.data.users[m.sender].exp += count * 1
-                conn.reply(m.chat, `💰 Casino 💰\n*Kamu:* ${Kamu} Point\n*Computer:* ${Aku} Point\n\n*SERI*\nKamu mendapatkan ${count * 1} Uang(xp)`.trim(), m)
+    let caption = `                💰 *C A S I N O* 💰\n\n${htjava} *@${m.sender.split("@")[0]}*\n┗┅⭑ ${Kamu} Point\n${htjava} *@${nomorbot.split("@")[0]}*\n┗┅⭑ ${Aku} Point\n\n❌ *LOSE* ❌\nKamu kehilangan ${count} Uang(xp)`.trim()
+    conn.sendButton(m.chat, caption, wm, imgr + 'LOSE', [['Try Again ' + args[0], '/casino ' + args[0]]], m, { mentions: conn.parseMention(caption) })
+    } else if (Aku < Kamu) {
+    let caption = `                💰 *C A S I N O* 💰\n\n${htjava} *@${m.sender.split("@")[0]}*\n┗┅⭑ ${Kamu} Point\n${htjava} *@${nomorbot.split("@")[0]}*\n┗┅⭑ ${Aku} Point\n\n🎉 *WIN* 🎉\nKamu mendapatkan ${count * 2} Uang(xp)`.trim()
+    conn.sendButton(m.chat, caption, wm, imgr + 'WIN', [['Try Again ' + args[0], '/casino ' + args[0]]], m, { mentions: conn.parseMention(caption) })
+    } else {
+    let caption = `                💰 *C A S I N O* 💰\n\n${htjava} *@${m.sender.split("@")[0]}*\n┗┅⭑ ${Kamu} Point\n${htjava} *@${nomorbot.split("@")[0]}*\n┗┅⭑ ${Aku} Point\n\n🔖*DRAW* 🔖\nKamu mendapatkan ${count * 1} Uang(xp)`.trim()
+    conn.sendButton(m.chat, caption, wm, imgr + 'DRAW', [['Try Again ' + args[0], '/casino ' + args[0]]], m, { mentions: conn.parseMention(caption) })
             }
         } else conn.reply(m.chat, `Uang(xp) kamu tidak mencukupi untuk Casino silahkan *#kerja* terlebih dahulu!`.trim(), m)
     } catch (e) {
@@ -41,7 +42,7 @@ let handler = async (m, { conn, args, usedPrefix, DevMode }) => {
     
 handler.help = ['casino <jumlah>']
 handler.tags = ['rpg']
-handler.command = /^(casino)$/i
+handler.command = /^(casino|csn)$/i
 
 handler.fail = null
 
