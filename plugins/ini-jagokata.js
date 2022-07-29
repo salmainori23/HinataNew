@@ -6,12 +6,12 @@ if (command == 'kataquotes') {
 let pe = await fetch(`https://programming-quotes-api.herokuapp.com/Quotes/random`)
 let xc = await pe.json()
   await conn.sendButton(m.chat, `*Quote:*
-${xc.result.en}
+${xc.en}
 
 *Author:*
-${x.author}`, wm, null, [
+${xc.author}`, wm, null, [
                 ['Next', `${usedPrefix + command}`],
-                ['Translate', `${usedPrefix}tr id ${x.en}`]
+                ['Translate', `${usedPrefix}tr id ${xc.en}`]
             ], m)
             }
             

@@ -3,11 +3,12 @@ let handler = (m, { conn, usedPrefix, command, text }) => {
    if(/kiri/i.test(text)) {
 
     let kiri = [
-      ["🤠", "・", "・", "・", "・"],
-      ["・", "🤠", "・", "・", "・"],
-      ["・", "・", "🤠", "・", "・"],
-      ["・", "・", "・", "🤠", "・"],
-      ["・", "・", "・", "・", "🤠"]
+      ["🤠", "・", "・", "・", "・", "・"],
+      ["・", "🤠", "・", "・", "・", "・"],
+      ["・", "・", "🤠", "・", "・", "・"],
+      ["・", "・", "・", "🤠", "・", "・"],
+      ["・", "・", "・", "・", "🤠", "・"],
+      ["・", "・", "・", "・", "・", "🤠"]
     ]
 
     if(conn.tembak.tembak.indexOf("🤠") == 0) {
@@ -20,22 +21,29 @@ let handler = (m, { conn, usedPrefix, command, text }) => {
       conn.tembak.tembak = kiri[2]
     } else if(conn.tembak.tembak.indexOf("🤠") == 4) {
       conn.tembak.tembak = kiri[3]
+    } else if(conn.tembak.tembak.indexOf("🤠") == 5) {
+      conn.tembak.tembak = kiri[4]
     }
 
     let pos = conn.tembak.musuh.join(" ") + "\n\n\n" + conn.tembak.tembak.join(" ")
 
 
 
-    if(conn.tembak.musuh.indexOf("🥷") === conn.tembak.tembak.indexOf("🤠")) return conn.sendButton(m.chat, pos, wm, null, [["🔫 Tembak 🔫", `${usedPrefix}${command} tembak`]])
-    return conn.sendButton(m.chat, pos, wm, null, [["←", `${usedPrefix}${command} kiri`], ["→", `${usedPrefix}${command} kanan`]])
+    if(conn.tembak.musuh.indexOf("🥷") === conn.tembak.tembak.indexOf("🤠")) return conn.sendButton(m.chat, pos, wm, [
+                                                                                              ['🔫 Tembak', `${usedPrefix}koboy tembak`]             
+                                                                                              ])
+    return conn.sendButton(m.chat, pos, wm, [
+          ['←', `${usedPrefix}koboy kiri`], ['→', `${usedPrefix}koboy kanan`]
+])
   } else if(/kanan/i.test(text)) {
 
     let kanan = [
-      ["🤠", "・", "・", "・", "・"],
-      ["・", "🤠", "・", "・", "・"],
-      ["・", "・", "🤠", "・", "・"],
-      ["・", "・", "・", "🤠", "・"],
-      ["・", "・", "・", "・", "🤠"]
+      ["🤠", "・", "・", "・", "・", "・"],
+      ["・", "🤠", "・", "・", "・", "・"],
+      ["・", "・", "🤠", "・", "・", "・"],
+      ["・", "・", "・", "🤠", "・", "・"],
+      ["・", "・", "・", "・", "🤠", "・"],
+      ["・", "・", "・", "・", "・", "🤠"]
     ]
 
     if(conn.tembak.tembak.indexOf("🤠") == 0) {
@@ -47,15 +55,21 @@ let handler = (m, { conn, usedPrefix, command, text }) => {
     } else if(conn.tembak.tembak.indexOf("🤠") == 3) {
       conn.tembak.tembak = kanan[4]
     } else if(conn.tembak.tembak.indexOf("🤠") == 4) {
-      conn.tembak.tembak = kanan[4]
+      conn.tembak.tembak = kanan[5]
+    } else if(conn.tembak.tembak.indexOf("🤠") == 5) {
+      conn.tembak.tembak = kanan[5]
     }
 
     let pos = conn.tembak.musuh.join(" ") + "\n\n\n" + conn.tembak.tembak.join(" ")
 
 
 
-    if(conn.tembak.musuh.indexOf("🥷") === conn.tembak.tembak.indexOf("🤠")) return conn.sendButton(m.chat, pos, wm, null, [["🔫 Tembak 🔫", `${usedPrefix}${command} tembak`]])
-    return conn.sendButton(m.chat, pos, wm, null, [["←", `${usedPrefix}${command} kiri`], ["→", `${usedPrefix}${command} kanan`]])
+    if(conn.tembak.musuh.indexOf("🥷") === conn.tembak.tembak.indexOf("🤠")) return conn.sendButton(m.chat, pos, wm, [
+                                                                                              ['🔫 Tembak', `${usedPrefix}koboy tembak`]             
+                                                                                              ])             
+    return conn.sendButton(m.chat, pos, wm, [
+          ['←', `${usedPrefix}koboy kiri`], ['→', `${usedPrefix}koboy kanan`]
+])
   } else if(/tembak/i.test(text)) {
 
     if(conn.tembak.tembak.indexOf("🤠") == conn.tembak.musuh.indexOf("🥷")) {
@@ -65,38 +79,44 @@ let handler = (m, { conn, usedPrefix, command, text }) => {
     }
 
   } else {
-    randMusuh = [
-      ["🥷", "・", "・", "・", "・"],
-      ["・", "🥷", "・", "・", "・"],
-      ["・", "・", "🥷", "・", "・"],
-      ["・", "・", "・", "🥷", "・"],
-      ["・", "・", "・", "・", "🥷"]
+   let randMusuh = [
+      ["🥷", "・", "・", "・", "・", "・"],
+      ["・", "🥷", "・", "・", "・", "・"],
+      ["・", "・", "🥷", "・", "・", "・"],
+      ["・", "・", "・", "🥷", "・", "・"],
+      ["・", "・", "・", "・", "🥷", "・"],
+      ["・", "・", "・", "・", "・", "🥷"]
     ]
-    randAku = [
-      ["🤠", "・", "・", "・", "・"],
-      ["・", "🤠", "・", "・", "・"],
-      ["・", "・", "🤠", "・", "・"],
-      ["・", "・", "・", "🤠", "・"],
-      ["・", "・", "・", "・", "🤠"]
+   let randAku = [
+      ["🤠", "・", "・", "・", "・", "・"],
+      ["・", "🤠", "・", "・", "・", "・"],
+      ["・", "・", "🤠", "・", "・", "・"],
+      ["・", "・", "・", "🤠", "・", "・"],
+      ["・", "・", "・", "・", "🤠", "・"],
+      ["・", "・", "・", "・", "・", "🤠"]
     ]
 
-    musuh = random(randMusuh)
-    aku = random(randAku)
+    let musuh = random(randMusuh)
+   let aku = random(randAku)
 
     conn.tembak.musuh = musuh
     conn.tembak.tembak = aku
 
     let pos = conn.tembak.musuh.join(" ") + "\n\n\n" + conn.tembak.tembak.join(" ")
 
-    if(conn.tembak.musuh.indexOf("🥷") === conn.tembak.tembak.indexOf("🤠")) return conn.sendButton(m.chat, pos, wm, nul, [["🔫 Tembak 🔫", `${usedPrefix}${command} tembak`]])
-    return conn.sendButton(m.chat, pos, wm, null, [["←", `${usedPrefix}${command} kiri`,] ["→", `${usedPrefix}${command} kanan`]])
+    if(conn.tembak.musuh.indexOf("🥷") === conn.tembak.tembak.indexOf("🤠")) return conn.sendButton(m.chat, pos, wm, [
+                                                                                              ['🔫 Tembak', `${usedPrefix}koboy tembak`]             
+                                                                                              ])
+    return conn.sendButton(m.chat, pos, wm, [
+          ['←', `${usedPrefix}koboy kiri`], ['→', `${usedPrefix}koboy kanan`]
+])
   }
 }
 handler.help = ['koboy']
 handler.tags = ['rpg']
 handler.command = /^(koboy|coboy)/i
 
-module.exports = handler
+export default handler
 
 
 function random(arr) {

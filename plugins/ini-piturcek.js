@@ -1,12 +1,9 @@
 
 import fetch from 'node-fetch'
 import fs from "fs"
-import Canvas from "discord-canvas"
 
 let handler = async (m, { conn, args, text, usedPrefix, command }) => {
-let frep = { contextInfo: { externalAdReply: {title: global.wm, body: global.author, sourceUrl: snh, thumbnail: fs.readFileSync('./thumbnail.jpg')}}}
-let fdoc = {quoted:{key : {participant : '0@s.whatsapp.net'},message: {documentMessage: {title: `${command}`}}}}
-  
+
 let template = (args[0] || '').toLowerCase()
 if (!args[0]) {
 let caption = `*Contoh Penggunaan*
@@ -55,9 +52,9 @@ ${usedPrefix + command} tai @user
 • tolol
 • udik
 `
-conn.sendButton(m.chat, caption, wm, null, [
+await conn.sendButton(m.chat, caption, wm, null, [
                 ['Menu', `${usedPrefix}menu`]
-            ], m, fdoc)
+            ], m)
             }
             
 if (command) {
@@ -103,7 +100,6 @@ case 'sompret':
 case 'tai':
 case 'tolol':
 case 'udik':
-// await conn.sendFile(m.chat, pp, 'propil.jpg', caption, m , false, { contextInfo: { mentionedJid: [who] } })
 
 let who = m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.fromMe ? conn.user.jid : m.sender
     let name = await conn.getName(who)

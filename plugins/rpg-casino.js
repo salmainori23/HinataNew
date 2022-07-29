@@ -16,16 +16,16 @@ let imgr = flaaa.getRandom()
         if (global.db.data.users[m.sender].exp >= count * 1) {
             global.db.data.users[m.sender].exp -= count * 1
             if (Aku > Kamu) {
-    let caption = `                💰 *C A S I N O* 💰\n\n${htjava} *@${m.sender.split("@")[0]}*\n┗┅⭑ ${Kamu} Point\n${htjava} *@${nomorbot.split("@")[0]}*\n┗┅⭑ ${Aku} Point\n\n❌ *LOSE* ❌\nKamu kehilangan ${count} Uang(xp)`.trim()
+    let caption = `                💰 *C A S I N O* 💰\n\n${htjava} *@${m.sender.split("@")[0]}* - [USER]\n┗┅⭑ ${Kamu} Point\n${htjava} *@${nomorbot.split("@")[0]}* - [BOT]\n┗┅⭑ ${Aku} Point\n\n❌ *LOSE* ❌\nKamu kehilangan ${count} Uang(xp)`.trim()
     conn.sendButton(m.chat, caption, wm, imgr + 'LOSE', [['Try Again ' + args[0], '/casino ' + args[0]]], m, { mentions: conn.parseMention(caption) })
     } else if (Aku < Kamu) {
-    let caption = `                💰 *C A S I N O* 💰\n\n${htjava} *@${m.sender.split("@")[0]}*\n┗┅⭑ ${Kamu} Point\n${htjava} *@${nomorbot.split("@")[0]}*\n┗┅⭑ ${Aku} Point\n\n🎉 *WIN* 🎉\nKamu mendapatkan ${count * 2} Uang(xp)`.trim()
+    let caption = `                💰 *C A S I N O* 💰\n\n${htjava} *@${m.sender.split("@")[0]}* - [USER]\n┗┅⭑ ${Kamu} Point\n${htjava} *@${nomorbot.split("@")[0]}* - [BOT]\n┗┅⭑ ${Aku} Point\n\n🎉 *WIN* 🎉\nKamu mendapatkan ${count * 2} Uang(xp)`.trim()
     conn.sendButton(m.chat, caption, wm, imgr + 'WIN', [['Try Again ' + args[0], '/casino ' + args[0]]], m, { mentions: conn.parseMention(caption) })
     } else {
-    let caption = `                💰 *C A S I N O* 💰\n\n${htjava} *@${m.sender.split("@")[0]}*\n┗┅⭑ ${Kamu} Point\n${htjava} *@${nomorbot.split("@")[0]}*\n┗┅⭑ ${Aku} Point\n\n🔖*DRAW* 🔖\nKamu mendapatkan ${count * 1} Uang(xp)`.trim()
+    let caption = `                💰 *C A S I N O* 💰\n\n${htjava} *@${m.sender.split("@")[0]}* - [USER]\n┗┅⭑ ${Kamu} Point\n${htjava} *@${nomorbot.split("@")[0]}* - [BOT]\n┗┅⭑ ${Aku} Point\n\n🔖*DRAW* 🔖\nKamu mendapatkan ${count * 1} Uang(xp)`.trim()
     conn.sendButton(m.chat, caption, wm, imgr + 'DRAW', [['Try Again ' + args[0], '/casino ' + args[0]]], m, { mentions: conn.parseMention(caption) })
             }
-        } else conn.reply(m.chat, `Uang(xp) kamu tidak mencukupi untuk Casino silahkan *#kerja* terlebih dahulu!`.trim(), m)
+        } else conn.reply(m.chat, `Uang(xp) kamu tidak mencukupi untuk Casino silahkan *.claim* terlebih dahulu!`.trim(), m)
     } catch (e) {
         console.log(e)
         m.reply('Error!!')
