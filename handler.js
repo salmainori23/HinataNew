@@ -1459,9 +1459,15 @@ export async function participantsUpdate({ id, participants, action }) {
                 text = (chat.sDemote || this.sdemote || conn.sdemote || '@user *is no longer Admin*')
             text = text.replace('@user', '@' + participants[0].split('@')[0])
             if (chat.detect) return
-                this.sendHydrated(id, text.trim(), botdate, null, null, null, null, null, [
-      [null, null]
-    ], null)
+                if (!text) continue
+    let ppu = await this.profilePictureUrl(m.sender, 'image').catch(_ => 'https://telegra.ph/file/24fa902ead26340f3df2c.png')
+    this.reply(m.chat, text.trim(), m, { contextInfo: {
+externalAdReply: {
+showAdAttribution: true,
+title: `👋 Hai, ${await this.getName(m.sender)}`,
+body: botdate,
+sourceUrl: sig,
+thumbnail: await( await fetch(ppu)).buffer() }}})
             break
     }
 }
@@ -1486,9 +1492,14 @@ export async function groupsUpdate(groupsUpdate) {
             if (groupUpdate.restrict == true) text = (chats.sRestrictOn || this.sRestrictOn || conn.sRestrictOn || '*Group has been all participants!*')
             if (groupUpdate.restrict == false) text = (chats.sRestrictOff || this.sRestrictOff || conn.sRestrictOff || '*Group has been only admin!*')
             if (!text) continue
-            this.sendHydrated(id, text.trim(), botdate, null, null, null, null, null, [
-      [null, null]
-    ], null)
+    let pgu = await this.profilePictureUrl(m.sender, 'image').catch(_ => 'https://telegra.ph/file/24fa902ead26340f3df2c.png')
+    this.reply(m.chat, text.trim(), m, { contextInfo: {
+externalAdReply: {
+showAdAttribution: true,
+title: `👋 Hai, ${await this.getName(m.sender)}`,
+body: botdate,
+sourceUrl: sig,
+thumbnail: await( await fetch(pgu)).buffer() }}})
     }
 }
 
@@ -1545,9 +1556,14 @@ ${htjava} RPG tidak aktif, Silahkan hubungi Team Bot Discussion Untuk mengaktifk
         restrict: `*${htki} ALERT ${htka}*
 ${htjava} Fitur ini di *disable* !`
     }[type]
-    if (msg) return conn.sendHydrated(m.chat, msg, botdate, null, null, null, null, null, [
-      [null, null]
-    ], null)
+    let pdfail = await this.profilePictureUrl(m.sender, 'image').catch(_ => 'https://telegra.ph/file/24fa902ead26340f3df2c.png')
+    if (msg) return this.reply(m.chat, msg, m, { contextInfo: {
+externalAdReply: {
+showAdAttribution: true,
+title: `👋 Hai, ${await this.getName(m.sender)}`,
+body: botdate,
+sourceUrl: sig,
+thumbnail: await( await fetch(pdfail)).buffer() }}})
 }
 
 let file = global.__filename(import.meta.url, true)
