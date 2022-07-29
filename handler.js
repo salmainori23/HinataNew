@@ -1464,7 +1464,7 @@ export async function participantsUpdate({ id, participants, action }) {
     this.reply(m.chat, text.trim(), m, { contextInfo: {
 externalAdReply: {
 showAdAttribution: true,
-title: `👋 Hai, ${await this.getName(m.sender)}`,
+title: `${htjava} INFO ${htjava}`,
 body: botdate,
 sourceUrl: sig,
 thumbnail: await( await fetch(ppu)).buffer() }}})
@@ -1496,7 +1496,7 @@ export async function groupsUpdate(groupsUpdate) {
     this.reply(m.chat, text.trim(), m, { contextInfo: {
 externalAdReply: {
 showAdAttribution: true,
-title: `👋 Hai, ${await this.getName(m.sender)}`,
+title: `${htjava} INFO ${htjava}`,
 body: botdate,
 sourceUrl: sig,
 thumbnail: await( await fetch(pgu)).buffer() }}})
